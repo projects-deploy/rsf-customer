@@ -1,0 +1,79 @@
+/* ------------------------------ *
+    REUSED STYLE
+* ------------------------------ */
+
+.container-b {
+    max-width: var(--mx-width, 1200);
+    padding: 0 var(--gutter, 15px);
+    margin: 0 auto;
+}
+
+.item-floating {
+    position: absolute;
+    font-size: 10px;
+    font-weight: var(--fw600);
+    top: -8px;
+    right: 0;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+// .title {
+//     font-size: clamp(30px, -0.875em + 8.333vw, var(--fs-max, 40px));
+// }
+
+.grey-link {
+    color: inherit;
+    transform: var(--transiction-color);
+}
+
+.grey-color,
+.grey-link:hover {
+    color: var(--grey-color);
+}
+
+input.checker {
+    position: relative;
+    padding: 5px;
+    margin: 0px 5px 0px 2px;
+    cursor: pointer;
+}
+
+input.checker::after,
+input.checker::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+input.checker::before {
+    width: 16px;
+    height: 16px;
+    transform: translate(-50%, -50%);
+    background-color: var(--white-color);
+    border: 1px solid var(--grey-color);
+    border-radius: 50%;
+    transition: var(--transiction-border);
+}
+
+input.checker::after {
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: var(--dark-color);
+    border-radius: 50%;
+    transition: var(--transiction-transform);
+}
+
+input.checker:checked:before {
+    border-color: var(--dark-color);
+}
+
+input.checker:checked:after {
+    transform: translate(-50%, -50%) scale(1);
+}

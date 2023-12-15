@@ -1,0 +1,73 @@
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/reused';
+
+ol,
+ul {
+  margin: 0;
+}
+
+.mobile-menu-active, .active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.navbar {
+  font-size: 16px !important;
+}
+
+.title-navbar h1,
+.title-navbar i {
+  font-size: 28px;
+}
+
+.brand-drop.show {
+  width: auto !important;
+}
+
+.promo-drop.show {
+  width: 700px !important;
+  padding: 0;
+}
+
+.red {
+  color: red;
+}
+
+.orange {
+  color: orange;
+}
+
+.active-modal {
+  display: block;
+}
+
+.active-cart-menu {
+  visibility: visible;
+  opacity: 1;
+  /* background-color: #c6c6c6; */
+}
+
+.reccos-logo {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.reccos-badge {
+  position: absolute;
+  font-size: 13px;
+  font-weight: var(--fw600);
+  top: -8px;
+  right: 0;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-promo-menu {
+  height: calc(90vh - 70px);
+}

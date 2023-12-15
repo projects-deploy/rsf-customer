@@ -1,0 +1,104 @@
+<div id="page" class="page-cart">
+    <main>
+        <div class="section">
+            <div class="container wide">
+                <div class="wrap">
+                    <div class="heading">
+                        <h1 class="title">Cart</h1>
+                    </div>
+                    <div class="content">
+                        <div class="cart-table">
+                            <div class="product-list has-bg">
+                                <div class="table-title">
+                                    <ul class="m-0">
+                                        <li class="dotgrid">
+                                            <div class="grouping wrapper">
+                                                <span></span>
+                                                <span>Product</span>
+                                            </div>
+
+                                            <div class="grouping wrapper">
+                                                <span>Price</span>
+                                                <span>Qty</span>
+                                                <span>Total</span>
+                                                <span></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="table-content">
+                                    <ul>
+                                        <li class="dotgrid" *ngFor="let c of cart; let idx = index">
+                                            <div class="grouping wrapper">
+                                                <!-- copy structure from floating cart on modal #data-cart -->
+                                                <div class="thumbnail ob-cover">
+                                                    <a href="">
+                                                        <img [src]="c.img" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="variants">
+                                                    <h4 class="dot-title m-0">
+                                                        <a href=""> {{ c.name }} </a>
+                                                    </h4>
+                                                    <div class="color grey-color">
+                                                        <span><strong>Color</strong>:</span>
+                                                        <span> {{ c.color }} </span>
+                                                    </div>
+                                                    <div class="size grey-color">
+                                                        <span><strong>Size</strong>:</span>
+                                                        <span> {{ c.size }} </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grouping wrapper">
+                                                <div class="price">${{ c.price.toFixed(2) }}</div>
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <button>-</button>
+                                                        <input type="text" [value]="c.quantity">
+                                                        <button>+</button>
+                                                    </div>
+                                                </div>
+                                                <div class="price-sub">${{ c.price.toFixed(2) * c.quantity.toFixed(2) }}
+                                                </div>
+                                                <a href="" class="item-remove">
+                                                    <i class="ri-delete-bin-2-line"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart-total">
+                            <div class="product-list has-bg">
+                                <div class="table-content">
+                                    <div class="grouping">
+                                        <div class="add-note">
+                                            <textarea rows="3" placeholder="Aditional note +"></textarea>
+                                        </div>
+                                        <div class="sub-total">
+                                            <div class="sub-pricing">
+                                                <span>Subtotal</span>
+                                                <span class="sub-total-price">${{ total_value.toFixed(2) }}</span>
+                                            </div>
+                                            <div class="sub-terms">
+                                                <input type="checkbox" id="terms" class="checker">
+                                                <label for="terms">I agree to <a class="grey-link" href="">Terms &
+                                                        Conditions</a></label>
+                                            </div>
+                                            <div class="button">
+                                                <!-- <a routerLink="/checkout" mat-button class="border w-100 text-white text-uppercase">Checkout</a> -->
+                                                <a routerLink="/checkout" class="text-uppercase w-100 secondary-btn">Checkout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

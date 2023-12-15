@@ -1,0 +1,40 @@
+$red-color: #ff4757;
+$dark-color: #212121;
+$grey-color: #687080;
+$ligth-color: #d1d8e0;
+$white-color: #FFFFFF;
+$primary-color: #2bcb96;
+$fashwhite-color: #f1f2f6;
+$bg-navbar-mobile: #3c7785;
+
+$fs-14: 12px;
+$fw600: 600;
+
+$transiction-color: color .3s;
+$transiction-background: background-color .3s;
+$transiction-border: border .3s;
+$transiction-transform: transform .3s;
+
+$shadow: 0px 10px 20px 0px rgb(0 0 0 / 20%);
+$fade: fade-botton .3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+
+:root {
+    --red-color: #{$red-color};
+    --dark-color: #{$dark-color};
+    --grey-color: #{$grey-color};
+    --ligth-color: #{$ligth-color};
+    --white-color: #{$white-color};
+    --primary-color: #{$primary-color};
+    --fashwhite-color: #{$fashwhite-color};
+
+    --fs-14: #{$fs-14};
+    --fw600: #{$fw600};
+
+    --transiction-color: #{$transiction-color};
+    --transiction-background: #{$transiction-background};
+    --transiction-border: #{$transiction-border};
+    --transiction-transform: #{$transiction-transform};
+
+    --shadow: #{$shadow};
+    --fade: #{$fade};
+}

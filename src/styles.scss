@@ -1,1 +1,134 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+@import 'assets/styles/general.scss';
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+*::before,
+::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Montserrat, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+ul,
+li {
+    list-style: none;
+    padding: 0;
+}
+
+p {
+    max-width: 0 0 15px;
+}
+
+input,
+textarea,
+select {
+    font: inherit;
+    width: 100%;
+}
+
+input[type=checkbox],
+input[type=radio] {
+    width: auto;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: inherit;
+    margin: 30px;
+}
+
+.reccos-cursor {
+    cursor: pointer;
+}
+
+.mat-typography {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+
+
+.summary .product-price .wrap::before,
+.product .head-review span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 12px;
+    height: 100%;
+    width: 1px;
+    background-color: var(--grey-color);
+    transform: skewX(-25deg);
+}
+
+.primary-btn,
+.secondary-btn {
+    border-color: var(--dark-color);
+}
+
+.primary-btn:hover,
+.secondary-btn {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+}
+
+.secondary-btn:hover {
+    background-color: transparent;
+    border-color: var(--dark-color);
+    color: var(--dark-color);
+}
+
+.mat-mdc-tab-group,
+.mat-mdc-tab-nav-bar {
+    --mdc-tab-indicator-active-indicator-color: #000;
+    --mat-tab-header-active-label-text-color: #000;
+    --mat-tab-header-active-ripple-color: #000;
+    --mat-tab-header-inactive-ripple-color: #000;
+    --mat-tab-header-active-focus-label-text-color: #000;
+    --mat-tab-header-active-hover-label-text-color: #000;
+    --mat-tab-header-active-focus-indicator-color: #000;
+    --mat-tab-header-active-hover-indicator-color: #000;
+}
+
+.mat-mdc-tab-body-content {
+    overflow: hidden !important;
+}
+
+body::-webkit-scrollbar {
+    width: 5px;
+}
+
+body::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #c6c6c6;
+}

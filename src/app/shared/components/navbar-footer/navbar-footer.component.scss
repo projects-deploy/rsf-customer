@@ -1,0 +1,10 @@
+@import '../../../../assets/styles/reused';
+
+.mobile-nav .wrap a {
+    display: flex;
+    align-items: center;
+}
+
+.item-floating {
+    top: -3px;
+}

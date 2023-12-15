@@ -1,0 +1,142 @@
+<div class="products">
+    <div class="container">
+        <h1 class="lg-title">Special Shoes With Offers</h1>
+        <p class="text-success">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quos sit
+            consectetur,
+            ipsa voluptatem vitae necessitatibus dicta veniam, optio, possimus assumenda laudantium. Temporibus, quis
+            cum.</p>
+
+        <div class="product-items">
+            <!-- single product -->
+            <div class="product" *ngFor="let data of products; let idx=index;">
+                <div class="content-box">
+                    <div class="box">
+                        <div class="my-card">
+                            <div class="image">
+                                <img [src]="data.link_photo" alt="">
+                                <div class="label" *ngIf="data.discount > 0"><span>-{{data.discount}}%</span></div>
+                            </div>
+                            <figcaption>
+                                <button mat-icon-button routerLink="/">
+                                    <mat-icon>menu</mat-icon>
+                                  </button>
+
+                                  <button mat-icon-button routerLink="/">
+                                    <mat-icon>star</mat-icon>
+                                  </button>
+
+                                  <button mat-icon-button routerLink="detail">
+                                    <mat-icon>visibility</mat-icon>
+                                  </button>
+                                <!-- <i class="ri-star-line"></i>
+                                <i class="ri-arrow-left-right-line"></i>
+                                <i class="ri-eye-line" (click)="router()"></i> -->
+                            </figcaption>
+                        </div>
+                        <div class="infos">
+                            <p class="reccos-title m-0 text-center"> {{ data.name }} </p>
+                            <div class="price-product my-3 p-3">
+                                <div class="d-flex justify-content-center align-items-center"
+                                    *ngIf="data.is_discount; else noDiscount">
+                                    <span class="before me-1"> ${{ data.price_product | number: '1.2-2' }} </span>
+                                    <span class="current"> ${{ data.discount | number: '1.2-2' }} </span>
+                                </div>
+                                <ng-template #noDiscount>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <span class="current"> ${{ data.price_product | number: '1.2-2' }}
+                                        </span>
+                                    </div>
+                                </ng-template>
+                            </div>
+                            <div class="buynow button mt-4">
+                                <!-- <button type="submit" class="secondary-btn w-100" (click)="addToCart(data)">
+                                    <i class="ri-shopping-cart-2-line me-3"></i>
+                                    Add to cart
+                                </button> -->
+
+                                <button type="submit" class="secondary-btn w-100" routerLink="/cart">
+                                    <i class="ri-shopping-cart-2-line me-3"></i>
+                                    Add to cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="product-collection">
+    <div class="container">
+        <div class="product-collection-wrapper">
+            <!-- product col left -->
+            <div class="product-col-left flex">
+                <div class="product-col-content">
+                    <h2 class="sm-title">men's shoes </h2>
+                    <h2 class="md-title">men's collection </h2>
+                    <p class="text-light d-none d-sm-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                        Molestiae
+                        consequatur facilis eligendi quibusdam voluptatibus exercitationem autem voluptatum, beatae
+                        architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+
+                    <div class="buynow button">
+                        <button type="submit" class="secondary-btn">
+                            Shop now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- product col right -->
+            <div class="product-col-right">
+                <div class="product-col-r-top flex">
+                    <div class="product-col-content">
+                        <h2 class="sm-title">women's dresses </h2>
+                        <h2 class="md-title">women's collection </h2>
+                        <p class="text-light d-none d-sm-block">Lorem ipsum dolor sit, amet consectetur adipisicing
+                            elit. Molestiae
+                            consequatur facilis eligendi quibusdam voluptatibus exercitationem autem voluptatum, beatae
+                            architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+                        <div class="buynow button mt-4">
+                            <button type="submit" class="secondary-btn">
+                                Shop now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-col-r-bottom">
+                    <!-- left -->
+                    <div class="flex">
+                        <div class="product-col-content">
+                            <h2 class="sm-title">summer sale </h2>
+                            <h2 class="md-title">Extra 50% Off </h2>
+                            <p class="text-light">Lorem ipsum dolor sit, voluptatibus exercitationem autem voluptatum,
+                                beatae architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+                            <div class="buynow button mt-4">
+                                <button type="submit" class="secondary-btn">
+                                    Shop now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- right -->
+                    <div class="flex">
+                        <div class="product-col-content">
+                            <h2 class="sm-title">shoes </h2>
+                            <h2 class="md-title">best sellers </h2>
+                            <p class="text-light">Lorem ipsum dolor sit, voluptatibus exercitationem autem voluptatum,
+                                beatae architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+                            <div class="buynow button mt-4">
+                                <button type="submit" class="secondary-btn">
+                                    Shop now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

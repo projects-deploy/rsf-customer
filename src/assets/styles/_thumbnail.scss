@@ -1,0 +1,163 @@
+@import '../../assets/styles/variables';
+.content-box {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.reccos-title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+// .price-product {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+.price-product .before {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: grey;
+}
+
+.price-product .current {
+    color: var(--primary-color);
+    font-size: 25px;
+    font-weight: var(--fw600);
+}
+
+.my-card {
+    position: relative;
+    color: #000;
+    min-width: 250px;
+    max-width: 310px;
+    margin: 10px;
+    overflow: hidden;
+}
+
+.my-card img {
+    position: relative;
+    vertical-align: top;
+    max-width: 100%;
+    transition: 0.7s ease;
+}
+
+.my-card:hover img {
+    transform: scale(1.2);
+}
+
+.my-card:hover figcaption i,
+.my-card:hover figcaption button {
+    opacity: 1;
+    z-index: 1;
+    transform: translateY(-20%);
+}
+
+.my-card figcaption {
+    position: absolute;
+    padding: 15px 20px;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-card figcaption i,
+.my-card figcaption button {
+    background-color: #FFF;
+    margin-left: 15px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    cursor: pointer;
+    border: 1px solid $ligth-color;
+}
+
+.my-card figcaption i:hover,
+.my-card figcaption button:hover {
+    background-color: #ebeaea;
+}
+
+.my-card figcaption i:first-child,
+.my-card figcaption button:first-child {
+    margin-left: 0;
+}
+
+.my-card figcaption::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* background: linear-gradient(90deg, #b2c4c9, #FFF); */
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.my-card h3 {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.my-card p {
+    font-size: .8rem;
+    line-height: 1.6em;
+}
+
+.my-card a {
+    position: absolute;
+    bottom: 10px;
+    display: inline-block;
+    font-size: 0.75em;
+    color: #FFF;
+    background-color: #413b3b;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 6px;
+    z-index: 1;
+    transition: .5s;
+    padding: 0.5rem 1.5rem;
+    text-align: center;
+}
+
+.my-card a:hover {
+    background-color: transparent;
+    color: #413b3b;
+    border: 1px solid #413b3b;
+    text-transform: uppercase;
+}
+
+.label {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.label span {
+    font-size: 16px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    color: var(--white-color);
+    font-weight: var(--fw600);
+    background-color: var(--primary-color);
+    transition: var(--transiction-background), var(--transiction-color);
+}

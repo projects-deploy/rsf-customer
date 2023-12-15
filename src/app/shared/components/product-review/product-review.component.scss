@@ -1,0 +1,37 @@
+h3 {
+    font-size: 30px;
+}
+
+.product-review {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.product-review .head-review {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--ligth-color);
+    padding: 20px 0;
+}
+
+.product-review .head-review strong {
+    font-size: 50px;
+}
+
+.product-review .head-review span {
+    position: relative;
+    padding-left: 20px;
+}
+
+.product-review p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+// MODAL BOOTSTRAP
+
+.modal-backdrop {
+    --bs-backdrop-opacity: 0 !important;
+}
