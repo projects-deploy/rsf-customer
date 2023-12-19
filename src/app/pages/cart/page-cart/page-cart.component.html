@@ -4,9 +4,9 @@
             <div class="container wide">
                 <div class="wrap">
                     <div class="heading">
-                        <h1 class="title">Cart</h1>
+                        <h1 class="title my-4">Cart</h1>
                     </div>
-                    <div class="content">
+                    <div class="content" *ngIf="cart.length > 0; else emptyCart">
                         <div class="cart-table">
                             <div class="product-list has-bg">
                                 <div class="table-title">
@@ -30,28 +30,27 @@
                                     <ul>
                                         <li class="dotgrid" *ngFor="let c of cart; let idx = index">
                                             <div class="grouping wrapper">
-                                                <!-- copy structure from floating cart on modal #data-cart -->
                                                 <div class="thumbnail ob-cover">
                                                     <a href="">
-                                                        <img [src]="c.img" alt="">
+                                                        <img [src]="c.products.link_photo" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="variants">
                                                     <h4 class="dot-title m-0">
-                                                        <a href=""> {{ c.name }} </a>
+                                                        <a href=""> {{ c.products.name }} </a>
                                                     </h4>
                                                     <div class="color grey-color">
                                                         <span><strong>Color</strong>:</span>
-                                                        <span> {{ c.color }} </span>
+                                                        <span> YELLOW </span>
                                                     </div>
                                                     <div class="size grey-color">
                                                         <span><strong>Size</strong>:</span>
-                                                        <span> {{ c.size }} </span>
+                                                        <span> L </span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="grouping wrapper">
-                                                <div class="price">${{ c.price.toFixed(2) }}</div>
+                                                <div class="price">${{ c.products.price_promo.toFixed(2) }}</div>
                                                 <div class="quantity">
                                                     <div class="control">
                                                         <button>-</button>
@@ -59,11 +58,12 @@
                                                         <button>+</button>
                                                     </div>
                                                 </div>
-                                                <div class="price-sub">${{ c.price.toFixed(2) * c.quantity.toFixed(2) }}
+                                                <div class="price-sub">${{ (c.products.price_promo *
+                                                    c.quantity).toFixed(2) }}
                                                 </div>
-                                                <a href="" class="item-remove">
-                                                    <i class="ri-delete-bin-2-line"></i>
-                                                </a>
+                                                <button (click)="removeItem(idx)" mat-icon-button color="warn">
+                                                    <mat-icon>delete_outline</mat-icon>
+                                                </button>
                                             </div>
                                         </li>
                                     </ul>
@@ -80,16 +80,16 @@
                                         <div class="sub-total">
                                             <div class="sub-pricing">
                                                 <span>Subtotal</span>
-                                                <span class="sub-total-price">${{ total_value.toFixed(2) }}</span>
+                                                <span class="sub-total-price">${{ totalAmount.toFixed(2) }}</span>
                                             </div>
-                                            <div class="sub-terms">
+                                            <div class="sub-terms d-flex align-items-center">
                                                 <input type="checkbox" id="terms" class="checker">
-                                                <label for="terms">I agree to <a class="grey-link" href="">Terms &
+                                                <label class="ms-3" for="terms">I agree to <a class="grey-link">Terms &
                                                         Conditions</a></label>
                                             </div>
                                             <div class="button">
-                                                <!-- <a routerLink="/checkout" mat-button class="border w-100 text-white text-uppercase">Checkout</a> -->
-                                                <a routerLink="/checkout" class="text-uppercase w-100 secondary-btn">Checkout</a>
+                                                <a routerLink="/checkout"
+                                                    class="text-uppercase w-100 secondary-btn">Checkout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -97,6 +97,12 @@
                             </div>
                         </div>
                     </div>
+                    <ng-template #emptyCart>
+                        <div class="empty-img d-flex flex-column align-items-center justify-content-center">
+                            <img src="./assets/messages/empty.png" alt="" width="50%">
+                            <p class="mb-5" style="font-size: 25px;">Seu carrinho está vazio!</p>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
         </div>

@@ -18,19 +18,16 @@
                             </div>
                             <figcaption>
                                 <button mat-icon-button routerLink="/">
-                                    <mat-icon>menu</mat-icon>
-                                </button>
-
-                                <button mat-icon-button routerLink="/">
-                                    <mat-icon>star</mat-icon>
+                                    <mat-icon>star_border</mat-icon>
                                 </button>
 
                                 <button mat-icon-button [routerLink]="['detail', data.id]">
                                     <mat-icon>visibility</mat-icon>
                                 </button>
-                                <!-- <i class="ri-star-line"></i>
-                                <i class="ri-arrow-left-right-line"></i>
-                                <i class="ri-eye-line" (click)="router()"></i> -->
+
+                                <button mat-icon-button [routerLink]="['/cart']">
+                                    <mat-icon>add_shopping_cart</mat-icon>
+                                </button>
                             </figcaption>
                         </div>
                         <div class="infos">
@@ -49,12 +46,7 @@
                                 </ng-template>
                             </div>
                             <div class="buynow button mt-4">
-                                <!-- <button type="submit" class="secondary-btn w-100" (click)="addToCart(data)">
-                                    <i class="ri-shopping-cart-2-line me-3"></i>
-                                    Add to cart
-                                </button> -->
-
-                                <button type="submit" class="secondary-btn w-100" routerLink="/cart">
+                                <button type="submit" class="secondary-btn w-100" (click)="addToCart(data)">
                                     <i class="ri-shopping-cart-2-line me-3"></i>
                                     Add to cart
                                 </button>

@@ -1,19 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CartItem, ShoppingCart } from 'src/app/models/Cart';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
   opened: boolean = false;
   opened_cart: boolean = false;
   active_mobile: boolean = false;
   openModalPromotions: boolean = false;
 
-  itens_cart: number = 0;
   ttl_favorites: number = 0;
+  itens_cart: number = this.cartService.cart().items.length;
+
+  totalAmount = this.cartService.cart().totalAmount;
+  products_cart: any = this.cartService.cart().items;
 
   destak_images = [
     {
@@ -42,6 +48,15 @@ export class NavbarComponent {
     }
   ]
 
+  constructor(
+    private route: Router,
+    private cartService: CartService,
+  ) { }
+
+  ngOnInit(): void {
+    console.log('PRODUCTS CART MENU NAVBAR', this.cartService.cart());
+  }
+
   openMobileMenu() {
     this.active_mobile = true;
   }
@@ -64,5 +79,20 @@ export class NavbarComponent {
 
   crtlCartMenu(e: any) { // OUTPUT
     this.opened_cart = e;
+  }
+
+  updateQuantity(sun: boolean, idx: number) {
+    let product = this.products_cart[idx];
+    sun ? product.quantity++ : product.quantity--;
+    console.log('totalAmount', this.cartService.cart().items[idx]);
+
+    // this.cartService.addItem(this.cartService.cart().items[idx]);
+
+    // this.cartService.addItem(idx);
+  }
+
+  goToCheckout(route: string) {
+    this.opened_cart = false;
+    this.route.navigate([`/${route}`]);
   }
 }

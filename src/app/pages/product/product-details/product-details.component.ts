@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { CartItem } from 'src/app/models/Cart';
 import { Product } from 'src/app/models/Product';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { DefaultModalComponent } from 'src/app/shared/components/default-modal/default-modal.component';
 
@@ -20,6 +22,7 @@ export class ProductDetailsComponent  implements OnInit, AfterViewInit {
   constructor(
     private el: ElementRef,
     public dialog: MatDialog,
+    private cartService: CartService,
     private acvtRouter: ActivatedRoute,
     private prodService: ProductsService,
   ) { }
@@ -50,6 +53,14 @@ export class ProductDetailsComponent  implements OnInit, AfterViewInit {
     }).afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  addToCart(item: any) {
+    let product: CartItem = {
+      products: item,
+      quantity: 1
+    }
+    this.cartService.addItem(product);
   }
 
 }

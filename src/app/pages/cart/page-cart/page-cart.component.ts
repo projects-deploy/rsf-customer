@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingCart } from 'src/app/models/Cart';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
   selector: 'app-page-cart',
@@ -7,42 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageCartComponent implements OnInit {
 
-  total_value: number = 0;
+  cart = this.cartService.cart().items;
+  totalAmount = this.cartService.cart().totalAmount;
 
-  cart: any = [
-    {
-      id: 1,
-      name: 'The Sweter in Tosca',
-      price: 45.00,
-      quantity: 1,
-      color: 'Tosca',
-      size: 'L',
-      img: './assets/images/product_01.jpg'
-    },
-    {
-      id: 3,
-      name: 'The Ocean',
-      price: 85.11,
-      quantity: 2,
-      color: 'Ocean',
-      size: 'XL',
-      img: './assets/images/product_02.jpg'
-    },
-    {
-      id: 1,
-      name: 'The Ocean in Roma',
-      price: 25.89,
-      quantity: 4,
-      color: 'Pink',
-      size: 'M',
-      img: './assets/images/product_03b.jpg'
-    }
-  ]
+  constructor(
+    private cartService: CartService
+  ) { }
 
   ngOnInit(): void {
-    this.cart.forEach((c: any) => {
-      let v = c.price * c.quantity;
-      this.total_value = this.total_value + v;
-    });
+  }
+
+  removeItem(productId: number) {
+    this.cartService.removeItem(String(productId));
   }
 }
