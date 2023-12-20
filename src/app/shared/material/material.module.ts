@@ -58,6 +58,7 @@ import { ProductWhriteReviewComponent } from '../components/product-whrite-revie
 import { ThumbailComponent } from '../components/thumbail/thumbail.component';
 import { NavbarFooterComponent } from '../components/navbar-footer/navbar-footer.component';
 import { DefaultModalComponent } from '../components/default-modal/default-modal.component';
+import { CustomerFormComponent } from '../components/customer-form/customer-form.component';
 
 const modules = [
   A11yModule,
@@ -121,6 +122,7 @@ const compoenentes = [
   ThumbailComponent,
   NavbarFooterComponent,
   DefaultModalComponent,
+  CustomerFormComponent,
 ]
 
 @NgModule({

@@ -1,24 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Brand } from 'src/app/models/Brand';
 import { CartItem, ShoppingCart } from 'src/app/models/Cart';
+import { Department } from 'src/app/models/Department';
+import { BrandsService } from 'src/app/services/brands/brands.service';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { DepartmentsService } from 'src/app/services/departments/departments.service';
+import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
+
+  local_str = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`) || null;
+
+  subscription: Subscription = new Subscription;
+
+  menu_brand: Brand[] = [];
+  menu_depto: Department[] = [];
 
   opened: boolean = false;
   opened_cart: boolean = false;
   active_mobile: boolean = false;
   openModalPromotions: boolean = false;
 
+  itens_cart: number = 0;
   ttl_favorites: number = 0;
-  itens_cart: number = this.cartService.cart().items.length;
 
-  totalAmount = this.cartService.cart().totalAmount;
   products_cart: any = this.cartService.cart().items;
 
   destak_images = [
@@ -50,11 +62,66 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private route: Router,
+    private rxjs: DataRxjsService,
     private cartService: CartService,
-  ) { }
+    private brandService: BrandsService,
+    private deptoService: DepartmentsService,
+  ) {
+    if (this.local_str != null) {
+      this.itens_cart = this.local_str.items.length;
+    }
+  }
 
   ngOnInit(): void {
-    console.log('PRODUCTS CART MENU NAVBAR', this.cartService.cart());
+    this.allBrands();
+    this.allDepartments();
+
+    this.initRXJS();
+
+    this.rxjs.cartItemsQuantity$.subscribe(value => {
+      this.itens_cart = value.qtde_items;
+    });
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  initRXJS() {
+    // this.subscription
+  }
+
+  allBrands() {
+    this.brandService.getAllBrands().subscribe({
+      next: (data) => {
+
+        data.forEach((item: Brand) => {
+          item.router_link = this.slug(item.name);
+        });
+
+        this.menu_brand = data;
+        console.log('GET ALL BRANDS:', data);
+      },
+      error: (err) => {
+        console.log('GET ALL BRANDS ERR:', err);
+      }
+    });
+  }
+
+  allDepartments() {
+    this.deptoService.getAllDepartments().subscribe({
+      next: (data) => {
+
+        data.forEach((item: Department) => {
+          item.router_link = this.slug(item.name);
+        });
+
+        this.menu_depto = data;
+        console.log('GET ALL DEPARTMENTS:', this.menu_depto);
+      },
+      error: (err) => {
+        console.log('GET ALL DEPARTMENTS ERR:', err);
+      }
+    });
   }
 
   openMobileMenu() {
@@ -81,18 +148,12 @@ export class NavbarComponent implements OnInit {
     this.opened_cart = e;
   }
 
-  updateQuantity(sun: boolean, idx: number) {
-    let product = this.products_cart[idx];
-    sun ? product.quantity++ : product.quantity--;
-    console.log('totalAmount', this.cartService.cart().items[idx]);
-
-    // this.cartService.addItem(this.cartService.cart().items[idx]);
-
-    // this.cartService.addItem(idx);
-  }
-
   goToCheckout(route: string) {
     this.opened_cart = false;
     this.route.navigate([`/${route}`]);
+  }
+
+  slug(input: string) {
+    return input.toString().toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, "_");
   }
 }

@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
 @import 'assets/styles/general.scss';
+@import 'assets/styles/loading';
+@import 'assets/styles/variables';
 
 * {
     padding: 0;
@@ -86,12 +88,14 @@ textarea::placeholder {
 }
 
 .primary-btn,
-.secondary-btn {
+.secondary-btn,
+.secondary-btn-shop {
     border-color: var(--dark-color);
 }
 
 .primary-btn:hover,
-.secondary-btn {
+.secondary-btn,
+.secondary-btn-shop {
     background-color: var(--dark-color);
     color: var(--white-color);
 }
@@ -100,6 +104,11 @@ textarea::placeholder {
     background-color: transparent;
     border-color: var(--dark-color);
     color: var(--dark-color);
+}
+
+.secondary-btn-shop:hover {
+    background-color: transparent;
+    color: var(--light-color);
 }
 
 .mat-mdc-tab-group,

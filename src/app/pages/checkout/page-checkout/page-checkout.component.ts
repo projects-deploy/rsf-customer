@@ -1,39 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
   selector: 'app-page-checkout',
   templateUrl: './page-checkout.component.html',
   styleUrls: ['./page-checkout.component.scss']
 })
-export class PageCheckoutComponent {
+export class PageCheckoutComponent implements OnInit {
 
-  checkout: any = [
-    {
-      id: 1,
-      name: 'The Sweter in Tosca',
-      price: 45.00,
-      quantity: 1,
-      color: 'Tosca',
-      size: 'L',
-      img: './assets/images/product_01.jpg'
-    },
-    {
-      id: 3,
-      name: 'The Ocean',
-      price: 85.11,
-      quantity: 2,
-      color: 'Ocean',
-      size: 'XL',
-      img: './assets/images/product_02.jpg'
-    },
-    {
-      id: 1,
-      name: 'The Ocean in Roma',
-      price: 25.89,
-      quantity: 4,
-      color: 'Pink',
-      size: 'M',
-      img: './assets/images/product_03b.jpg'
-    }
-  ]
+  checkout: any = this.cartService.cart().items;
+
+  customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`) || null;
+
+  constructor(
+    private cartService: CartService
+  ) { }
+
+  ngOnInit(): void {
+    console.log('checkout', this.checkout);
+  }
 }

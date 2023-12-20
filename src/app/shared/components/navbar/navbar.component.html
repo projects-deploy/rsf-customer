@@ -2,7 +2,7 @@
     <app-navbar-footer (cartMenuClose)="crtlCartMenu($event)"></app-navbar-footer>
 </div>
 
-<nav class="navbar bg-light" style="height: 75px;">
+<nav class="navbar bg-light sticky-top shadow" style="height: 75px;">
     <div class="container-fluid">
         <div class="col-12 col-lg-1">
             <div class="menu-bar">
@@ -29,12 +29,9 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false"> Departamentos </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
+                        <li  *ngFor="let depto of menu_depto">
+                            <a class="dropdown-item" [routerLink]="depto.router_link"> {{ depto.name }} </a>
                         </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
                 <li class="reccos-logo">
@@ -49,10 +46,9 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false"> Marcas </a>
                     <ul class="dropdown-menu brand-drop">
-                        <li><a class="dropdown-item" routerLink="/product">Hering</a></li>
-                        <li><a class="dropdown-item" routerLink="/product">Dulce & Gabana</a></li>
-                        <li><a class="dropdown-item" routerLink="/product">Louis Vuitton</a></li>
-                        <li><a class="dropdown-item" routerLink="/product">Dior</a></li>
+                        <li *ngFor="let brand of menu_brand">
+                            <!-- <img [src]="brand.link_photo" alt="" width="5%"> -->
+                            <a class="dropdown-item" [routerLink]="brand.router_link"> {{ brand.name }} </a></li>
                     </ul>
                 </li>
 
@@ -79,7 +75,7 @@
                     </li>
                     <li>
                         <!-- trigger-button data-target="data-share" -->
-                        <a class="reccos-cursor" (click)="openCart()">
+                        <a class="reccos-cursor" [routerLink]="['/cart']">
                             <span class="reccos-badge"> {{ itens_cart }} </span>
                             <i class="ri-shopping-bag-line"></i>
                         </a>
@@ -150,7 +146,7 @@
     </div>
 </div>
 
-<div id="data-cart" class="cart-menu" [ngClass]="{'active': opened_cart}">
+<!-- <div id="data-cart" class="cart-menu" [ngClass]="{'active': opened_cart}">
     <div class="wrap">
         <a class="close-trigger" (click)="opened_cart = false;">
             <i class="ri-close-circle-line"></i>
@@ -196,7 +192,8 @@
                                                     <span>Size:</span>
                                                     <span>L</span>
                                                 </div>
-                                                <div class="price">$ {{ (cart.products.price_promo * cart.quantity).toFixed(2) }}
+                                                <div class="price">$ {{ (cart.products.price_promo *
+                                                    cart.quantity).toFixed(2) }}
                                                 </div>
                                                 <a href="" class="item-remove"><i class="ri-close-line"></i></a>
                                             </div>
@@ -212,15 +209,15 @@
                             </div>
                         </ng-template>
                         <div class="cart-footer">
-                            <!-- <div class="discount">
+                            <div class="discount">
                                 <form action="">
                                     <input type="text" class="input" placeholder="Cupon">
                                     <input type="submit" class="submit" value="Apply">
                                 </form>
-                            </div> -->
+                            </div>
                             <div class="math-pricing">
                                 <ul class="p-0">
-                                    <!-- <li>
+                                    <li>
                                         <span>Subtotal</span>
                                         <span class="value">{{ totalAmount }}</span>
                                     </li>
@@ -244,7 +241,7 @@
                                     <li>
                                         <span>Promo discount</span>
                                         <span class="value">- $0.00</span>
-                                    </li> -->
+                                    </li>
                                     <li class="total">
                                         <span>Total</span>
                                         <span class="value">$ {{ totalAmount.toFixed(2) }} </span>
@@ -261,4 +258,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

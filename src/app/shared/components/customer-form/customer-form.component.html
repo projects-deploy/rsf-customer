@@ -1,0 +1,53 @@
+<form [formGroup]="customerForm">
+    <div class="row">
+        <div class="col-12 col-md-6 py-3">
+            <label for="first-name">First Name *</label>
+            <input formControlName="name" type="text" id="first-name" placeholder="First name">
+        </div>
+        <div class="col-12 col-md-6 py-3">
+            <label for="last-name">Last Name *</label>
+            <input formControlName="surname" type="text" id="last-name" placeholder="Last name">
+        </div>
+        <div class="col-12 col-md-4 py-3">
+            <label for="last-name">Data de nascimento *</label>
+            <input formControlName="birth_date" type="text" id="last-name" placeholder="Last name">
+        </div>
+        <div class="col-12 col-md-8 py-3">
+            <label for="last-name">Email *</label>
+            <input formControlName="email" type="text" id="last-name" placeholder="Last name">
+        </div>
+        <div class="col-12 col-md-3 py-3">
+            <label for="last-name">CEP *</label>
+            <input formControlName="cep" type="text" id="last-name" placeholder="Last name">
+        </div>
+        <div class="col-12 col-md-9 py-3">
+            <label for="last-name">Endereço *</label>
+            <input formControlName="logradouro" type="text" id="last-name" placeholder="Last name">
+        </div>
+        <div class="col-12 col-md-3 py-3">
+            <label for="last-name">Número *</label>
+            <input formControlName="numero" type="text" id="last-name" placeholder="Last name">
+        </div>
+        <div class="col-12 col-md-5 py-3">
+            <label for="last-name">Bairro *</label>
+            <input formControlName="bairro" type="text" id="last-name" placeholder="Last name">
+        </div>
+        <div class="col-12 col-md-4 py-3">
+            <label for="last-name">Complemento *</label>
+            <input formControlName="complemento" type="text" id="last-name" placeholder="Last name">
+        </div>
+        <div class="col-12 col-md-4 py-3">
+            <label for="last-name">Cidade *</label>
+            <input formControlName="localidade" type="text" id="last-name" placeholder="Last name">
+        </div>
+        <div class="col-12 col-md-4 py-3">
+            <label for="last-name">Estado *</label>
+            <input formControlName="uf" type="text" id="last-name" placeholder="Last name">
+        </div>
+        <div class="col-12 col-md-4 py-3 d-flex align-items-center">
+            <label class="check-option"></label>
+            <input formControlName="account" type="checkbox" class="checker me-2">
+            <span>Create an account?</span>
+        </div>
+    </div>
+</form>

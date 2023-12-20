@@ -1,34 +1,38 @@
 import { Injectable, signal } from '@angular/core';
 import { CartItem, ShoppingCart } from 'src/app/models/Cart';
+import { DataRxjsService } from '../../shared/services/rxjs/data-rxjs.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  local_str = JSON.parse(`${localStorage.getItem(('RSF-CART'))}`) || [];
+  local_str = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`) || [];
 
   cart = signal<ShoppingCart>({
     items: this.local_str.items || [],
     totalAmount: this.local_str.totalAmount || 0
   });
 
-  constructor() { }
+  constructor(
+    private rxjs: DataRxjsService
+  ) { }
 
   addItem(item: CartItem) {
 
     this.cart.mutate(currentCart => {
       const existingItemIndex = currentCart.items.findIndex(i => i.products.id === item.products.id);
-
-      let valuePerProduct = item.products.price_product * item.quantity;
+      console.log('CART SERVICE', item, existingItemIndex);
 
       if (existingItemIndex !== -1) {
-        currentCart.items[existingItemIndex].quantity += item.quantity;
-      } else { 
+        currentCart.items[existingItemIndex].quantity = item.quantity + 1;
+      } else {
         currentCart.items.push(item);
       }
       currentCart.totalAmount += item.products.price_product * item.quantity;
-      localStorage.setItem('RSF-CART', JSON.stringify(currentCart));
+
+      this.sendRxjsData(currentCart);
+      localStorage.setItem('rsf-cart', JSON.stringify(currentCart));
     });
   }
 
@@ -37,24 +41,34 @@ export class CartService {
       const item = currentCart.items[idx];
       currentCart.totalAmount -= item.products.price_product * item.quantity;
       currentCart.items.splice(idx, 1);
-      localStorage.removeItem('RSF-CART');
-      localStorage.setItem('RSF-CART', JSON.stringify(currentCart));
+      this.sendRxjsData(currentCart);
+      localStorage.removeItem('rsf-cart');
+      localStorage.setItem('rsf-cart', JSON.stringify(currentCart));
     });
   }
 
-  updateQuantity(idx: any) {
+  updateItem(idx: number, item: CartItem, crtl: boolean) {
     this.cart.mutate(currentCart => {
-      const item = currentCart.items[idx];
-      currentCart.totalAmount += item.products.price_product * item.quantity;
+
       if (item.quantity == 0) {
         this.removeItem(idx);
-        if (currentCart.items.length === 0) {
-          currentCart.totalAmount = 0;
-        }
         return;
       }
-      localStorage.removeItem('RSF-CART');
-      localStorage.setItem('RSF-CART', JSON.stringify(currentCart));
+
+      currentCart.items[idx].quantity = item.quantity;
+
+      crtl ? currentCart.totalAmount += item.products.price_product * item.quantity : currentCart.totalAmount -= item.products.price_product * item.quantity;
+
+      this.sendRxjsData(currentCart);
     });
+  }
+
+  sendRxjsData(values: any) {
+
+    this.rxjs.crtlItemCardQuantity({
+      qtde_items: values.items.length,
+      amount: values.totalAmount
+    });
+    console.log('ITEM UPDATE cart:', values);
   }
 }

@@ -13,7 +13,6 @@ export class ThumbailComponent<T> implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('QUE VEM:', this.content);
   }
 
 }
