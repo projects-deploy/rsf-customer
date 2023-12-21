@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Customer } from 'src/app/models/Customer';
+import { Order } from 'src/app/models/Order';
 import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
@@ -9,15 +11,30 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class PageCheckoutComponent implements OnInit {
 
-  checkout: any = this.cartService.cart().items;
+  checkout: any = this.cartService.cart();
 
-  customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`) || null;
-
+  customer: Customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`) || undefined;
+  // customer!: Customer;
   constructor(
     private cartService: CartService
   ) { }
 
   ngOnInit(): void {
-    console.log('checkout', this.checkout);
+  }
+
+  createOrder() {
+
+    let order: Order = {
+      date_order: new Date(Date.now()),
+      value_total: 321,
+      shipping: 1,
+      to_remove: 1,
+      comments: '',
+      status: 1,
+      customer: this.customer,
+      itemsOrder: this.checkout
+    }
+
+    console.log('CHECKOUT:', order)
   }
 }

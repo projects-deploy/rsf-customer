@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Brand } from 'src/app/models/Brand';
-import { CartItem, ShoppingCart } from 'src/app/models/Cart';
 import { Department } from 'src/app/models/Department';
 import { BrandsService } from 'src/app/services/brands/brands.service';
 import { CartService } from 'src/app/services/cart/cart.service';

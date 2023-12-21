@@ -6,6 +6,7 @@ export interface Customer {
     cpf: string;
     cep: string;
     name: string;
+    surname: string;
     email: string;
     phone: string;
     numero: number;

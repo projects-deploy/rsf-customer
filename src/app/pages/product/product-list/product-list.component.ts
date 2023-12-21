@@ -55,10 +55,11 @@ export class ProductListComponent implements OnInit {
   }
 
   addToCart(item: any) {
-    let product: CartItem = {
+    let product = {
       products: item,
       quantity: 1
     }
+    console.log('TA INDO PRODUCT', product);
     this.cartService.addItem(product);
   }
 
