@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, computed, signal } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Customer } from 'src/app/models/Customer';
 import { Order } from 'src/app/models/Order';
-import { CartService } from 'src/app/services/cart/cart.service';
+import { OrdersService } from 'src/app/services/ordres/orders.service';
+import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service';
 
 @Component({
   selector: 'app-page-checkout',
@@ -11,15 +13,49 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class PageCheckoutComponent implements OnInit {
 
-  checkout: any = this.cartService.cart();
+  checkout: any = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`) || [];
+  itemList = signal(this.checkout);
+
+  radioPayment = [
+    {
+      value: 'pix',
+      icon: 'ri-currency-line'
+    },
+    {
+      value: 'ticket',
+      icon: 'ri-coupon-3-line'
+    },
+    {
+      value: 'pix',
+      icon: 'ri-bank-card-line'
+    }
+  ]
+
+  tax: number = 0;
+  free: number = 0
+  flat: number = 10;
+  cupom: number = 0;
+  // finaly_value: number = 0;
+
+  totalAmount = computed(() => {
+    return this.itemList().reduce((acc: any, curr: any) => acc + curr.amount, 0);
+  });
+
+  finaly_valuet = computed(() => {
+    return this.tax + this.free + this.flat + this.totalAmount();
+  });
 
   customer: Customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`) || undefined;
-  // customer!: Customer;
+  
+  payment: string = '';
   constructor(
-    private cartService: CartService
+    private route: Router,
+    private rxjs: DataRxjsService,
+    private orderService: OrdersService,
   ) { }
 
   ngOnInit(): void {
+    console.log('CHECKOUT INIT', this.checkout);
   }
 
   createOrder() {
@@ -32,9 +68,26 @@ export class PageCheckoutComponent implements OnInit {
       comments: '',
       status: 1,
       customer: this.customer,
-      itemsOrder: this.checkout
+      items: this.checkout
     }
 
-    console.log('CHECKOUT:', order)
+    console.log('CHECKOUT:', order);
+    this.sendOrderApi(order);
+  }
+
+  sendOrderApi(order: Order) {
+    this.orderService.createOrder(order).subscribe({
+      next: (data) => {
+        // console.log('CREATE ORDER SUCCESS:', data);
+        localStorage.removeItem('rsf-cart');
+        this.rxjs.crtlItemCardQuantity({
+          qtde_items: 0
+        });
+        this.route.navigate(['/']);
+      },
+      error: (err) => {
+        console.log('CREATE ORDER ERROR:', err);
+      }
+    });
   }
 }

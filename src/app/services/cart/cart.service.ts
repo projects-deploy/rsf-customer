@@ -8,10 +8,12 @@ import { DataRxjsService } from '../../shared/services/rxjs/data-rxjs.service';
 export class CartService {
 
   local_str = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`) || [];
+  cartStrg: ShoppingCart = {
+    items: this.local_str
+  };
 
   cart = signal<ShoppingCart>({
-    items: this.local_str.items || [],
-    totalAmount: this.local_str.totalAmount || 0
+    items: this.local_str.items || []
   });
 
   constructor(
@@ -20,55 +22,61 @@ export class CartService {
 
   addItem(item: CartItem) {
 
-    this.cart.mutate(currentCart => {
-      const existingItemIndex = currentCart.items.findIndex(i => i.products.id === item.products.id);
-      console.log('CART SERVICE', item, existingItemIndex);
+    const idx = this.cartStrg.items.findIndex((i: CartItem) => i.product.id === item.product.id);
 
-      if (existingItemIndex !== -1) {
-        currentCart.items[existingItemIndex].quantity = item.quantity + 1;
-      } else {
-        currentCart.items.push(item);
-      }
-      currentCart.totalAmount += item.products.price_product * item.quantity;
+    if (idx !== -1) {
+      this.cartStrg.items[idx].qtde_item += item.qtde_item;
+      this.cartStrg.items[idx].amount += parseFloat((item.qtde_item * item.product.price_promo).toFixed(2));
+    } else {
+      item.amount = parseFloat((item.qtde_item * item.product.price_promo).toFixed(2));
+      this.cartStrg.items.push(item);
+    }
 
-      this.sendRxjsData(currentCart);
-      localStorage.setItem('rsf-cart', JSON.stringify(currentCart));
-    });
+    this.sendRxjsData(this.cartStrg.items);
+    localStorage.setItem('rsf-cart', JSON.stringify(this.cartStrg.items));
   }
 
   removeItem(idx: any) {
-    this.cart.mutate(currentCart => {
-      const item = currentCart.items[idx];
-      currentCart.totalAmount -= item.products.price_product * item.quantity;
-      currentCart.items.splice(idx, 1);
-      this.sendRxjsData(currentCart);
+    let storage = this.getStorage();
+    if (storage != null) {
+      console.log('valor de qt vindo do update', idx, storage);
+      storage.splice(idx, 1);
       localStorage.removeItem('rsf-cart');
-      localStorage.setItem('rsf-cart', JSON.stringify(currentCart));
-    });
+      localStorage.setItem('rsf-cart', JSON.stringify(storage));
+      this.sendRxjsData(storage);
+    }
   }
 
-  updateItem(idx: number, item: CartItem, crtl: boolean) {
-    this.cart.mutate(currentCart => {
+  updateItem(idx: number, qt: number) {
 
-      if (item.quantity == 0) {
-        this.removeItem(idx);
-        return;
-      }
+    if (qt == 0) {
+      this.removeItem(idx);
+      return;
+    }
 
-      currentCart.items[idx].quantity = item.quantity;
+    let storage = this.getStorage();
+    if (storage != null) {
+      storage[idx].qtde_item = qt;
+      storage[idx].amount = this.calcAmount(storage[idx]);
 
-      crtl ? currentCart.totalAmount += item.products.price_product * item.quantity : currentCart.totalAmount -= item.products.price_product * item.quantity;
+      localStorage.removeItem('rsf-cart');
+      localStorage.setItem('rsf-cart', JSON.stringify(storage));
 
-      this.sendRxjsData(currentCart);
-    });
+      this.sendRxjsData(storage);
+    }
+  }
+
+  getStorage() {
+    return JSON.parse(`${localStorage.getItem(('rsf-cart'))}`) || null;
+  }
+
+  calcAmount(item: CartItem) {
+    return parseFloat((item.qtde_item * item.product.price_promo).toFixed(2));
   }
 
   sendRxjsData(values: any) {
-
     this.rxjs.crtlItemCardQuantity({
-      qtde_items: values.items.length,
-      amount: values.totalAmount
+      qtde_items: values.length
     });
-    console.log('ITEM UPDATE cart:', values);
   }
 }

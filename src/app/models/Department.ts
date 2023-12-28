@@ -5,6 +5,6 @@ export interface Department {
     name: string;
 	createdAt?: Date;
 	updatedAt?: Date;
-    router_link?: string;
+    name_link?: string;
 	categories: Category;
 }

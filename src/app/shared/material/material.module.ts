@@ -59,6 +59,8 @@ import { ThumbailComponent } from '../components/thumbail/thumbail.component';
 import { NavbarFooterComponent } from '../components/navbar-footer/navbar-footer.component';
 import { DefaultModalComponent } from '../components/default-modal/default-modal.component';
 import { CustomerFormComponent } from '../components/customer-form/customer-form.component';
+import { CategoryThumbnailComponent } from '../components/category-thumbnail/category-thumbnail.component';
+import { CategoryFilterComponent } from '../components/category-filter/category-filter.component';
 
 const modules = [
   A11yModule,
@@ -114,15 +116,17 @@ const modules = [
 const compoenentes = [
   NavbarComponent,
   FooterComponent,
+  ThumbailComponent,
   ProductDetailComponent,
   ProductCustomComponent,
   ProductReviewComponent,
-  ProductShippingComponent,
-  ProductWhriteReviewComponent,
-  ThumbailComponent,
   NavbarFooterComponent,
   DefaultModalComponent,
   CustomerFormComponent,
+  CategoryFilterComponent,
+  ProductShippingComponent,
+  CategoryThumbnailComponent,
+  ProductWhriteReviewComponent,
 ]
 
 @NgModule({

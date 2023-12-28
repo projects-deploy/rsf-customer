@@ -6,9 +6,10 @@ ul {
   margin: 0;
 }
 
-.mobile-menu-active, .active {
-    visibility: visible;
-    opacity: 1;
+.mobile-menu-active,
+.active {
+  visibility: visible;
+  opacity: 1;
 }
 
 .navbar {
@@ -70,4 +71,9 @@ ul {
 
 .dropdown-promo-menu {
   height: calc(90vh - 70px);
+}
+
+.dropdown-menu>li {
+  height: 40px;
+  vertical-align: middle;
 }

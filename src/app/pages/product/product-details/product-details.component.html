@@ -77,19 +77,20 @@
                         <div class="product-color py-4">
                             <span>Colors:</span>
                             <div class="wrap">
-                                <button class="tosca selected"></button>
-                                <button class="brown"></button>
-                                <button class="ocean"></button>
+                                <button *ngFor="let color of colors; let idx = index"
+                                    [style.backgroundColor]="color.color"
+                                    [ngClass]="{'selected': color.selected}"
+                                    (click)="selectColor(idx)">
+                                </button>
                             </div>
                         </div>
                         <div class="product-size py-4">
                             <span>Size:</span>
                             <div class="wrap">
-                                <button disabled>S</button>
-                                <button>M</button>
-                                <button class="selected">L</button>
-                                <button>XL</button>
-                                <button>XXL</button>
+                                <button *ngFor="let size of sizes, let idx = index"
+                                    [ngClass]="{ 'desabled': size.disabled, 'selected': size.selected }"
+                                    (click)="selectSize(idx)"> {{ size.name }}
+                                </button>
                             </div>
                         </div>
                         <div class="product-stok py-4">

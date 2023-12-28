@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="category">
+        <div class="grid">
+            <div *ngFor="let data of content; let idx = index">
+                <div class="content-box">
+                    <div class="my-card">
+                        <div class="image">
+                            <img [src]="data.link_photo" alt="">
+                        </div>
+                        <figcaption>
+                            <figcaption>
+                                <button mat-icon-button>
+                                    <mat-icon>star_border</mat-icon>
+                                </button>
+
+                                <button mat-icon-button [routerLink]="['detail', data.id]">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+
+                                <button mat-icon-button (click)="addToCartStorage(data)">
+                                    <mat-icon>add_shopping_cart</mat-icon>
+                                </button>
+                            </figcaption>
+                        </figcaption>
+                    </div>
+                    <div class="infos">
+                        <p class="reccos-title my-2 text-center"> {{ data.name }} </p>
+                        <div class="price-product text-center">
+                            <span class="before" *ngIf="data.discount > 0"> ${{ data.price_product
+                                | number: '1.2-2'
+                                }} </span>
+                            <span class="current"> ${{ data.price_promo | number:
+                                '1.2-2' }} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

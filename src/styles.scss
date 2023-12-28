@@ -30,6 +30,7 @@ a {
     text-decoration: none;
     color: inherit;
     -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
 }
 
 img {
@@ -72,8 +73,6 @@ textarea::placeholder {
 .mat-typography {
     font-family: 'Montserrat', sans-serif !important;
 }
-
-
 
 .summary .product-price .wrap::before,
 .product .head-review span::before {
@@ -127,17 +126,25 @@ textarea::placeholder {
     overflow: hidden !important;
 }
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar,
+.dropdown-menu::-webkit-scrollbar {
     width: 5px;
 }
 
-body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track,
+.dropdown-menu::-webkit-scrollbar-track {
     border-radius: 8px;
     background-color: #e7e7e7;
     border: 1px solid #cacaca;
 }
 
-body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb,
+.dropdown-menu::-webkit-scrollbar-thumb {
     border-radius: 8px;
     background-color: #c6c6c6;
+}
+
+.dropdown-menu {
+  max-height: 450px;
+  overflow-y: auto;
 }

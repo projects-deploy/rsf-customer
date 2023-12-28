@@ -1,0 +1,14 @@
+@import '../../../../assets/styles/category-thumbnail';
+@import '../../../../assets/styles/variables';
+
+.reccos-title {
+    font-family: 'Prata', sans-serif;
+    font-size: 18px;
+    --fw600: 400;
+    margin-top: 15px;
+    color: $grey-color;
+}
+
+.breadcrumb-item.active {
+    color: $primary-color;
+}

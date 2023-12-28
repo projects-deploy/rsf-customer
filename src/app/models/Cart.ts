@@ -1,11 +1,11 @@
 import { Product } from "./Product";
 
 export interface CartItem {
-    products: Product;
-    quantity: number;
+    qtde_item: number;
+    amount: number;
+    product: Product;
 }
 
 export interface ShoppingCart {
     items: CartItem[];
-    totalAmount: number;
 }

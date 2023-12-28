@@ -16,5 +16,8 @@ export interface Product {
     createdAt?: Date;
     updatedAt?: Date;
     is_discount?: boolean;
+    product_size: string;
+    product_colors: string;
     brand: Brand;
+    images: any[];
 }

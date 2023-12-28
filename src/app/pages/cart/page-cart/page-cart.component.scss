@@ -1,3 +1,5 @@
+@import '../../../../assets/styles/variables';
+
 .mdc-form-field>label {
     color: #FFF !important;
 }
@@ -7,5 +9,13 @@
     font-size: 35px;
     --fw600: 400;
     margin-top: 15px;
-    color: #2bcb96;
+}
+
+.reccos .grouping.wrapper span {
+    align-items: center;
+}
+
+.cart-product-name,
+.reccos-title {
+    color: $primary-color;
 }

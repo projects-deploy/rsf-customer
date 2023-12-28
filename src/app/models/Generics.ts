@@ -1,4 +1,3 @@
 export interface itemsCardRxjs {
-    qtde_items: number;
-    amount: number;
+    qtde_items: number
 }

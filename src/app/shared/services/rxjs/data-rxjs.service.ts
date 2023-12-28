@@ -11,7 +11,7 @@ export class DataRxjsService {
   cartItemsQuantity$ = this.cartItemsQuantity.asObservable();
 
   crtlItemCardQuantity(value: itemsCardRxjs) {
-    console.log('ITEM UPDATE SERVICE:', value);
     this.cartItemsQuantity.next(value);
   }
+
 }

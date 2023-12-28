@@ -2,9 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Brand } from 'src/app/models/Brand';
+import { Category } from 'src/app/models/Category';
 import { Department } from 'src/app/models/Department';
 import { BrandsService } from 'src/app/services/brands/brands.service';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { CategoriesService } from 'src/app/services/categories/categories.service';
 import { DepartmentsService } from 'src/app/services/departments/departments.service';
 import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service';
 
@@ -15,11 +17,12 @@ import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service'
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  local_str = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`) || null;
+  local_str = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`) || 0;
 
   subscription: Subscription = new Subscription;
 
   menu_brand: Brand[] = [];
+  menu_cat: Category[] = [];
   menu_depto: Department[] = [];
 
   opened: boolean = false;
@@ -65,17 +68,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     private brandService: BrandsService,
     private deptoService: DepartmentsService,
+    private categoryService: CategoriesService,
   ) {
-    if (this.local_str != null) {
-      this.itens_cart = this.local_str.items.length;
+    if (this.local_str.length > 0) {
+      this.itens_cart = this.local_str.length;
+    } else {
+      localStorage.setItem('rsf-cart', JSON.stringify([]));
     }
   }
 
   ngOnInit(): void {
     this.allBrands();
+    this.allCategories();
     this.allDepartments();
-
-    this.initRXJS();
 
     this.rxjs.cartItemsQuantity$.subscribe(value => {
       this.itens_cart = value.qtde_items;
@@ -85,8 +90,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  initRXJS() {
-    // this.subscription
+  allCategories() {
+    this.categoryService.getAllCategorys().subscribe({
+      next: (data) => {
+
+        this.menu_cat = data;
+        data.forEach((item: Category) => {
+          item.router_link = this.slug(item.name);
+        });
+        sessionStorage.setItem('category', JSON.stringify(data));
+        // console.log('GET ALL CATEGORIES:', this.menu_cat);
+      },
+      error: (err) => {
+        console.log('GET ALL CATEGORIES ERR:', err);
+      }
+    });
   }
 
   allBrands() {
@@ -98,7 +116,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
         });
 
         this.menu_brand = data;
-        console.log('GET ALL BRANDS:', data);
+        sessionStorage.setItem('brand', JSON.stringify(data));
+        // console.log('GET ALL BRANDS:', data);
       },
       error: (err) => {
         console.log('GET ALL BRANDS ERR:', err);
@@ -111,11 +130,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
       next: (data) => {
 
         data.forEach((item: Department) => {
-          item.router_link = this.slug(item.name);
+          item.name_link = this.slug(item.name);
         });
 
         this.menu_depto = data;
-        console.log('GET ALL DEPARTMENTS:', this.menu_depto);
+        sessionStorage.setItem('depto', JSON.stringify(data));
+        // console.log('GET ALL DEPARTMENTS:', this.menu_depto);
       },
       error: (err) => {
         console.log('GET ALL DEPARTMENTS ERR:', err);
@@ -153,6 +173,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   slug(input: string) {
-    return input.toString().toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, "_");
+    return input.toString().toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, "-");
   }
 }

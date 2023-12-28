@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
+import { CartItem } from 'src/app/models/Cart';
 import { CartService } from 'src/app/services/cart/cart.service';
-import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service';
 
 @Component({
   selector: 'app-page-cart',
@@ -9,28 +9,44 @@ import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service'
 })
 export class PageCartComponent implements OnInit {
 
-  cart = this.cartService.cart().items;
-  totalAmount = this.cartService.cart().totalAmount;
+  cart = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`) || [];
+  itemList = signal(this.cart);
+
+  totalAmount = computed(() => {
+    return this.itemList().reduce((acc: number, curr: any) => acc + (curr.product.price_promo * curr.qtde_item), 0);
+  });
 
   constructor(
-    private rxjs: DataRxjsService,
     private cartService: CartService,
   ) { }
 
   ngOnInit(): void {
-    this.rxjs.cartItemsQuantity$.subscribe(value => {
-      console.log('ITEM UPDATE COMPONENT:', value);
-      this.totalAmount = value.amount;
-    });
   }
 
-  removeItem(productId: number) {
-    this.cartService.removeItem(String(productId));
+  removeItem(item: any, idx: number) {
+    this.itemList.set(this.itemList().filter((i: CartItem) => i !== item));
+    this.cartService.removeItem(idx);
+    this.cart = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`);
+
+    if (this.cart.length == 0) {
+      localStorage.removeItem('rsf-cart');
+    }
   }
 
   addProduct(i: number, sum: boolean = false) {
-    let p = this.cartService.cart().items[i];
-    sum ? p.quantity++ : p.quantity--;
-    this.cartService.updateItem(i, p, sum);
+    let p = this.cart[i];
+    sum ? p.qtde_item++ : p.qtde_item--;
+
+    this.cartService.updateItem(i, +p.qtde_item);
+    this.reduceValue();
+  }
+
+  reduceValue() {
+    this.cart = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`);
+    this.itemList = signal(this.cart);
+    console.log('reduceValue', this.itemList());
+    this.totalAmount = computed(() => {
+      return this.itemList().reduce((acc: number, curr: any) => acc + (curr.product.price_promo * curr.qtde_item), 0);
+    });
   }
 }

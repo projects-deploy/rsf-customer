@@ -32,12 +32,12 @@
                                             <div class="grouping wrapper">
                                                 <div class="thumbnail ob-cover">
                                                     <a href="">
-                                                        <img [src]="c.products.link_photo" alt="">
+                                                        <img [src]="c.product.link_photo" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="variants">
                                                     <h4 class="dot-title m-0">
-                                                        <a href=""> {{ c.products.name }} </a>
+                                                        <a href=""> {{ c.product.name }} </a>
                                                     </h4>
                                                     <div class="color grey-color">
                                                         <span><strong>Color</strong>:</span>
@@ -50,18 +50,18 @@
                                                 </div>
                                             </div>
                                             <div class="grouping wrapper">
-                                                <div class="price">${{ c.products.price_promo.toFixed(2) }}</div>
+                                                <div class="price">$ {{ c.product.price_promo | number: '1.2-2' }}</div>
                                                 <div class="quantity">
                                                     <div class="control">
                                                         <button (click)="addProduct(idx, true)">+</button>
-                                                        <input type="text" [value]="c.quantity">
+                                                        <input type="text" [value]="c.qtde_item">
                                                         <button (click)="addProduct(idx)">-</button>
                                                     </div>
                                                 </div>
-                                                <div class="price-sub">${{ (c.products.price_promo *
-                                                    c.quantity).toFixed(2) }}
+                                                <div class="price-sub">${{ (c.product.price_promo *
+                                                    c.qtde_item).toFixed(2) }}
                                                 </div>
-                                                <button (click)="removeItem(idx)" mat-icon-button color="warn">
+                                                <button (click)="removeItem(c, idx)" mat-icon-button color="warn">
                                                     <mat-icon>delete_outline</mat-icon>
                                                 </button>
                                             </div>
@@ -80,7 +80,7 @@
                                         <div class="sub-total">
                                             <div class="sub-pricing">
                                                 <span>Subtotal</span>
-                                                <span class="sub-total-price">$ {{ totalAmount.toFixed(2) }}</span>
+                                                <span class="sub-total-price">$ {{ totalAmount() | number: '1.2-2' }}</span>
                                             </div>
                                             <div class="sub-terms d-flex align-items-center">
                                                 <input type="checkbox" id="terms" class="checker">
@@ -88,7 +88,7 @@
                                                         Conditions</a></label>
                                             </div>
                                             <div class="button">
-                                                <a routerLink="/checkout"
+                                                <a [routerLink]="['/checkout']"
                                                     class="text-uppercase w-100 secondary-btn">Checkout</a>
                                             </div>
                                         </div>

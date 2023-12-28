@@ -19,7 +19,6 @@ export class AppComponent {
       error: (err) => {
         console.log('ERRO AO BUSCAR USÁRIO');
       }
-      
-    })
+    });
   }
 }

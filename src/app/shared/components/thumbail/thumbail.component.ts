@@ -9,7 +9,6 @@ export class ThumbailComponent<T> implements OnInit {
 
   @Input() content: any = [];
 
-
   constructor() { }
 
   ngOnInit(): void {

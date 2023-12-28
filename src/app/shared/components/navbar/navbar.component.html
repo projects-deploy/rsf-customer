@@ -29,15 +29,22 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false"> Departamentos </a>
                     <ul class="dropdown-menu">
-                        <li  *ngFor="let depto of menu_depto">
-                            <a class="dropdown-item" [routerLink]="depto.router_link"> {{ depto.name }} </a>
+                        <li *ngFor="let depto of menu_depto">
+                            <a class="dropdown-item"> {{ depto.name }} </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false"> Categorias </a>
+                    <ul class="dropdown-menu dropdown-cat">
+                        <li *ngFor="let cat of menu_cat">
+                            <a class="dropdown-item" [routerLink]="['/category']" [queryParams]="{s: cat.router_link, q: cat.id}"> {{ cat.name }} </a>
                         </li>
                     </ul>
                 </li>
                 <li class="reccos-logo">
                     <a routerLink="/" style="z-index: 1000;">
-                        <!-- <span class="red">reccos</span>
-                        <span class="orange">Shop</span> -->
                         <img src="../../../../assets/logos_banners/logo_01.png" alt="">
                     </a>
                 </li>
