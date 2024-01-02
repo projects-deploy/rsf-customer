@@ -1,0 +1,32 @@
+<div id="page" class="page-category">
+    <main>
+        <div class="section">
+            <div class="container wide">
+                <div class="wrap">
+                    <div class="heading d-flex justify-content-center">
+                        <h6 class="reccos-title my-4">
+                            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+                                    <li class="breadcrumb-item">Marcas</li>
+                                    <li class="breadcrumb-item active" aria-current="page"> {{ brandName }} </li>
+                                </ol>
+                            </nav>
+                        </h6>
+                    </div>
+                    <div class="content">
+
+                        <app-category-filter></app-category-filter>
+
+                        <div class="category-content">
+                            <app-category-thumbnail [content]="products"></app-category-thumbnail>
+                            <div class="button">
+                                <a href="" class="primary-btn">Load More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CartItem } from 'src/app/models/Cart';
 import { Category } from 'src/app/models/Category';
 import { Product } from 'src/app/models/Product';
-import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
+import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service';
 
 @Component({
   selector: 'app-page-category',
@@ -15,6 +14,9 @@ export class PageCategoryComponent implements OnInit {
 
   category_id: string = '';
   categoryName: string = '';
+
+  openned_sidebar: boolean = false;
+
   category: Category;
   products: Product[] = [];
 
@@ -27,7 +29,7 @@ export class PageCategoryComponent implements OnInit {
   ];
 
   constructor(
-    private cartService: CartService,
+    private rxjs: DataRxjsService,
     private actvRoute: ActivatedRoute,
     private catService: CategoriesService,
   ) { }
@@ -36,6 +38,10 @@ export class PageCategoryComponent implements OnInit {
     this.actvRoute.queryParams.subscribe(params => {
       this.category_id = params['q'];
       this.getProductsByCategory(+params['q']);
+    });
+
+    this.rxjs.openCloseFilterModal$.subscribe(value => {
+      this.openned_sidebar = value;
     });
   }
 

@@ -22,7 +22,8 @@ ul {
 }
 
 .brand-drop.show {
-  width: auto !important;
+  min-width: 250px !important;
+  padding: 10px;
 }
 
 .promo-drop.show {
@@ -76,4 +77,109 @@ ul {
 .dropdown-menu>li {
   height: 40px;
   vertical-align: middle;
+}
+
+.space-menu .item-menu:first-child {
+  margin-left: 0;
+}
+
+.space-menu .item-menu:last-child {
+  margin-right: 0;
+}
+
+.space-menu .item-menu {
+  margin: 0 25px;
+}
+
+//search
+
+.search {
+  padding-left: 25px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 500px;
+  height: 54px;
+  background-color: white;
+  border-radius: 25px;
+  -webkit-box-shadow: 0px 10px 18px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 10px 18px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 10px 18px 0px rgba(0, 0, 0, 0.1);
+}
+
+.select_area {
+  color: $primary-color;
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  line-height: 24px;
+  font-weight: medium;
+}
+
+.text {
+  padding-left: 15px;
+}
+
+.line {
+  margin-left: 15px;
+  border-left: 1px solid $primary-color;
+  height: 40px;
+}
+
+.search_text {
+  width: 100%;
+  border: none;
+  margin-left: 15px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: Regular;
+}
+
+::-webkit-input-placeholder {
+  color: #ADB1B8;
+}
+
+.text_and-icon {
+  width: 335px;
+  display: flex;
+  align-items: center;
+}
+
+.search_icon {
+  color: #5E6573;
+  transition: all .6s ease-in-out;
+  -webkit-transition: all .6s ease-in-out;
+  -moz-transition: all .6s ease-in-out;
+  -o-transition: all .6s ease-in-out;
+}
+
+.search_text:focus {
+  outline: none !important;
+}
+
+.search_text:focus+.search_icon {
+  color: $primary-color;
+  // transform: translate(1px, 0);
+  // -webkit-transform: translate(1px, 0);
+  // -o-transform: translate(1px, 0);
+  // -moz-transform: translate(1px);
+}
+
+.mobile-menu .wrap {
+  top: 90px;
+}
+
+@media screen and (max-width: 992px) {
+  .h-navbar {
+    height: auto;
+    padding: 0 !important;
+  }
+
+  .search {
+    width: 400px;
+  }
+
+  .text_and-icon {
+    width: 235px;
+  }
 }

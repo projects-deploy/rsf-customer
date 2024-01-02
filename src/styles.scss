@@ -127,24 +127,38 @@ textarea::placeholder {
 }
 
 body::-webkit-scrollbar,
-.dropdown-menu::-webkit-scrollbar {
+.dropdown-menu::-webkit-scrollbar,
+.nav__dropdown-collapse::-webkit-scrollbar {
     width: 5px;
 }
 
 body::-webkit-scrollbar-track,
-.dropdown-menu::-webkit-scrollbar-track {
+.dropdown-menu::-webkit-scrollbar-track,
+.nav__dropdown-collapse::-webkit-scrollbar-track {
     border-radius: 8px;
     background-color: #e7e7e7;
     border: 1px solid #cacaca;
 }
 
 body::-webkit-scrollbar-thumb,
-.dropdown-menu::-webkit-scrollbar-thumb {
+.dropdown-menu::-webkit-scrollbar-thumb,
+.nav__dropdown-collapse::-webkit-scrollbar-thumb {
     border-radius: 8px;
     background-color: #c6c6c6;
 }
 
 .dropdown-menu {
-  max-height: 450px;
-  overflow-y: auto;
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.gradient-title, .icon-title {
+    font-family: 'Prata', sans-serif;
+    font-size: 25px;
+    background: #FF7900;
+    background: -webkit-linear-gradient(to right, #FF7900 27%, #FF2C2C 61%);
+    background: -moz-linear-gradient(to right, #FF7900 27%, #FF2C2C 61%);
+    background: linear-gradient(to right, #FF7900 27%, #FF2C2C 61%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

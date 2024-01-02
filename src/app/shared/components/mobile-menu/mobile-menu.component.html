@@ -1,0 +1,79 @@
+<div class="box">
+    <div class="wrap_search p-3">
+        <div class="search">
+           <input type="text" class="searchTerm" placeholder="What are you looking for?">
+           <button type="submit" class="searchButton">
+            <i class="ri-search-line"></i>
+          </button>
+        </div>
+     </div>
+    <div class="nav" id="navbar">
+        <nav class="nav__container">
+            <div>
+                <a href="#" class="nav__link nav__logo">
+                    <i class='ri-home-line nav__icon'></i>
+                    <span class="nav__logo-name">Home</span>
+                </a>
+
+                <a href="#" class="nav__link nav__logo">
+                    <i class='ri-box-3-line nav__icon'></i>
+                    <span class="nav__logo-name">Produtos</span>
+                </a>
+
+                <div class="nav__dropdown nav__logo">
+                    <a class="nav__link">
+                        <i class='ri-shapes-line nav__icon'></i>
+                        <span class="nav__name">Departamentos</span>
+                        <i class='ri-arrow-down-s-line nav__icon nav__dropdown-icon'></i>
+                    </a>
+
+                    <div class="nav__dropdown-collapse">
+                        <div class="nav__dropdown-content">
+                            <a *ngFor="let depto of mobile_menu_dpt" (click)="goToRouter(depto, 'department')"
+                                class="nav__dropdown-item"> {{ depto.name }} </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav__dropdown  nav__logo">
+                    <a class="nav__link">
+                        <i class='ri-shapes-line nav__icon'></i>
+                        <span class="nav__name">Categorias</span>
+                        <i class='ri-arrow-down-s-line nav__icon nav__dropdown-icon'></i>
+                    </a>
+
+                    <div class="nav__dropdown-collapse">
+                        <div class="nav__dropdown-content">
+                            <a *ngFor="let cat of mobile_menu_cat" (click)="goToRouter(cat, 'category')"
+                                class="nav__dropdown-item">
+                                {{ cat.name }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav__dropdown  nav__logo">
+                    <a class="nav__link">
+                        <i class='ri-shapes-line nav__icon'></i>
+                        <span class="nav__name">Marcas</span>
+                        <i class='ri-arrow-down-s-line nav__icon nav__dropdown-icon'></i>
+                    </a>
+
+                    <div class="nav__dropdown-collapse">
+                        <div class="nav__dropdown-content">
+                            <a *ngFor="let brand of mobile_menu_bnd" (click)="goToRouter(brand, 'brand')"
+                                class="nav__dropdown-item">
+                                {{ brand.name }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="nav__link nav__logout">
+                <i class='bx bx-log-out nav__icon'></i>
+                <span class="nav__name">Log Out</span>
+            </a>
+        </nav>
+    </div>
+</div>

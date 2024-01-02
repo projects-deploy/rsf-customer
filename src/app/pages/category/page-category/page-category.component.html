@@ -15,12 +15,15 @@
                         </h6>
                     </div>
                     <div class="content">
-
-                        <app-category-filter></app-category-filter>
+                        <div id="sidebar-filter" class="sidebar" [ngClass]="{'sidebar-active': openned_sidebar}">
+                            <div class="wrap">
+                                <app-category-filter></app-category-filter>
+                            </div>
+                        </div>
 
                         <div class="category-content">
                             <div class="sorter">
-                                <a href="#0" class="menu-trigger" trigger-button data-target="sidebar-filter">
+                                <a class="menu-trigger" (click)="openned_sidebar = true">
                                     <i class="ri-filter-2-fill"></i>
                                 </a>
                                 <div class="left">

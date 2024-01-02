@@ -2,30 +2,55 @@
     <app-navbar-footer (cartMenuClose)="crtlCartMenu($event)"></app-navbar-footer>
 </div>
 
-<nav class="navbar bg-light sticky-top shadow" style="height: 75px;">
-    <div class="container-fluid">
-        <div class="col-12 col-lg-1">
-            <div class="menu-bar">
-                <a class="menu-trigger reccos-cursor" (click)="openMobileMenu()">
-                    <i class="ri-menu-line"></i>
-                </a>
-            </div>
+<nav class="navbar bg-light sticky-top shadow py-3 h-navbar" style="height: auto;">
+    <div class="container-fluid  p-3">
+        <a class="menu-trigger reccos-cursor" (click)="openMobileMenu()">
+            <i class="ri-menu-line"></i>
+        </a>
 
-            <div class="list-inline d-lg-block d-sm-none d-none">
-                <ul>
-                    <li><a href=""><i class="ri-user-line"></i></a></li>
-                    <li><a href=""><span class="reccos-badge"> {{ttl_favorites}} </span>
-                            <i class="ri-star-line"></i>
-                        </a>
-                    </li>
-                </ul>
+        <a class="navbar-brand" href="#">
+            <h4 class="font-weight-bold m-0">
+                <i class="icon-title me-2 ri-shopping-cart-line"></i>
+                <span class="gradient-title">reccos.shop.com</span>
+            </h4>
+        </a>
+
+        <div class="search_box  d-lg-block d-sm-none d-none">
+            <div class="search">
+                <div class="select_area">
+                    <i class="ri-box-3-line map_icon"></i>
+                    <div class="text">Produtos</div>
+                </div>
+                <div class="line"></div>
+                <div class="text_and-icon">
+                    <input type="text" class="search_text" id="search_text" placeholder="Buscar por produtos">
+                    <i class="ri-search-line search_icon"></i>
+                </div>
             </div>
         </div>
-        <div class="col-10 col-lg-10 d-lg-block d-sm-none d-none">
-            <ul class="d-flex justify-content-around align-items-center p-0 m-0">
-                <li> <a class="nav-link active" aria-current="page" href="#">Home</a> </li>
-                <li> <a class="nav-link" routerLink="/product">Produtos</a> </li>
-                <li class="nav-item dropdown">
+
+        <div class="list-inline d-lg-block d-sm-none d-none">
+            <ul>
+                <li><a href=""><span class="reccos-badge"> {{ttl_favorites}} </span>
+                        <i class="ri-star-line"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="reccos-cursor" [routerLink]="['/cart']">
+                        <span class="reccos-badge"> {{ itens_cart }} </span>
+                        <i class="ri-shopping-cart-2-line"></i>
+                    </a>
+                </li>
+                <li><a href=""><i class="ri-user-line"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid p-2">
+        <div class="col-12 col-lg-12 d-lg-block d-sm-none d-none">
+            <ul class="d-flex justify-content-center align-items-center space-menu p-0 m-0">
+                <li class="item-menu"> <a class="nav-link active" aria-current="page" href="#">Home</a> </li>
+                <li class="item-menu"> <a class="nav-link" routerLink="/product">Produtos</a> </li>
+                <li class="nav-item dropdown item-menu">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false"> Departamentos </a>
                     <ul class="dropdown-menu">
@@ -34,32 +59,31 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown item-menu">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false"> Categorias </a>
                     <ul class="dropdown-menu dropdown-cat">
                         <li *ngFor="let cat of menu_cat">
-                            <a class="dropdown-item" [routerLink]="['/category']" [queryParams]="{s: cat.router_link, q: cat.id}"> {{ cat.name }} </a>
+                            <a class="dropdown-item" [routerLink]="['/category']"
+                                [queryParams]="{s: cat.name_link, q: cat.id}"> {{ cat.name }} </a>
                         </li>
                     </ul>
                 </li>
-                <li class="reccos-logo">
-                    <a routerLink="/" style="z-index: 1000;">
-                        <img src="../../../../assets/logos_banners/logo_01.png" alt="">
-                    </a>
-                </li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown item-menu">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false"> Marcas </a>
                     <ul class="dropdown-menu brand-drop">
                         <li *ngFor="let brand of menu_brand">
-                            <!-- <img [src]="brand.link_photo" alt="" width="5%"> -->
-                            <a class="dropdown-item" [routerLink]="brand.router_link"> {{ brand.name }} </a></li>
+                            <a class="dropdown-item px-0" [routerLink]="['/brand']"
+                                [queryParams]="{s: brand.name, q: brand.id}">
+                                <img src="https://www.shutterstock.com/image-vector/image-icon-trendy-flat-style-600nw-643080895.jpg"
+                                    alt="" width="15%" height="auto"> {{ brand.name }} </a>
+                        </li>
                     </ul>
                 </li>
 
-                <li class="nav-item dropdown position-static">
+                <li class="nav-item dropdown position-static item-menu">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false"> Promoções </a>
                     <ul class="dropdown-menu dropdown-promo-menu w-100">
@@ -67,89 +91,21 @@
                     </ul>
                 </li>
 
-                <li>
+                <li class="item-menu">
                     <a class="nav-link" href="#">Blog</a>
                 </li>
             </ul>
-        </div>
-        <div class="col-1 col-lg-1 d-lg-block d-sm-none d-none">
-            <div class="list-inline">
-                <ul>
-                    <li>
-                        <a href="#0" trigger-button data-target="search-float">
-                            <i class="ri-search-line"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <!-- trigger-button data-target="data-share" -->
-                        <a class="reccos-cursor" [routerLink]="['/cart']">
-                            <span class="reccos-badge"> {{ itens_cart }} </span>
-                            <i class="ri-shopping-bag-line"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 </nav>
 
 <div id="mobile-menu" class="mobile-menu" [ngClass]="{'mobile-menu-active': active_mobile}">
     <div class="wrap">
-        <nav class="navbar px-3 bg-body-tertiary">
-            <div class="d-flex justify-content-between align-items-center w-100 mt-2 title-navbar">
-                <img src="../../../../assets/logos_banners/logo_01.png" alt="">
-                <a (click)="closeMobileMenu()" class="reccos-cursor">
-                    <i class="ri-close-circle-line"></i>
-                </a>
-            </div>
-        </nav>
-
-        <div class="main-menu scrollto">
-            <nav class="wrapper">
-                <ul>
-                    <li><a href=""><span>Home</span></a></li>
-                    <li class="has-child">
-                        <a href="">
-                            <span>Products</span>
-                            <span class="child-trigger"><i class="ri-arrow-down-s-line"></i></span>
-                        </a>
-                        <ul class="sub-menu list-block">
-                            <li><a href="page-single.html">Adidas</a></li>
-                            <li><a href="page-single.html">Channel</a></li>
-                            <li><a href="page-single.html">Dulce & Gabana</a></li>
-                            <li><a href="page-single.html">Ganni</a></li>
-                            <li><a href="page-single.html">Gucci</a></li>
-                            <li><a href="page-single.html">Louis Vuitton</a></li>
-                            <li><a href="page-single.html">Nike</a></li>
-                            <li><a href="page-single.html">Prada</a></li>
-                            <li><a href="page-single.html">Puma</a></li>
-                            <li><a href="page-single.html">New Ballance</a></li>
-                            <li><a href="page-single.html">Olympkus</a></li>
-                            <li><a href="page-single.html">Hering</a></li>
-                        </ul>
-                    </li>
-                    <li><a href=""><span>Discount</span></a></li>
-                    <li class="has-child">
-                        <a href="">
-                            <span>Specials</span>
-                            <span class="child-trigger"><i class="ri-arrow-down-s-line"></i></span>
-                        </a>
-                        <ul class="sub-menu list-block">
-                            <li><a href="page-single.html">Adidas</a></li>
-                            <li><a href="page-single.html">Channel</a></li>
-                            <li><a href="page-single.html">Olympkus</a></li>
-                            <li><a href="page-single.html">Hering</a></li>
-                        </ul>
-                    </li>
-                    <li><a href=""><span>Sale</span></a></li>
-                </ul>
-            </nav>
-            <div class="button">
-                <a href="" class="secondary-btn">Login</a>
-                <a href="" class="primary-btn">Register</a>
-
-            </div>
-        </div>
+        <app-mobile-menu
+            [mobile_menu_cat]="menu_cat"
+            [mobile_menu_dpt]="menu_depto"
+            [mobile_menu_bnd]="menu_brand"
+        ></app-mobile-menu>
     </div>
 </div>
 

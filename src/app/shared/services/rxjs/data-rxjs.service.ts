@@ -10,8 +10,22 @@ export class DataRxjsService {
   private cartItemsQuantity = new Subject<itemsCardRxjs>();
   cartItemsQuantity$ = this.cartItemsQuantity.asObservable();
 
+  private openCloseMenu = new Subject<boolean>();
+  openCloseMenu$ = this.openCloseMenu.asObservable();
+
+  private openCloseFilterModal = new Subject<boolean>();
+  openCloseFilterModal$ = this.openCloseFilterModal.asObservable();
+
   crtlItemCardQuantity(value: itemsCardRxjs) {
     this.cartItemsQuantity.next(value);
+  }
+
+  crtlOpenCloseMenuCard(value: boolean) {
+    this.openCloseMenu.next(value);
+  }
+
+  closeFilterModal(value: boolean) {
+    this.openCloseFilterModal.next(value);
   }
 
 }

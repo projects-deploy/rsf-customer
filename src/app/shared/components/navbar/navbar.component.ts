@@ -85,6 +85,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.rxjs.cartItemsQuantity$.subscribe(value => {
       this.itens_cart = value.qtde_items;
     });
+
+    this.rxjs.openCloseMenu$.subscribe(value => {
+      this.active_mobile = value;
+    });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -96,7 +100,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
         this.menu_cat = data;
         data.forEach((item: Category) => {
-          item.router_link = this.slug(item.name);
+          item.name_link = this.slug(item.name);
         });
         sessionStorage.setItem('category', JSON.stringify(data));
         // console.log('GET ALL CATEGORIES:', this.menu_cat);
@@ -112,7 +116,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       next: (data) => {
 
         data.forEach((item: Brand) => {
-          item.router_link = this.slug(item.name);
+          item.name_link = this.slug(item.name);
         });
 
         this.menu_brand = data;
@@ -164,7 +168,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   crtlCartMenu(e: any) { // OUTPUT
-    this.opened_cart = e;
+    console.log('VALOR OUTPUT', e);
+    this.active_mobile = e;
   }
 
   goToCheckout(route: string) {

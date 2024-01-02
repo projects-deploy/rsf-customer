@@ -61,6 +61,7 @@ import { DefaultModalComponent } from '../components/default-modal/default-modal
 import { CustomerFormComponent } from '../components/customer-form/customer-form.component';
 import { CategoryThumbnailComponent } from '../components/category-thumbnail/category-thumbnail.component';
 import { CategoryFilterComponent } from '../components/category-filter/category-filter.component';
+import { MobileMenuComponent } from '../components/mobile-menu/mobile-menu.component';
 
 const modules = [
   A11yModule,
@@ -113,7 +114,7 @@ const modules = [
   // COMPONENTES
 ]
 
-const compoenentes = [
+const componentes = [
   NavbarComponent,
   FooterComponent,
   ThumbailComponent,
@@ -127,11 +128,12 @@ const compoenentes = [
   ProductShippingComponent,
   CategoryThumbnailComponent,
   ProductWhriteReviewComponent,
+  MobileMenuComponent,
 ]
 
 @NgModule({
   declarations: [
-    ...compoenentes
+    ...componentes
   ],
   imports: [
     CommonModule,
@@ -145,7 +147,7 @@ const compoenentes = [
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    ...compoenentes,
+    ...componentes,
     ...modules
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
