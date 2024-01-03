@@ -1,25 +1,10 @@
 <div class="content-box">
-    <div class="box" *ngFor="let data of content; let idx = index">
+    <div class="box">
         <div class="my-card">
             <div class="content-box">
                 <div class="my-card">
                     <div class="image">
-                        <img [src]="data.link_photo" alt="">
-                    </div>
-                    <figcaption>
-                        <i class="ri-star-line"></i>
-                        <i class="ri-arrow-left-right-line"></i>
-                        <i class="ri-eye-line"></i>
-                    </figcaption>
-                </div>
-                <div class="infos">
-                    <p class="reccos-title m-0 text-center"> {{ data.name }} </p>
-                    <div class="price-product">
-                        <span class="before"> ${{ data.price_promo
-                            | number: '1.2-2'
-                            }} </span>
-                        <span class="current"> ${{ data.discount | number:
-                            '1.2-2' }} </span>
+                        <img [src]="content.link_photo" alt="">
                     </div>
                 </div>
             </div>

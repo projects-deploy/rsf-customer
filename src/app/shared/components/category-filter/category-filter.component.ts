@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Brand } from 'src/app/models/Brand';
 import { Category } from 'src/app/models/Category';
 import { Department } from 'src/app/models/Department';
@@ -10,6 +10,8 @@ import { DataRxjsService } from '../../services/rxjs/data-rxjs.service';
   styleUrls: ['./category-filter.component.scss']
 })
 export class CategoryFilterComponent implements OnInit {
+
+  @Input() crtl: boolean = false;
 
   brandNames: Brand[] = JSON.parse(`${sessionStorage.getItem('brand')}`) || [];
   catNames: Category[] = JSON.parse(`${sessionStorage.getItem('category')}`) || [];

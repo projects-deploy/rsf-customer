@@ -23,8 +23,8 @@ export class ProductsService {
     return this.http.get<Product>(`${this.url}/${this.flag}/${product_id}`);
   }
 
-  productByBrandId(brand_id: number) {
-    return this.http.get<Product>(`${this.url}/${this.flag}/by-brand/${brand_id}`);
+  productByBrandId(product_id: number) {
+    return this.http.get<Product>(`${this.url}/${this.flag}/by-brand/${product_id}`);
   }
 
   createProduct(product: Product) {

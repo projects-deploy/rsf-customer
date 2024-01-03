@@ -17,7 +17,7 @@
                     <div class="content">
                         <div id="sidebar-filter" class="sidebar" [ngClass]="{'sidebar-active': openned_sidebar}">
                             <div class="wrap">
-                                <app-category-filter></app-category-filter>
+                                <app-category-filter [crtl]="openned_sidebar"></app-category-filter>
                             </div>
                         </div>
 

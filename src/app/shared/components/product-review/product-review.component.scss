@@ -2,6 +2,19 @@ h3 {
     font-size: 30px;
 }
 
+.box-comment:not(:last-child) {
+    border-bottom: 1px solid #c6c6c6;
+}
+
+.data-popup {
+    z-index: 2001;
+    pointer-events: none;
+}
+
+.open-modal {
+    display: block;
+}
+
 .product-review {
     max-width: 980px;
     margin: 0 auto;

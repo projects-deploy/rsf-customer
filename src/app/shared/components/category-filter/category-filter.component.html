@@ -1,7 +1,7 @@
 <div class="sidebar-content">
     <div class="sidebar-title d-flex justify-content-between">
         <span>Filter</span>
-        <a><i class="ri-close-line" (click)="closeFilterModal()"></i></a>
+        <a *ngIf="crtl"><i class="ri-close-line" (click)="closeFilterModal()"></i></a>
     </div>
     <div class="widget">
         <div class="summary">

@@ -62,7 +62,7 @@ export class PageCheckoutComponent implements OnInit {
 
     let order: Order = {
       date_order: new Date(Date.now()),
-      value_total: 321,
+      value_total: this.finaly_valuet(),
       shipping: 1,
       to_remove: 1,
       comments: '',
@@ -78,7 +78,7 @@ export class PageCheckoutComponent implements OnInit {
   sendOrderApi(order: Order) {
     this.orderService.createOrder(order).subscribe({
       next: (data) => {
-        // console.log('CREATE ORDER SUCCESS:', data);
+        console.log('CREATE ORDER SUCCESS:', data);
         localStorage.removeItem('rsf-cart');
         this.rxjs.crtlItemCardQuantity({
           qtde_items: 0

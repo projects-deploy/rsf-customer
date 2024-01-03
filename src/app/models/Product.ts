@@ -1,4 +1,5 @@
 import { Brand } from "./Brand";
+import { Reviews } from "./Reviews";
 
 export interface Product {
     id?: number;
@@ -19,5 +20,5 @@ export interface Product {
     product_size: string;
     product_colors: string;
     brand: Brand;
-    images: any[];
+    reviews: Reviews[];
 }

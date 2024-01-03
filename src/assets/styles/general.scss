@@ -1099,7 +1099,7 @@ main>div .heading {
 
 .product.detail .dotgrid .wrapper {
     --grid-col: 250px;
-    --gutter: 30px;
+    --gutter: 20px;
 }
 
 .product .product-about.custom h3 {
@@ -1166,16 +1166,15 @@ main>div .heading {
 * ------------------------------ */
 
 .data-popup {
-    /* value z-index 1001 */
-    z-index: 1000;
+    z-index: 2001;
     pointer-events: none;
-    // background-color: #f0ecec;
 }
 
 .data-popup .wrap {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba($color: #000000, $alpha: .5);
     height: 100%;
 }
 
@@ -1185,10 +1184,14 @@ main>div .heading {
     padding: 40px 20px;
     width: var(--data-width, 400px);
     max-width: calc(100vw - 50px);
-    max-height: calc(100vh - 60px);
+    max-height: calc(100vh - 100px);
     border-radius: 5px;
     overflow-y: auto;
     pointer-events: auto;
+}
+
+.data-popup .data-content.modal-top {
+    top: 80px;
 }
 
 .data-popup .close-trigger,

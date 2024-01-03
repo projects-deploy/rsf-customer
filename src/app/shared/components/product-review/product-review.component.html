@@ -1,117 +1,94 @@
 <div class="product-review">
     <h3>Rating & Review</h3>
-    <div class="head-review">
-        <div class="sum-rating">
-            <strong>4.8</strong>
-            <span>3 reviews</span>
+    <ng-container *ngIf="reviews.length > 0; else noComments">
+        <div class="head-review">
+            <div class="sum-rating">
+                <strong>4.8</strong>
+                <span>3 reviews</span>
+            </div>
+            <div class="button">
+                <a (click)="oppened_modal = true;" class="primary-btn">Whrite a review</a>
+            </div>
         </div>
-        <div class="button">
-            <!-- <a (click)="openDialog()" class="primary-btn" trigger-button data-target="data-review">Whrite a review</a> -->
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalReview">
-                Whrite a review
-            </button>
-        </div>
-    </div>
-    <div class="body-review">
-        <div class="profile">
-            <div class="thumb-name">
-                <div class="image">
-                    <img src="./assets/images/ig_01.jpg" alt="">
-                </div>
-                <div class="grouping">
-                    <div class="name">Sara</div>
-                    <div class="rating">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
+        <div class="body-review box-comment" *ngFor="let r of reviews; let idx = index">
+            <div class="profile">
+                <div class="thumb-name">
+                    <div class="image">
+                        <img src="./assets/images/ig_01.jpg" alt="">
                     </div>
-                    <div class="date grey-color">On October 29, 2023</div>
+                    <div class="grouping">
+                        <div class="name"> {{ r.customer.name + " " + r.customer.surname }} </div>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                        </div>
+                        <div class="date grey-color">On {{ r.createdAt | date }} </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <strong> {{ r.title }} </strong>
+                    <p class="grey-color"> {{ r.comment }} </p>
                 </div>
             </div>
-            <div class="comment">
-                <strong>Awesome Product</strong>
-                <p class="grey-color">Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Distinctio dolorem vero perferendis magnam
-                    accusantium, ex velit, ipsa qui voluptatum suscipit commodi nemo
-                    odio sequi aspernatur numquam fugiat corporis perspiciatis.
-                    Quisquam.</p>
-            </div>
         </div>
-    </div>
+    </ng-container>
+    <ng-template #noComments>
+        <div class="alert alert-light mt-3" role="alert">
+            O produto ainda não possui avaliação!
+            <a mat-button (click)="oppened_modal = true;">Clique aqui</a>e seja o primeiro a fazer!
+        </div>
+    </ng-template>
+</div>
 
-    <div class="body-review">
-        <div class="profile">
-            <div class="thumb-name">
-                <div class="image">
-                    <img src="./assets/images/ig_02.jpg" alt="">
+<div id="data-question" class="data-popup d-question">
+    <div class="wrap">
+        <div class="data-content">
+            <a mat-button class="close-trigger" color="accent" (click)="oppened_modal = false;"><i
+                    class="ri-close-line"></i></a>
+            <h3 class="reccos-title">The question</h3>
+            <form action="">
+                <div><input type="text" placeholder="Name"></div>
+                <div><input type="text" placeholder="Email"></div>
+                <div><textarea placeholder="Your question is..." name="" id="" cols="30" rows="5"></textarea></div>
+                <div class="button">
+                    <button class="secondary-btn">Submit</button>
                 </div>
-                <div class="grouping">
-                    <div class="name">Oolonéia</div>
-                    <div class="rating">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                    </div>
-                    <div class="date grey-color">On October 29, 2023</div>
-                </div>
-            </div>
-            <div class="comment">
-                <strong>Awesome Product</strong>
-                <p class="grey-color">Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Quo blanditiis placeat sed repellat, vitae
-                    possimus aperiam odit nostrum eius at, est distinctio nesciunt
-                    reiciendis architecto molestias labore similique sunt ducimus?
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="body-review">
-        <div class="profile">
-            <div class="thumb-name">
-                <div class="image">
-                    <img src="./assets/images/ig_03.jpg" alt="">
-                </div>
-                <div class="grouping">
-                    <div class="name">Micalatéia</div>
-                    <div class="rating">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                    </div>
-                    <div class="date grey-color">On October 29, 2023</div>
-                </div>
-            </div>
-            <div class="comment">
-                <strong>Awesome Product</strong>
-                <p class="grey-color">Lorem ipsum dolor sit, amet consectetur
-                    adipisicing elit. Expedita, dolores, mollitia dolore qui quidem
-                    dolorem similique, deleniti recusandae harum eius ea nam
-                    facilis! Enim, neque eum maxime at perspiciatis nihil.</p>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalReview" tabindex="-1" aria-labelledby="modalReviewLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modalReviewLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div id="data-review" class="data-popup d-review" [ngClass]="{'open-modal': oppened_modal}">
+    <div class="wrap">
+        <div class="data-content modal-top">
+            <a mat-button class="close-trigger" color="accent" (click)="oppened_modal = false;"><i
+                    class="ri-close-line"></i></a>
+            <h3 class="reccos-title">Write a Review</h3>
+            <div class="rating">
+                <span>Your Ratting:</span>
+                <div class="stars">
+                    <input [(ngModel)]="value_rating" value="5" type="radio" name="rating" id="star5">
+                    <label for="star5"><i class="ri-star-fill"></i></label>
+
+                    <input [(ngModel)]="value_rating" value="4" type="radio" name="rating" id="star4">
+                    <label for="star4"><i class="ri-star-fill"></i></label>
+
+                    <input [(ngModel)]="value_rating" value="3" type="radio" name="rating" id="star3">
+                    <label for="star3"><i class="ri-star-fill"></i></label>
+
+                    <input [(ngModel)]="value_rating" value="2" type="radio" name="rating" id="star2">
+                    <label for="star2"><i class="ri-star-fill"></i></label>
+
+                    <input [(ngModel)]="value_rating" value="1" type="radio" name="rating" id="star1">
+                    <label for="star1"><i class="ri-star-fill"></i></label>
+                </div>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <form [formGroup]="reviewForm">
+                <div><input formControlName="title" type="text" placeholder="Review title"></div>
+                <div><textarea formControlName="comment" placeholder="Your review is..." name="" id="" cols="30"
+                        rows="3"></textarea></div>
+            </form>
+            <div class="button mt-2">
+                <button class="secondary-btn w-100" (click)="createReviewProduct(reviewForm.value)">Submit</button>
             </div>
         </div>
     </div>

@@ -81,17 +81,17 @@
                                             <input type="radio" class="checker">
                                             <label>Envio</label>
                                         </div>
-                                        <span class="value">$ {{flat | number: '1.2-2' }}</span>
+                                        <span class="value">$ {{ flat | number: '1.2-2' }}</span>
                                     </li>
                                 </ul>
                             </li>
                             <li class="pricing-item">
                                 <span>Cupom/Descontos</span>
-                                <span class="value">$ {{cupom | number: '1.2-2' }}</span>
+                                <span class="value">$ {{ cupom | number: '1.2-2' }}</span>
                             </li>
                             <li class="total pricing-item">
                                 <span>Total</span>
-                                <span class="value">$ {{finaly_valuet() | number: '1.2-2' }} </span>
+                                <span class="value">$ {{ finaly_valuet() | number: '1.2-2' }} </span>
                             </li>
                         </ul>
                     </div>

@@ -2,10 +2,13 @@ import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CartItem } from 'src/app/models/Cart';
+import { Customer } from 'src/app/models/Customer';
 import { Product } from 'src/app/models/Product';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { FavoritesService } from 'src/app/services/favorites/favorites.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { DefaultModalComponent } from 'src/app/shared/components/default-modal/default-modal.component';
+import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service';
 
 @Component({
   selector: 'app-product-details',
@@ -14,20 +17,43 @@ import { DefaultModalComponent } from 'src/app/shared/components/default-modal/d
 })
 export class ProductDetailsComponent implements OnInit, AfterViewInit {
 
+  customer: Customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`) || null;
+  customer_id: number = 1;
+
   oppened_modal: boolean = false;
 
   product_id: string = '';
-  product!: Product;
+  product: Product = {
+    name: '',
+    detail: '',
+    link_photo: '',
+    price_product: 0,
+    price_promo: 0,
+    in_stok: 0,
+    delivery: 0,
+    discount: 0,
+    category_idd: 0,
+    department_idd: 0,
+    product_size: '',
+    product_colors: '',
+    brand: {
+      name: '',
+      link_photo: ''
+    },
+    reviews: []
+  };
 
   sizes: ProductsSizes[] = [];
   colors: ProductsColors[] = [];
 
   constructor(
     private el: ElementRef,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
+    private rxjs: DataRxjsService,
     private cartService: CartService,
     private acvtRouter: ActivatedRoute,
     private prodService: ProductsService,
+    private favoritesService: FavoritesService,
   ) { }
 
   ngOnInit(): void {
@@ -42,8 +68,8 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
         let colors: any = data.product_colors;
         this.product = data;
         this.product.price_promo = data.price_product - ((data.price_product * data.discount) / 100);
+        this.createArrColorsAndSizes(data.product_size, data.product_colors);
         console.log('LIST PRODUCTS ID DATA', this.product);
-        this.createArrColorsAndSizes(data.product_size, data.product_colors)
       },
       error: (err) => {
         console.log('LIST PRODUCTS ID ERR', err);
@@ -97,6 +123,18 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
         selected: idx == 0 ? true : false,
         disabled: false
       })
+    });
+  }
+
+  addToFavorites(product: any) {
+    //ajustar customer_id
+    this.favoritesService.createFavorites(+this.customer_id, +product.id).subscribe({
+      next: (data) => {
+        console.log('PRODUTO FAVOTIRADO', data);
+      },
+      error: (err) => {
+        console.log('ERRO AO FAVORITAR O PRODUTO', err);
+      }
     });
   }
 
