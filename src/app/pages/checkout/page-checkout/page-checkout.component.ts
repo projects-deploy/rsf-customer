@@ -14,7 +14,23 @@ import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service'
 export class PageCheckoutComponent implements OnInit {
 
   checkout: any = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`) || [];
+  cupom = signal(0);
   itemList = signal(this.checkout);
+
+  delivery: any[] = [
+    {
+      id: 1,
+      name: 'Grátis',
+      value: 'free',
+      price: 0.00
+    },
+    {
+      id: 2,
+      name: 'Correios',
+      value: 'flat',
+      price: 10.00
+    }
+  ];
 
   radioPayment = [
     {
@@ -26,15 +42,16 @@ export class PageCheckoutComponent implements OnInit {
       icon: 'ri-coupon-3-line'
     },
     {
-      value: 'pix',
+      value: 'card',
       icon: 'ri-bank-card-line'
     }
-  ]
+  ];
+
+  flat: number = 10;
 
   tax: number = 0;
-  free: number = 0
-  flat: number = 10;
-  cupom: number = 0;
+  select_delivery: string = '';
+  select_payment: string = '';
   // finaly_value: number = 0;
 
   totalAmount = computed(() => {
@@ -42,11 +59,11 @@ export class PageCheckoutComponent implements OnInit {
   });
 
   finaly_valuet = computed(() => {
-    return this.tax + this.free + this.flat + this.totalAmount();
+    return this.tax + this.cupom() + this.totalAmount();
   });
 
   customer: Customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`) || undefined;
-  
+
   payment: string = '';
   constructor(
     private route: Router,
@@ -62,9 +79,9 @@ export class PageCheckoutComponent implements OnInit {
 
     let order: Order = {
       date_order: new Date(Date.now()),
-      value_total: this.finaly_valuet(),
+      value_total: +this.finaly_valuet(),
       shipping: 1,
-      to_remove: 1,
+      payment: 1,
       comments: '',
       status: 1,
       customer: this.customer,
@@ -88,6 +105,18 @@ export class PageCheckoutComponent implements OnInit {
       error: (err) => {
         console.log('CREATE ORDER ERROR:', err);
       }
+    });
+  }
+
+  paymentMode(value: any) {
+    let vlr = (value === 'pix') ? -10 : 0;
+    this.cupom.set(vlr);
+    this.calculateValue();
+  }
+
+  calculateValue() {
+    this.finaly_valuet = computed(() => {
+      return this.tax + this.cupom() + this.totalAmount();
     });
   }
 }

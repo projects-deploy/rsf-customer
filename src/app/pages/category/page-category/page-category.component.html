@@ -14,53 +14,7 @@
                             </nav>
                         </h6>
                     </div>
-                    <div class="content">
-                        <div id="sidebar-filter" class="sidebar" [ngClass]="{'sidebar-active': openned_sidebar}">
-                            <div class="wrap">
-                                <app-category-filter [crtl]="openned_sidebar"></app-category-filter>
-                            </div>
-                        </div>
-
-                        <div class="category-content">
-                            <div class="sorter">
-                                <a class="menu-trigger" (click)="openned_sidebar = true">
-                                    <i class="ri-filter-2-fill"></i>
-                                </a>
-                                <div class="left">
-                                    <span class="grey-color">Showing 9 of 35 results</span>
-                                </div>
-                                <div class="right">
-                                    <div class="sort-list">
-                                        <div class="wrap">
-                                            <mat-form-field appearance="fill">
-                                                <mat-label>Default sorting</mat-label>
-                                                <mat-select name="food" #food
-                                                    (selectionChange)="selectedFilter(food.value)">
-                                                    <mat-option *ngFor="let food of list_sort" [value]="food.name">
-                                                        {{food.name}}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                    <div class="list-inline">
-                                        <ul>
-                                            <li><a href=""><i class="ri-pause-mini-line"></i></a></li>
-                                            <li><a href=""><i class="ri-list-check-2"></i></a></li>
-                                            <li><a href=""><i class="ri-layout-grid-line"></i></a></li>
-                                            <li><a href=""><i class="ri-layout-masonry-line"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <app-category-thumbnail [content]="products"></app-category-thumbnail>
-
-                            <div class="button">
-                                <a href="" class="primary-btn">Load More</a>
-                            </div>
-                        </div>
-                    </div>
+                    <app-product-by-menu></app-product-by-menu>
                 </div>
             </div>
         </div>

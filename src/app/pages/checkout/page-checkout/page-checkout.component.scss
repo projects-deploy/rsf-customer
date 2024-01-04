@@ -1,5 +1,15 @@
 @import '../../../../assets/styles/variables';
 
+.example-radio-group {
+    display: flex;
+    margin: 15px 20px 0;
+    align-items: center;
+}
+
+.reccos-radio-button {
+    margin: 5px;
+}
+
 .reccos-title {
     font-family: 'Prata', sans-serif;
     font-size: 35px;

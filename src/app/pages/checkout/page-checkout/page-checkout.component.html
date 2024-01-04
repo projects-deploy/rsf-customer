@@ -43,8 +43,9 @@
                     <div class="payment-options list-inline">
                         <span>Forma de pagamento</span>
                         <ul>
-                            <li *ngFor="let pg of radioPayment">
-                                <input type="radio" name="pay-option" [id]="pg.value" [(ngModel)]="payment">
+                            <li *ngFor="let pg of radioPayment; let idx = index">
+                                <!-- <input type="radio" name="pay-option" [id]="pg.value" [value]="pg.value" [(ngModel)]="select_payment"> -->
+                                <input type="radio" name="pay-option" [id]="pg.value" [value]="pg.value" (change)="paymentMode(pg.value)">
                                 <label [for]="pg.value"><i [class]="pg.icon"></i></label>
                             </li>
                         </ul>
@@ -66,32 +67,20 @@
                                 <span class="value">{{tax | currency }}</span>
                             </li>
                             <li>
-                                <ul>
-                                    <li>Envio</li>
-                                    <li class="pricing-item">
-                                        <div>
-                                            <input type="radio" class="checker">
-                                            <label>Grátis</label>
-                                        </div>
-                                        <span class="value">$ {{free | number: '1.2-2' }}</span>
-                                    </li>
-
-                                    <li class="pricing-item">
-                                        <div>
-                                            <input type="radio" class="checker">
-                                            <label>Envio</label>
-                                        </div>
-                                        <span class="value">$ {{ flat | number: '1.2-2' }}</span>
-                                    </li>
-                                </ul>
+                                <p>Envio</p>
+                                <div *ngFor="let d of delivery" class="example-radio-group my-2">
+                                    <input type="radio" [id]="d.name" name="delivery" [value]="d.value"
+                                        [(ngModel)]="select_delivery">
+                                    <label class="ms-2" [for]="d.name"> {{ d.name }} </label>
+                                </div>
                             </li>
                             <li class="pricing-item">
                                 <span>Cupom/Descontos</span>
-                                <span class="value">$ {{ cupom | number: '1.2-2' }}</span>
+                                <span class="value">{{ cupom() | currency }}</span>
                             </li>
                             <li class="total pricing-item">
                                 <span>Total</span>
-                                <span class="value">$ {{ finaly_valuet() | number: '1.2-2' }} </span>
+                                <span class="value">{{ finaly_valuet() | currency }} </span>
                             </li>
                         </ul>
                     </div>

@@ -10,20 +10,20 @@
                     <div class="product-group d-flex flex-column">
                         <div class="group-product py-4 d-flex justify-content-between align-items-center">
                             <div class="product-price">
-                                <span class="current" [ngClass]="{'strong-price' : product.discount == 0}">$ {{
-                                    product.price_product | number: '1.2-2' }} </span>
+                                <span class="current" [ngClass]="{'strong-price' : product.discount == 0}">
+                                    {{ product.price_product | currency }}
+                                </span>
                                 <div class="wrap" *ngIf="product.discount > 0">
-                                    <span class="before strong-price">${{ product.price_promo | number: '1.2-2'
-                                        }}</span>
+                                    <span class="before strong-price">{{ product.price_promo | currency }}</span>
                                     <span class="discount text-center">-{{ product.discount }}%</span>
                                 </div>
                             </div>
                             <div class="product-rating strong-price">
                                 <span>
                                     <i class="ri-star-fill"></i>
-                                    <span>4.8</span>
+                                    <span> {{ product.average_rating | number: '1.1-1'}} </span>
                                 </span>
-                                <a href="">3 Reviews</a>
+                                <a href=""> {{ product.review_count }} Reviews</a>
                             </div>
                         </div>
                         <div class="product-color py-4">

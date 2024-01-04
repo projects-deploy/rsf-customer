@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { itemsCardRxjs } from 'src/app/models/Generics';
+import { itemsCardRxjs, prodReview } from 'src/app/models/Generics';
+import { Product } from 'src/app/models/Product';
 import { Reviews } from 'src/app/models/Reviews';
 
 @Injectable({
@@ -20,6 +21,12 @@ export class DataRxjsService {
   private dataReviews = new Subject<Reviews[]>();
   dataReviews$ = this.dataReviews.asObservable();
 
+  private dataProducts = new Subject<Product[]>();
+  dataProducts$ = this.dataProducts.asObservable();
+
+  private dataReview = new Subject<prodReview>();
+  dataReview$ = this.dataReview.asObservable();
+
   crtlItemCardQuantity(value: itemsCardRxjs) {
     this.cartItemsQuantity.next(value);
   }
@@ -34,6 +41,14 @@ export class DataRxjsService {
 
   sendReviews(data: Reviews[]) {
     this.dataReviews.next(data);
+  }
+
+  sendProducts(data: Product[]) {
+    this.dataProducts.next(data);
+  }
+
+  sendRating(data: prodReview) {
+    this.dataReview.next(data);
   }
 
 }

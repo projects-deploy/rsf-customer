@@ -4,7 +4,7 @@
             <div class="container wide">
                 <div class="wrap">
                     <div class="heading">
-                        <h1 class="reccos-title my-4">Cart</h1>
+                        <h1 class="reccos-title my-5">Carrinho de compras</h1>
                     </div>
                     <div class="content" *ngIf="cart.length > 0; else emptyCart">
                         <div class="cart-table">
@@ -14,13 +14,13 @@
                                         <li class="dotgrid">
                                             <div class="grouping wrapper">
                                                 <span></span>
-                                                <span>Product</span>
+                                                <span>Produtos</span>
                                             </div>
 
                                             <div class="grouping wrapper">
-                                                <span>Price</span>
-                                                <span>Qty</span>
-                                                <span>Total</span>
+                                                <span>Preço Un.</span>
+                                                <span>Quantidade</span>
+                                                <span>Valor Total</span>
                                                 <span></span>
                                             </div>
                                         </li>
@@ -50,7 +50,7 @@
                                                 </div>
                                             </div>
                                             <div class="grouping wrapper">
-                                                <div class="price">$ {{ c.product.price_promo | number: '1.2-2' }}</div>
+                                                <div class="price">{{ c.product.price_promo | currency }}</div>
                                                 <div class="quantity">
                                                     <div class="control">
                                                         <button (click)="addProduct(idx, true)">+</button>
@@ -58,8 +58,8 @@
                                                         <button (click)="addProduct(idx)">-</button>
                                                     </div>
                                                 </div>
-                                                <div class="price-sub">${{ (c.product.price_promo *
-                                                    c.qtde_item).toFixed(2) }}
+                                                <div class="price-sub">{{ (c.product.price_promo *
+                                                    c.qtde_item) | currency }}
                                                 </div>
                                                 <button (click)="removeItem(c, idx)" mat-icon-button color="warn">
                                                     <mat-icon>delete_outline</mat-icon>
@@ -75,17 +75,17 @@
                                 <div class="table-content">
                                     <div class="grouping">
                                         <div class="add-note">
-                                            <textarea rows="3" placeholder="Aditional note +"></textarea>
+                                            <!-- <textarea rows="3" placeholder="Aditional note +"></textarea> -->
                                         </div>
                                         <div class="sub-total">
                                             <div class="sub-pricing">
                                                 <span>Subtotal</span>
-                                                <span class="sub-total-price">$ {{ totalAmount() | number: '1.2-2' }}</span>
+                                                <span class="sub-total-price">{{ totalAmount() | currency }}</span>
                                             </div>
                                             <div class="sub-terms d-flex align-items-center">
                                                 <input type="checkbox" id="terms" class="checker">
-                                                <label class="ms-3" for="terms">I agree to <a class="grey-link">Terms &
-                                                        Conditions</a></label>
+                                                <label class="ms-3" for="terms">Concordo com os <a
+                                                        class="grey-link">Termos e Condições</a></label>
                                             </div>
                                             <div class="button">
                                                 <a [routerLink]="['/checkout']"

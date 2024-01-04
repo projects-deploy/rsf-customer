@@ -1784,7 +1784,6 @@ input[type="range"]::-webkit-slider-thumb {
 
 .cart-total .grouping {
     font-weight: var(--fw600);
-    text-transform: uppercase;
 }
 
 .cart-total .add-note {
@@ -1828,7 +1827,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .cart-total .sub-terms {
     font-weight: initial;
-    text-transform: capitalize;
+    // text-transform: ;
     color: #FFF;
 }
 

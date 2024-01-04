@@ -14,6 +14,8 @@ export interface Product {
     discount: number;
     category_idd: number;
     department_idd: number;
+    average_rating: number;
+    review_count: number;
     createdAt?: Date;
     updatedAt?: Date;
     is_discount?: boolean;

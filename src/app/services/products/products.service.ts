@@ -24,7 +24,7 @@ export class ProductsService {
   }
 
   productByBrandId(product_id: number) {
-    return this.http.get<Product>(`${this.url}/${this.flag}/by-brand/${product_id}`);
+    return this.http.get<Product[]>(`${this.url}/${this.flag}/by-brand/${product_id}`);
   }
 
   createProduct(product: Product) {

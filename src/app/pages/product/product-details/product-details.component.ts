@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CartItem } from 'src/app/models/Cart';
 import { Customer } from 'src/app/models/Customer';
+import { prodReview } from 'src/app/models/Generics';
 import { Product } from 'src/app/models/Product';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { FavoritesService } from 'src/app/services/favorites/favorites.service';
@@ -15,7 +16,7 @@ import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service'
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
-export class ProductDetailsComponent implements OnInit, AfterViewInit {
+export class ProductDetailsComponent implements OnInit {
 
   customer: Customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`) || null;
   customer_id: number = 1;
@@ -40,7 +41,9 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       name: '',
       link_photo: ''
     },
-    reviews: []
+    reviews: [],
+    average_rating: 0,
+    review_count: 0
   };
 
   sizes: ProductsSizes[] = [];
@@ -69,15 +72,21 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
         this.product = data;
         this.product.price_promo = data.price_product - ((data.price_product * data.discount) / 100);
         this.createArrColorsAndSizes(data.product_size, data.product_colors);
-        console.log('LIST PRODUCTS ID DATA', this.product);
+
+         let data_reviews: prodReview = {
+          average_rating: data.average_rating,
+          review_count: data.review_count
+        };
+
+        this.rxjs.sendRating(data_reviews);
+
+        console.log('LIST PRODUCTS ID DATA', data);
       },
       error: (err) => {
         console.log('LIST PRODUCTS ID ERR', err);
       }
     });
   }
-
-  ngAfterViewInit(): void { }
 
   openModal() {
     this.dialog.open(DefaultModalComponent, {

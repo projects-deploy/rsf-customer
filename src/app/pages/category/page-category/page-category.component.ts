@@ -17,9 +17,6 @@ export class PageCategoryComponent implements OnInit {
 
   openned_sidebar: boolean = false;
 
-  category: Category;
-  products: Product[] = [];
-
   list_sort = [
     { name: 'Popular' },
     { name: 'Rating' },
@@ -52,9 +49,8 @@ export class PageCategoryComponent implements OnInit {
   getProductsByCategory(category_id: number) {
     this.catService.categoryById(category_id).subscribe({
       next: (data) => {
-        this.category = data;
-        this.products = data.products;
         this.categoryName = data.name;
+        this.rxjs.sendProducts(data.products);
         // console.log('CATEGORY_ID DATA', this.category);
       },
       error: (err) => {

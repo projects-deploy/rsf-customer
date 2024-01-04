@@ -11,6 +11,7 @@ export interface Customer {
     phone: string;
     numero: number;
     bairro: string;
+    link_photo: string;
     localidade: string;
     logradouro: string;
     complemento: string;

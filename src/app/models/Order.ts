@@ -3,12 +3,12 @@ import { Customer } from "./Customer";
 
 export interface Order {
     id?: number;
+    status: number;
+    payment: number;
+    shipping: number;
+    comments: string;
     date_order: Date;
     value_total: number;
-    shipping: number;
-    to_remove: number;
-    comments: string;
-    status: number;
     customer?: Customer;
     items: CartItem[];
 }

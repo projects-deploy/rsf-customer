@@ -62,6 +62,7 @@ import { CustomerFormComponent } from '../components/customer-form/customer-form
 import { CategoryThumbnailComponent } from '../components/category-thumbnail/category-thumbnail.component';
 import { CategoryFilterComponent } from '../components/category-filter/category-filter.component';
 import { MobileMenuComponent } from '../components/mobile-menu/mobile-menu.component';
+import { ProductByMenuComponent } from '../components/product-by-menu/product-by-menu.component';
 
 const modules = [
   A11yModule,
@@ -128,6 +129,7 @@ const componentes = [
   ProductShippingComponent,
   CategoryThumbnailComponent,
   ProductWhriteReviewComponent,
+  ProductByMenuComponent,
   MobileMenuComponent,
 ]
 

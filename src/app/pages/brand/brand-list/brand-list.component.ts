@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/Product';
 import { BrandsService } from 'src/app/services/brands/brands.service';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service';
 
 @Component({
   selector: 'app-brand-list',
@@ -12,9 +13,9 @@ import { ProductsService } from 'src/app/services/products/products.service';
 export class BrandListComponent implements OnInit {
 
   brandName: string = '';
-  products: Product;
 
   constructor(
+    private rxjs: DataRxjsService,
     private actvRoute: ActivatedRoute,
     private prodService: ProductsService,
   ) { }
@@ -30,8 +31,8 @@ export class BrandListComponent implements OnInit {
   getProductsByBrands(brand_id: number) {
     this.prodService.productByBrandId(brand_id).subscribe({
       next: (data) => {
-        this.products = data;
-        console.log('PRODUCTS BRAND_ID DATA', data);
+        this.rxjs.sendProducts(data);
+        console.log('PRODUCTS BRAND_ID DATA', typeof data);
       },
       error: (err) => {
         console.log('PRODUCTS BRAND_ID DATA ERR', err);
