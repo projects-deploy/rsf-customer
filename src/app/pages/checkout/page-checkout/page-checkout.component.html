@@ -41,20 +41,23 @@
             <div class="total-summary py-5">
                 <div class="box-checkout m-auto">
                     <div class="payment-options list-inline">
-                        <span>Forma de pagamento</span>
+                        <span>Forma de pagamento *</span>
                         <ul>
                             <li *ngFor="let pg of radioPayment; let idx = index">
-                                <!-- <input type="radio" name="pay-option" [id]="pg.value" [value]="pg.value" [(ngModel)]="select_payment"> -->
-                                <input type="radio" name="pay-option" [id]="pg.value" [value]="pg.value" (change)="paymentMode(pg.value)">
+                                <input type="radio" name="pay-option" [id]="pg.value" [value]="pg.value" [checked]="pg.check"
+                                    (change)="paymentMode(pg.value)">
                                 <label [for]="pg.value"><i [class]="pg.icon"></i></label>
                             </li>
                         </ul>
                     </div>
-                    <div class="discount">
-                        <form action="">
-                            <input type="text" class="input" placeholder="Coupon">
-                            <input type="submit" class="submit" placeholder="Apply">
+                    <div class="discount mb-3">
+                        <form [formGroup]="formCupom">
+                            <input #cpm formControlName="discount" type="text" class="input" placeholder="Coupon">
+                            <a mat-button class="submit px-3" [disabled]="formCupom.invalid || !blockApplyBtn"
+                                (click)="checkCupon(formCupom.value.discount)">Aplicar</a>
                         </form>
+                        <div *ngIf="!blockApplyBtn" class="text-end remove-cupom"><a
+                                (click)="removeCupom(cpm.value)">remover cupom</a></div>
                     </div>
                     <div class="math-pricing">
                         <ul>
@@ -62,15 +65,14 @@
                                 <span>Subtotal</span>
                                 <span class="value">{{ totalAmount() | currency }} </span>
                             </li>
-                            <li class="pricing-item">
-                                <span>Taxa</span>
-                                <span class="value">{{tax | currency }}</span>
-                            </li>
                             <li>
-                                <p>Envio</p>
+                                <p class="pricing-item">
+                                    <span>Envio *</span>
+                                    <span class="value">{{ s_delivery() | currency }}</span>
+                                </p>
                                 <div *ngFor="let d of delivery" class="example-radio-group my-2">
                                     <input type="radio" [id]="d.name" name="delivery" [value]="d.value"
-                                        [(ngModel)]="select_delivery">
+                                        [(ngModel)]="select_delivery" (change)="deliveryMode(d)">
                                     <label class="ms-2" [for]="d.name"> {{ d.name }} </label>
                                 </div>
                             </li>
@@ -83,10 +85,18 @@
                                 <span class="value">{{ finaly_valuet() | currency }} </span>
                             </li>
                         </ul>
+                        <form [formGroup]="commentsForm">
+                            <div class="check-comment">
+                                <div class="add-note">
+                                    <textarea formControlName="comments" class="w-100" rows="3" placeholder="Observações +"></textarea>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="button">
-                        <a (click)="createOrder()" class="secondary-btn-checkout w-100 text-center">Finalizar compra</a>
+                    <div class="button mt-2">
+                        <a [ngClass]="{'disabled': !checkPayment || !checkDelivery }" (click)="createOrder()" class="btn btn-secondary w-100 text-center">Finalizar compra</a>
                     </div>
+                    <div class="text-end remove-cupom"><small>Campos com  <strong class="text-danger">*</strong> são obrigatórios!</small></div>
                 </div>
             </div>
         </div>
