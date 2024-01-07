@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
 @import 'assets/styles/general.scss';
+@import 'assets/styles/loading';
+@import 'assets/styles/variables';
 
 * {
     padding: 0;
@@ -28,6 +30,7 @@ a {
     text-decoration: none;
     color: inherit;
     -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
 }
 
 img {
@@ -63,6 +66,14 @@ textarea::placeholder {
     margin: 30px;
 }
 
+.reccos-title {
+    font-family: 'Prata', sans-serif;
+    font-size: 18px;
+    --fw600: 400;
+    margin-top: 15px;
+    color: $grey-color;
+}
+
 .reccos-cursor {
     cursor: pointer;
 }
@@ -70,8 +81,6 @@ textarea::placeholder {
 .mat-typography {
     font-family: 'Montserrat', sans-serif !important;
 }
-
-
 
 .summary .product-price .wrap::before,
 .product .head-review span::before {
@@ -86,12 +95,14 @@ textarea::placeholder {
 }
 
 .primary-btn,
-.secondary-btn {
+.secondary-btn,
+.secondary-btn-shop {
     border-color: var(--dark-color);
 }
 
 .primary-btn:hover,
-.secondary-btn {
+.secondary-btn,
+.secondary-btn-shop {
     background-color: var(--dark-color);
     color: var(--white-color);
 }
@@ -100,6 +111,11 @@ textarea::placeholder {
     background-color: transparent;
     border-color: var(--dark-color);
     color: var(--dark-color);
+}
+
+.secondary-btn-shop:hover {
+    background-color: transparent;
+    color: var(--light-color);
 }
 
 .mat-mdc-tab-group,
@@ -118,17 +134,39 @@ textarea::placeholder {
     overflow: hidden !important;
 }
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar,
+.dropdown-menu::-webkit-scrollbar,
+.nav__dropdown-collapse::-webkit-scrollbar {
     width: 5px;
 }
 
-body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track,
+.dropdown-menu::-webkit-scrollbar-track,
+.nav__dropdown-collapse::-webkit-scrollbar-track {
     border-radius: 8px;
     background-color: #e7e7e7;
     border: 1px solid #cacaca;
 }
 
-body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb,
+.dropdown-menu::-webkit-scrollbar-thumb,
+.nav__dropdown-collapse::-webkit-scrollbar-thumb {
     border-radius: 8px;
     background-color: #c6c6c6;
+}
+
+.dropdown-menu {
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.gradient-title, .icon-title {
+    font-family: 'Prata', sans-serif;
+    font-size: 25px;
+    background: #FF7900;
+    background: -webkit-linear-gradient(to right, #FF7900 27%, #FF2C2C 61%);
+    background: -moz-linear-gradient(to right, #FF7900 27%, #FF2C2C 61%);
+    background: linear-gradient(to right, #FF7900 27%, #FF2C2C 61%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

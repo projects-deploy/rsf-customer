@@ -1,0 +1,66 @@
+<form [formGroup]="customerForm" class="w-75 m-auto">
+    <div formGroupName="personaldata">
+        <div class="row">
+            <div class="col-12 col-md-6 py-3">
+                <label for="first-name">First Name *</label>
+                <input formControlName="name" type="text" id="name" placeholder="Nome">
+            </div>
+            <div class="col-12 col-md-6 py-3">
+                <label for="surname">Last Name *</label>
+                <input formControlName="surname" type="text" id="surname" placeholder="Sobrenome">
+            </div>
+            <div class="col-12 col-md-12 py-3">
+                <label for="email">Email *</label>
+                <input formControlName="email" type="email" id="email" placeholder="seunome@provedor.com">
+            </div>
+            <div class="col-12 col-md-6 py-3">
+                <label for="cpf">CPF *</label>
+                <input formControlName="cpf" type="text" id="cpf" placeholder="000.000.000-00">
+            </div>
+            <div class="col-12 col-md-6 py-3">
+                <label for="birth_date">Data de nascimento *</label>
+                <input formControlName="birth_date" type="text" id="birth_date" placeholder="dd/mm/yyyy">
+            </div>
+        </div>
+    </div>
+    <div formGroupName="address">
+        <div class="row">
+            <div class="col-12 col-md-12 py-3">
+                <label for="cep">CEP *</label>
+                <input formControlName="cep" type="text" id="" placeholder="00000-000">
+            </div>
+            <div class="col-12 col-md-9 py-3">
+                <label for="logradouro">Endereço *</label>
+                <input formControlName="logradouro" type="text" id="logradouro" placeholder="Rua Principal">
+            </div>
+            <div class="col-12 col-md-3 py-3">
+                <label for="numHome">Número *</label>
+                <input formControlName="numero" type="text" id="numHome" placeholder="1">
+            </div>
+            <div class="col-12 col-md-7 py-3">
+                <label for="bairro">Bairro *</label>
+                <input formControlName="bairro" type="text" id="bairro" placeholder="Vila Branca">
+            </div>
+            <div class="col-12 col-md-5 py-3">
+                <label for="complemento">Complemento *</label>
+                <input formControlName="complemento" type="text" id="complemento"
+                    placeholder="Casa, Apartamento, Lado ímpar">
+            </div>
+            <div class="col-12 col-md-10 py-3">
+                <label for="localidade">Cidade *</label>
+                <input formControlName="localidade" type="text" id="localidade" placeholder="São Paulo">
+            </div>
+            <div class="col-12 col-md-2 py-3">
+                <label for="uf">Estado *</label>
+                <input formControlName="uf" type="text" id="uf" placeholder="SP">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 py-3 text-end">
+                <label class="check-option"></label>
+                <input type="checkbox" class="checker me-2">
+                <span>Create an account?</span>
+            </div>
+        </div>
+    </div>
+</form>

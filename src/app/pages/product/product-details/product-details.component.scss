@@ -1,3 +1,19 @@
+@import '../../../../assets/styles/variables';
+
+.bloco-carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.reccos-title {
+    font-family: 'Prata', sans-serif;
+    font-size: 18px;
+    --fw600: 400;
+    margin-top: 15px;
+    color: $grey-color;
+}
+
 .summary .entry {
     display: flex;
     flex-direction: column;
@@ -97,28 +113,6 @@
 .summary .product-color button.selected,
 .summary .product-color button:hover:not(.selected) {
     box-shadow: inset 0 0 0 4px var(--white-color);
-}
-
-.summary .product-size button {
-    font-size: var(--fs14);
-    line-height: 44px;
-    border: 1px solid var(--ligth-color);
-    border-radius: 5px;
-    background-color: transparent;
-}
-
-.summary .product-size button.selected {
-    background-color: var(--dark-color);
-    color: var(--white-color);
-    border-color: var(--dark-color);
-}
-
-.summary .product-size button:hover:not(.selected, [disabled]) {
-    border-color: var(--dark-color);
-}
-
-.summary .product-size button:disabled {
-    pointer-events: none;
 }
 
 .summary .product-stok .wrap,

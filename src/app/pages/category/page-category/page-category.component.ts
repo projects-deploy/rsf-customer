@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Category } from 'src/app/models/Category';
+import { Product } from 'src/app/models/Product';
+import { CategoriesService } from 'src/app/services/categories/categories.service';
+import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service';
 
 @Component({
   selector: 'app-page-category',
   templateUrl: './page-category.component.html',
   styleUrls: ['./page-category.component.scss']
 })
-export class PageCategoryComponent {
+export class PageCategoryComponent implements OnInit {
+
+  category_id: string = '';
+  categoryName: string = '';
+
+  openned_sidebar: boolean = false;
 
   list_sort = [
     { name: 'Popular' },
@@ -15,83 +25,37 @@ export class PageCategoryComponent {
     { name: 'Price: high to low' }
   ];
 
-  products: any = [
-    {
-      id: 21,
-      imgA: './assets/images/product_01.jpg',
-      imgB: './assets/images/product_01b.jpg',
-      discount: 12,
-      name: 'The Swater in Tosca',
-      price_before: 189.22,
-    },
-    {
-      id: 13,
-      imgA: './assets/images/product_02.jpg',
-      imgB: './assets/images/product_02b.jpg',
-      discount: 8,
-      name: 'The Swater in Tosca 2',
-      price_before: 256.55,
-    },
-    {
-      id: 51,
-      imgA: './assets/images/product_03.jpg',
-      imgB: './assets/images/product_03b.jpg',
-      discount: 5,
-      name: 'The Swater in Tosca 3',
-      price_before: 206.00,
-    },
-    {
-      id: 21,
-      imgA: './assets/images/product_01.jpg',
-      imgB: './assets/images/product_01b.jpg',
-      discount: 12,
-      name: 'The Swater in Tosca',
-      price_before: 189.22,
-    },
-    {
-      id: 13,
-      imgA: './assets/images/product_02.jpg',
-      imgB: './assets/images/product_02b.jpg',
-      discount: 8,
-      name: 'The Swater in Tosca 2',
-      price_before: 256.55,
-    },
-    {
-      id: 51,
-      imgA: './assets/images/product_03.jpg',
-      imgB: './assets/images/product_03b.jpg',
-      discount: 5,
-      name: 'The Swater in Tosca 3',
-      price_before: 206.00,
-    },
-    {
-      id: 21,
-      imgA: './assets/images/product_01.jpg',
-      imgB: './assets/images/product_01b.jpg',
-      discount: 12,
-      name: 'The Swater in Tosca',
-      price_before: 189.22,
-    },
-    {
-      id: 13,
-      imgA: './assets/images/product_02.jpg',
-      imgB: './assets/images/product_02b.jpg',
-      discount: 8,
-      name: 'The Swater in Tosca 2',
-      price_before: 256.55,
-    },
-    {
-      id: 51,
-      imgA: './assets/images/product_03.jpg',
-      imgB: './assets/images/product_03b.jpg',
-      discount: 5,
-      name: 'The Swater in Tosca 3',
-      price_before: 206.00,
-    }
-  ]
+  constructor(
+    private rxjs: DataRxjsService,
+    private actvRoute: ActivatedRoute,
+    private catService: CategoriesService,
+  ) { }
+
+  ngOnInit(): void {
+    this.actvRoute.queryParams.subscribe(params => {
+      this.category_id = params['q'];
+      this.getProductsByCategory(+params['q']);
+    });
+
+    this.rxjs.openCloseFilterModal$.subscribe(value => {
+      this.openned_sidebar = value;
+    });
+  }
 
   selectedFilter(value: any) {
     console.log('value selected', value);
   }
 
+  getProductsByCategory(category_id: number) {
+    this.catService.categoryById(category_id).subscribe({
+      next: (data) => {
+        this.categoryName = data.name;
+        this.rxjs.sendProducts(data.products);
+        // console.log('CATEGORY_ID DATA', this.category);
+      },
+      error: (err) => {
+        console.log('CATEGORY_ID DATA ERR', err);
+      }
+    });
+  }
 }

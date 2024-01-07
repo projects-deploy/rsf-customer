@@ -35,7 +35,7 @@
                         </div>
                         <div class="infos">
                             <p class="reccos-title m-0 text-center"> {{ data.name }} </p>
-                            <div class="price-product my-3 p-3">
+                            <div class="price-product my-3">
                                 <div class="d-flex justify-content-center align-items-center"
                                     *ngIf="data.is_discount; else noDiscount">
                                     <span class="before me-1"> ${{ data.price_product | number: '1.2-2' }} </span>

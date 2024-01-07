@@ -23,6 +23,10 @@ export class ProductsService {
     return this.http.get<Product>(`${this.url}/${this.flag}/${product_id}`);
   }
 
+  productByBrandId(product_id: number) {
+    return this.http.get<Product[]>(`${this.url}/${this.flag}/by-brand/${product_id}`);
+  }
+
   createProduct(product: Product) {
     return this.http.post<Product>(`${this.url}/${this.flag}`, product);
   }

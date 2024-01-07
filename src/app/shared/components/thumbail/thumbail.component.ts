@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/Product';
 
 @Component({
   selector: 'app-thumbail',
@@ -7,13 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ThumbailComponent<T> implements OnInit {
 
-  @Input() content: any = [];
-
+  @Input() content: Product;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log('QUE VEM:', this.content);
   }
 
 }

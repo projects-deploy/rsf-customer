@@ -90,7 +90,7 @@
             <div class="container">
                 <div class="wrap">
                     <div class="heading">
-                        <h2 class="title my-5">New Arrivals</h2>
+                        <h2 class="title my-5">Novidades</h2>
                     </div>
                     <div class="inner-wrapper">
                         <div class="dotgrid carouselbox swiper">
@@ -134,20 +134,100 @@
                     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
                         <mat-tab label="Sweater">
                             <div class="d-flex justify-content-around">
-                                <app-thumbail [content]="sweaterProduct"></app-thumbail>
+                                <app-category-thumbnail [content]="sweaterProduct"></app-category-thumbnail>
                             </div>
                         </mat-tab>
                         <mat-tab label="Hoddie">
                             <div class="d-flex justify-content-around">
-                                <app-thumbail [content]="hoddieProducts"></app-thumbail>
+                                <app-category-thumbnail [content]="hoddieProducts"></app-category-thumbnail>
                             </div>
                         </mat-tab>
                         <mat-tab label="Shirt">
                             <div class="d-flex justify-content-around">
-                                <app-thumbail [content]="shirtProducts"></app-thumbail>
+                                <app-category-thumbnail [content]="shirtProducts"></app-category-thumbnail>
                             </div>
                         </mat-tab>
                     </mat-tab-group>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-collection">
+            <div class="container">
+                <div class="product-collection-wrapper">
+                    <!-- product col left -->
+                    <div class="product-col-left flex border">
+                        <div class="product-col-content">
+                            <h2 class="sm-title">men's shoes </h2>
+                            <h2 class="md-title">men's collection </h2>
+                            <p class="text-light d-none d-sm-block">Lorem ipsum dolor sit, amet consectetur adipisicing
+                                elit.
+                                Molestiae
+                                consequatur facilis eligendi quibusdam voluptatibus exercitationem autem voluptatum,
+                                beatae
+                                architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+
+                            <div class="buynow button">
+                                <button type="submit" class="secondary-btn-shop">
+                                    Shop now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- product col right -->
+                    <div class="product-col-right">
+                        <div class="product-col-r-top flex">
+                            <div class="product-col-content">
+                                <h2 class="sm-title">women's dresses </h2>
+                                <h2 class="md-title">women's collection </h2>
+                                <p class="text-light d-none d-sm-block">Lorem ipsum dolor sit, amet consectetur
+                                    adipisicing
+                                    elit. Molestiae
+                                    consequatur facilis eligendi quibusdam voluptatibus exercitationem autem voluptatum,
+                                    beatae
+                                    architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+                                <div class="buynow button mt-4">
+                                    <button type="submit" class="secondary-btn-shop">
+                                        Shop now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-col-r-bottom">
+                            <!-- left -->
+                            <div class="flex">
+                                <div class="product-col-content">
+                                    <h2 class="sm-title">summer sale </h2>
+                                    <h2 class="md-title">Extra 50% Off </h2>
+                                    <p class="text-light">Lorem ipsum dolor sit, voluptatibus exercitationem autem
+                                        voluptatum,
+                                        beatae architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+                                    <div class="buynow button mt-4">
+                                        <button type="submit" class="secondary-btn-shop">
+                                            Shop now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- right -->
+                            <div class="flex">
+                                <div class="product-col-content">
+                                    <h2 class="sm-title">shoes </h2>
+                                    <h2 class="md-title">best sellers </h2>
+                                    <p class="text-light">Lorem ipsum dolor sit, voluptatibus exercitationem autem
+                                        voluptatum,
+                                        beatae architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+                                    <div class="buynow button mt-4">
+                                        <button type="submit" class="secondary-btn-shop">
+                                            Shop now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -166,7 +246,7 @@
             <div class="container">
                 <div class="wrap">
                     <div class="heading">
-                        <h2 class="title my-5">From the blog</h2>
+                        <h2 class="title my-5">Blog</h2>
                     </div>
                     <div class="dotgrid scrollto">
                         <div class="wrapper">

@@ -1,194 +1,104 @@
-<div id="page" class="page-checkout">
-    <main>
-        <div class="section">
-            <div class="container wide">
-                <div class="wrap">
-                    <div class="heading">
-                        <h1 class="title">Checkout</h1>
-                    </div>
-                    <div class="content">
-                        <div class="checkout-address">
-                            <h2>Billing detais</h2>
-                            <form>
-                                <div class="dotgrid">
-                                    <div class="wrapper">
-                                        <div>
-                                            <label for="first-name">First Name *</label>
-                                            <input type="text" id="first-name" placeholder="First name">
-                                        </div>
-                                        <div>
-                                            <label for="last-name">Last Name *</label>
-                                            <input type="text" id="last-name" placeholder="Last name">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label>Company Name *</label>
-                                    <input type="text" placeholder="Company name">
-                                </div>
-
-                                <div>
-                                    <label for="country">Country / Region *</label>
-                                    <select name="country" id="country">
-                                        <option value=""></option>
-                                        <option value="1">Afeganistan</option>
-                                        <option value="2">Aland Island</option>
-                                        <option value="3">Albania</option>
-                                        <option value="4" selected="selected">Brasil</option>
-                                        <option value="5">United States</option>
-                                        <option value="6">Others</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label>Street address *</label>
-                                    <input type="text" placeholder="Street address">
-                                    <input type="text" placeholder="Apartment, suite etc. (Optional)">
-                                </div>
-
-                                <div>
-                                    <label>Town / City *</label>
-                                    <input type="text" placeholder="Town / City">
-                                </div>
-
-                                <div>
-                                    <label>State *</label>
-                                    <input type="text" placeholder="State">
-                                </div>
-
-                                <div>
-                                    <label>Zip Code *</label>
-                                    <input type="text" placeholder="Zip Code">
-                                </div>
-                                <div class="dotgrid">
-                                    <div class="wrapper">
-                                        <div>
-                                            <label>Phone *</label>
-                                            <input type="tel" placeholder="Phone">
-                                        </div>
-
-                                        <div>
-                                            <label>Email address *</label>
-                                            <input type="email" placeholder="Email address">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label class="check-option"></label>
-                                    <input type="checkbox" class="checker">
-                                    <span>Create an account?</span>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="checkout-products has-bg">
-                            <div class="order-summary">
-                                <div class="wrapper">
-                                    <h2>Order Summary</h2>
-                                    <div class="product-list">
-                                        <ul>
-                                            <li *ngFor="let c of checkout; let idx = index">
-                                                <div class="grouping">
-                                                    <div class="thumbnail ob-cover">
-                                                        <span class="item-floating">XL</span>
-                                                        <img [src]="c.img" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="variants">
-                                                    <h4 class="dot-title m-0">
-                                                        <a href="">{{ c.name }}</a>
-                                                    </h4>
-                                                    <div class="color grey-color">
-                                                        <span><strong>Color</strong>:</span>
-                                                        <span>{{ c.color }}</span>
-                                                    </div>
-                                                    <div class="size grey-color">
-                                                        <span><strong>Size</strong>:</span>
-                                                        <span>{{ c.size }}</span>
-                                                    </div>
-                                                    <div class="price-item">
-                                                        <span>${{ c.price.toFixed(2) }}</span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+<div class="container">
+    <h1 class="reccos-title text-center my-4">Checkout</h1>
+    <div class="row mb-2" style="--bs-gap: .25rem 1rem;">
+        <div class="col-7">
+            <h2 class="reccos-sub-title mt-3">Billing detais</h2>
+            <app-customer-form [customer]="customer"></app-customer-form>
+        </div>
+        <div class="col-5 p-0">
+            <h2 class="reccos-sub-title mt-3">Order Summary</h2>
+            <div class="product-list">
+                <div class="box-products">
+                    <ul>
+                        <li *ngFor="let c of checkout; let idx = index">
+                            <div class="grouping">
+                                <div class="thumbnail ob-cover">
+                                    <span class="item-floating">XL</span>
+                                    <img [src]="c.product.link_photo" alt="">
                                 </div>
                             </div>
-                            <div class="total-summary has-bg">
-                                <div class="wrapper cart-footer">
-                                    <div class="payment-options list-inline">
-                                        <span>Select payment</span>
-                                        <ul>
-                                            <li>
-                                                <input type="radio" name="pay-option" id="cc" checked>
-                                                <label for="cc"><i class="ri-bank-card-line"></i></label>
-                                            </li>
-                                            <li>
-                                                <input type="radio" name="pay-option" id="pp">
-                                                <label for="pp"><i class="ri-paypal-line"></i></label>
-                                            </li>
-                                            <li>
-                                                <input type="radio" name="pay-option" id="cod">
-                                                <label for="cod"><i class="ri-hand-coin-line"></i></label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="discount">
-                                        <form action="">
-                                            <input type="text" class="input" placeholder="Coupon">
-                                            <input type="submit" class="submit" placeholder="Apply">
-                                        </form>
-                                    </div>
-                                    <div class="math-pricing">
-                                        <ul>
-                                            <li>
-                                                <span>Subtotal</span>
-                                                <span class="value">$147.00</span>
-                                            </li>
-                                            <li>
-                                                <span>Tax</span>
-                                                <span class="value">$7.00</span>
-                                            </li>
-                                            <li>
-                                                <ul>
-                                                    <li>Shipping</li>
-                                                    <li>
-                                                        <div>
-                                                            <input type="radio" class="checker">
-                                                            <label>Free</label>
-                                                        </div>
-                                                        <span class="value">$0.00</span>
-                                                    </li>
-
-                                                    <li>
-                                                        <div>
-                                                            <input type="radio" class="checker">
-                                                            <label>Flat</label>
-                                                        </div>
-                                                        <span class="value">$10.00</span>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <span>Promo discount</span>
-                                                <span class="value">$0.00</span>
-                                            </li>
-                                            <li class="total">
-                                                <span>Total</span>
-                                                <span class="value">$161.70</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="button">
-                                        <a href="" class="text-uppercase w-100 secondary-btn">Place order</a>
-                                    </div>
+                            <div class="variants">
+                                <h4 class="dot-title m-0">
+                                    <a href="">{{ c.product.name }}</a>
+                                </h4>
+                                <div class="color grey-color">
+                                    <span><strong>Color</strong>:</span>
+                                    <span>GREEN</span>
+                                </div>
+                                <div class="size grey-color">
+                                    <span><strong>Size</strong>:</span>
+                                    <span>SIZE</span>
+                                </div>
+                                <div class="price-item">
+                                    <span>${{ c.amount.toFixed(2) }}</span>
                                 </div>
                             </div>
-                        </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="total-summary py-5">
+                <div class="box-checkout m-auto">
+                    <div class="payment-options list-inline">
+                        <span>Forma de pagamento *</span>
+                        <ul>
+                            <li *ngFor="let pg of radioPayment; let idx = index">
+                                <input type="radio" name="pay-option" [id]="pg.value" [value]="pg.value" [checked]="pg.check"
+                                    (change)="paymentMode(pg.value)">
+                                <label [for]="pg.value"><i [class]="pg.icon"></i></label>
+                            </li>
+                        </ul>
                     </div>
+                    <div class="discount mb-3">
+                        <form [formGroup]="formCupom">
+                            <input #cpm formControlName="discount" type="text" class="input" placeholder="Coupon">
+                            <a mat-button class="submit px-3" [disabled]="formCupom.invalid || !blockApplyBtn"
+                                (click)="checkCupon(formCupom.value.discount)">Aplicar</a>
+                        </form>
+                        <div *ngIf="!blockApplyBtn" class="text-end remove-cupom"><a
+                                (click)="removeCupom(cpm.value)">remover cupom</a></div>
+                    </div>
+                    <div class="math-pricing">
+                        <ul>
+                            <li class="pricing-item">
+                                <span>Subtotal</span>
+                                <span class="value">{{ totalAmount() | currency }} </span>
+                            </li>
+                            <li>
+                                <p class="pricing-item">
+                                    <span>Envio *</span>
+                                    <span class="value">{{ s_delivery() | currency }}</span>
+                                </p>
+                                <div *ngFor="let d of delivery" class="example-radio-group my-2">
+                                    <input type="radio" [id]="d.name" name="delivery" [value]="d.value"
+                                        [(ngModel)]="select_delivery" (change)="deliveryMode(d)">
+                                    <label class="ms-2" [for]="d.name"> {{ d.name }} </label>
+                                </div>
+                            </li>
+                            <li class="pricing-item">
+                                <span>Cupom/Descontos</span>
+                                <span class="value">{{ cupom() | currency }}</span>
+                            </li>
+                            <li class="total pricing-item">
+                                <span>Total</span>
+                                <span class="value">{{ finaly_valuet() | currency }} </span>
+                            </li>
+                        </ul>
+                        <form [formGroup]="commentsForm">
+                            <div class="check-comment">
+                                <div class="add-note">
+                                    <textarea formControlName="comments" class="w-100" rows="3" placeholder="Observações +"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="button mt-2">
+                        <a [ngClass]="{'disabled': !checkPayment || !checkDelivery }" (click)="createOrder()" class="btn btn-secondary w-100 text-center">Finalizar compra</a>
+                    </div>
+                    <div class="text-end remove-cupom"><small>Campos com  <strong class="text-danger">*</strong> são obrigatórios!</small></div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 </div>

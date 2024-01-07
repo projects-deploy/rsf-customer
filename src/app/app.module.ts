@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { DataRxjsService } from './shared/services/rxjs/data-rxjs.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     CarouselModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    DataRxjsService
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
