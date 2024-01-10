@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 import { DataRxjsService } from './shared/services/rxjs/data-rxjs.service';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { DataRxjsService } from './shared/services/rxjs/data-rxjs.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CarouselModule,
     MaterialModule
   ],
   providers: [

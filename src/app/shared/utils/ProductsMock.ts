@@ -19,6 +19,13 @@ export const shirt = [
         current_price: 45,
         discount_percent: 5,
         name: 'The shirt in Tosca'
+    },
+    {
+        id: 4,
+        img: 'assets/images/product_03.jpg',
+        current_price: 45,
+        discount_percent: 5,
+        name: 'The shirt in Tosca'
     }
 ]
 

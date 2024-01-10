@@ -7,6 +7,6 @@ export interface Category {
 	createdAt?: Date;
 	updatedAt?: Date;
     name_link?: string;
-    products: Product[];
-	department: Department[];
+    products?: Product[];
+	department?: Department[];
 }

@@ -43,7 +43,15 @@ export class ProductDetailsComponent implements OnInit {
     },
     reviews: [],
     average_rating: 0,
-    review_count: 0
+    review_count: 0,
+    category: {
+      id: 0,
+      name: '',
+    },
+    department: {
+      id: 0,
+      name: '',
+    }
   };
 
   sizes: ProductsSizes[] = [];

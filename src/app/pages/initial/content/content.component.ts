@@ -26,36 +26,33 @@ export class ContentComponent {
   hoddieProducts = hoddie;
   carousel = carouselMock;
   sweaterProduct = sweater;
-  insta_photos = imagesInstagram
+  insta_photos = imagesInstagram;
 
   customOptions: OwlOptions = {
     loop: true,
-    autoplay: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
     dots: false,
     navSpeed: 700,
-    startPosition: 0,
-    // stagePadding: 50,
-    margin: 10,
-    navText: ['<i class="ri-arrow-left-line"></i>', '<i class="ri-arrow-right-line"></i>'],
+    navText: ['<i class="ri-arrow-left-s-line"></i>', '<i class="ri-arrow-right-s-line"></i>'],
     responsive: {
       0: {
         items: 1
       },
       400: {
-        items: 2
+        items: 1
       },
       740: {
-        items: 3
+        items: 1
       },
       940: {
-        items: 4
+        items: 1
       }
     },
-    nav: true
-  };
+    nav: true,
+    autoplay: true
+  }
 
   changeTemplate(value: string) {
 

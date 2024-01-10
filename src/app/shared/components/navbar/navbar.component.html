@@ -76,7 +76,7 @@
                     <ul class="dropdown-menu brand-drop">
                         <li *ngFor="let brand of menu_brand">
                             <a class="dropdown-item px-0" [routerLink]="['/brand']"
-                                [queryParams]="{s: brand.name, q: brand.id}">
+                                [queryParams]="{s: brand.name_link, q: brand.id}">
                                 <img src="https://www.shutterstock.com/image-vector/image-icon-trendy-flat-style-600nw-643080895.jpg"
                                     alt="" width="15%" height="auto"> {{ brand.name }} </a>
                         </li>
