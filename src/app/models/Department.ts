@@ -6,5 +6,5 @@ export interface Department {
 	createdAt?: Date;
 	updatedAt?: Date;
     name_link?: string;
-	categories: Category;
+	categories?: Category;
 }

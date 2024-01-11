@@ -63,6 +63,10 @@ import { CategoryThumbnailComponent } from '../components/category-thumbnail/cat
 import { CategoryFilterComponent } from '../components/category-filter/category-filter.component';
 import { MobileMenuComponent } from '../components/mobile-menu/mobile-menu.component';
 import { ProductByMenuComponent } from '../components/product-by-menu/product-by-menu.component';
+import { HighlightedComponent } from '../components/highlighted/highlighted.component';
+import { ArrivalsComponent } from '../components/arrivals/arrivals.component';
+import { ColectionsComponent } from '../components/colections/colections.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 const modules = [
   A11yModule,
@@ -111,7 +115,7 @@ const modules = [
   ScrollingModule,
   MatFormFieldModule,
   HttpClientModule,
-  
+  CarouselModule,
   // COMPONENTES
 ]
 
@@ -131,6 +135,9 @@ const componentes = [
   ProductWhriteReviewComponent,
   ProductByMenuComponent,
   MobileMenuComponent,
+  HighlightedComponent,
+  ArrivalsComponent,
+  ColectionsComponent,
 ]
 
 @NgModule({

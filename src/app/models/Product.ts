@@ -1,4 +1,6 @@
 import { Brand } from "./Brand";
+import { Category } from "./Category";
+import { Department } from "./Department";
 import { Reviews } from "./Reviews";
 
 export interface Product {
@@ -22,5 +24,7 @@ export interface Product {
     product_size: string;
     product_colors: string;
     brand: Brand;
-    reviews: Reviews[];
+    category: Category;
+    department: Department;
+    reviews?: Reviews[];
 }

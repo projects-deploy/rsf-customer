@@ -23,16 +23,16 @@ export class BrandListComponent implements OnInit {
   ngOnInit(): void {
     
     this.actvRoute.queryParams.subscribe(params => {
-      this.getProductsByBrands(+params['q']);
-      this.brandName = params['s'];
+      this.getProductsByBrandsId(+params['q']);
     });
   }
 
-  getProductsByBrands(brand_id: number) {
+  getProductsByBrandsId(brand_id: number) {
     this.prodService.productByBrandId(brand_id).subscribe({
-      next: (data) => {
+      next: (data: Product[]) => {
+        this.brandName = data[0].brand.name;
         this.rxjs.sendProducts(data);
-        console.log('PRODUCTS BRAND_ID DATA', typeof data);
+        console.log('PRODUCTS BRAND_ID DATA', data);
       },
       error: (err) => {
         console.log('PRODUCTS BRAND_ID DATA ERR', err);

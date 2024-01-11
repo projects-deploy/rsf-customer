@@ -67,14 +67,20 @@ img {
     object-fit: cover;
 }
 
+.tag-title {
+    font-family: 'Prata', serif;
+    font-size: 35px;
+    --fw600: 400;
+}
+
 /* product collection */
 .product-collection {
     padding: 3.2rem 0;
 }
 
-.product-collection-wrapper {
-    padding: 3.2rem 0;
-}
+// .product-collection-wrapper {
+//     padding: 3.2rem 0;
+// }
 
 .product-col-left {
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url('https://img.freepik.com/fotos-premium/roupa-de-moda-casual-homens-cool-na-mesa-de-madeira_93675-18917.jpg?size=626&ext=jpg&ga=GA1.1.1470928843.1701981111&semt=ais') center/cover no-repeat;

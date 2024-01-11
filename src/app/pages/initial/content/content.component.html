@@ -1,131 +1,25 @@
 <div id="page" class="page-home">
     <main>
-        <div id="carouselExampleCaptions" class="carousel slide">
-            <!-- <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div> -->
-            <div class="carousel-inner">
-                <div class="carousel-item" *ngFor="let carousel of carousel; let idx = index"
-                    [ngClass]="{'active': idx == 0 }">
-                    <img [src]="carousel.img" alt="">
-                    <div class="carousel-caption d-none d-md-block">
-                        <p>
-                            <span>{{ '$'+carousel.price }}</span>
-                        </p>
-                        <p> <strong>{{ carousel.title }}</strong> </p>
-                        <div class="button"><a href="" class="primary-btn">Shop Now</a></div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+        <section class="carousel-banners">
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let slide of carousel">
+                    <ng-template class="slide" carouselSlide [id]="slide.link_photo">
+                        <div class="caurousel-box-image">
+                            <img class="carousel-image" [src]="slide.link_photo" alt="">
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </section>
 
         <!-- guide -->
         <div class="guide pt-3">
-            <div class="container">
-                <div class="wrap">
-                    <div class="heading">
-                        <div class="h2 title my-3">Products Guide</div>
-                    </div>
-                    <div class="dotgrid scrollto">
-                        <div class="wrapper">
-                            <div class="item">
-                                <div class="dot-image">
-                                    <div class="thumbnail hover">
-                                        <img src="assets/images/guide_01.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="dot-info">
-                                    <h3 class="dot-title">The Blue Ocean MX</h3>
-                                    <p class="grey-color">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                        Amet, nihil?</p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="dot-image">
-                                    <div class="thumbnail hover">
-                                        <img src="assets/images/guide_02.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="dot-info">
-                                    <h3 class="dot-title">The Blue Ocean MX</h3>
-                                    <p class="grey-color">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                        Amet, nihil?</p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="dot-image">
-                                    <div class="thumbnail hover">
-                                        <img src="assets/images/guide_03.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="dot-info">
-                                    <h3 class="dot-title">The Blue Ocean MX</h3>
-                                    <p class="grey-color">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                        Amet, nihil?</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <app-highlighted></app-highlighted>
         </div>
 
         <!-- carousel -->
         <div class="carousel">
-            <div class="container">
-                <div class="wrap">
-                    <div class="heading">
-                        <h2 class="title my-5">Novidades</h2>
-                    </div>
-                    <div class="inner-wrapper">
-                        <div class="dotgrid carouselbox swiper">
-                            <owl-carousel-o [options]="customOptions">
-                                <ng-container *ngFor="let slide of shirtProducts">
-                                    <ng-template class="slide" carouselSlide [id]="slide.img">
-                                        <div class="dot-image">
-                                            <a href="" class="product-permalink"></a>
-                                            <div class="thumbnail">
-                                                <img [src]="slide.img" [alt]="slide.id" [title]="slide.id">
-                                            </div>
-                                            <div class="actions">
-                                                <ul>
-                                                    <li><a href=""><i class="ri-star-line"></i></a></li>
-                                                    <li><a href=""><i class="ri-arrow-left-right-line"></i></a></li>
-                                                    <li><a href=""><i class="ri-eye-line"></i></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="label"><span>-25%</span></div>
-                                            <div class="dot-info">
-                                                <h2 class="dot-title"><a href="">The Swater
-                                                        in Tosca</a></h2>
-                                                <div class="product-price">
-                                                    <span class="before">$62.00</span>
-                                                    <span class="current">$45.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ng-template>
-                                </ng-container>
-                            </owl-carousel-o>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <app-arrivals></app-arrivals>
         </div>
 
         <div class="bycats mb-5">
@@ -152,86 +46,6 @@
             </div>
         </div>
 
-        <div class="product-collection">
-            <div class="container">
-                <div class="product-collection-wrapper">
-                    <!-- product col left -->
-                    <div class="product-col-left flex border">
-                        <div class="product-col-content">
-                            <h2 class="sm-title">men's shoes </h2>
-                            <h2 class="md-title">men's collection </h2>
-                            <p class="text-light d-none d-sm-block">Lorem ipsum dolor sit, amet consectetur adipisicing
-                                elit.
-                                Molestiae
-                                consequatur facilis eligendi quibusdam voluptatibus exercitationem autem voluptatum,
-                                beatae
-                                architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
-
-                            <div class="buynow button">
-                                <button type="submit" class="secondary-btn-shop">
-                                    Shop now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- product col right -->
-                    <div class="product-col-right">
-                        <div class="product-col-r-top flex">
-                            <div class="product-col-content">
-                                <h2 class="sm-title">women's dresses </h2>
-                                <h2 class="md-title">women's collection </h2>
-                                <p class="text-light d-none d-sm-block">Lorem ipsum dolor sit, amet consectetur
-                                    adipisicing
-                                    elit. Molestiae
-                                    consequatur facilis eligendi quibusdam voluptatibus exercitationem autem voluptatum,
-                                    beatae
-                                    architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
-                                <div class="buynow button mt-4">
-                                    <button type="submit" class="secondary-btn-shop">
-                                        Shop now
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="product-col-r-bottom">
-                            <!-- left -->
-                            <div class="flex">
-                                <div class="product-col-content">
-                                    <h2 class="sm-title">summer sale </h2>
-                                    <h2 class="md-title">Extra 50% Off </h2>
-                                    <p class="text-light">Lorem ipsum dolor sit, voluptatibus exercitationem autem
-                                        voluptatum,
-                                        beatae architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
-                                    <div class="buynow button mt-4">
-                                        <button type="submit" class="secondary-btn-shop">
-                                            Shop now
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- right -->
-                            <div class="flex">
-                                <div class="product-col-content">
-                                    <h2 class="sm-title">shoes </h2>
-                                    <h2 class="md-title">best sellers </h2>
-                                    <p class="text-light">Lorem ipsum dolor sit, voluptatibus exercitationem autem
-                                        voluptatum,
-                                        beatae architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
-                                    <div class="buynow button mt-4">
-                                        <button type="submit" class="secondary-btn-shop">
-                                            Shop now
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="banner">
             <div class="container" style="height: 100%;">
                 <div class="wrap d-flex flex-column justify-content-center ms-lg-4">
@@ -242,86 +56,6 @@
             </div>
         </div>
 
-        <div class="fromblog">
-            <div class="container">
-                <div class="wrap">
-                    <div class="heading">
-                        <h2 class="title my-5">Blog</h2>
-                    </div>
-                    <div class="dotgrid scrollto">
-                        <div class="wrapper">
-                            <div class="item">
-                                <div class="dot-image">
-                                    <div class="thumbnail hover">
-                                        <a href="">
-                                            <img src="assets/images/blog_01.jpg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="dot-info">
-                                    <a href="">Hoodie</a>
-                                    <h3 class="dot-title">
-                                        <a href="">Lorem ipsum dolor sit amet consectetur?</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="dot-image">
-                                    <div class="thumbnail hover">
-                                        <a href="">
-                                            <img src="assets/images/blog_03.jpg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="dot-info">
-                                    <a href="">Hoodie</a>
-                                    <h3 class="dot-title">
-                                        <a href="">Amet consectetur adipisicing elit adipisicing elit!</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="dot-image">
-                                    <div class="thumbnail hover">
-                                        <a href="">
-                                            <img src="assets/images/blog_02.jpg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="dot-info">
-                                    <a href="">Hoodie</a>
-                                    <h3 class="dot-title">
-                                        <a href="">Amet consectetur adipisicing elit!</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="button">
-                        <a href="" class="secondary-btn">Read more!</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="frominsta mb-3">
-            <div class="container wide">
-                <div class="wrap">
-                    <div class="heading">
-                        <h2 class="title my-5">Popular Instagram Photos</h2>
-                    </div>
-                    <div class="row">
-                        <div class="col box-image" *ngFor="let a of insta_photos">
-                            <div class="thumbnail">
-                                <img [src]="a.img" alt="">
-                            </div>
-                            <div class="actions">
-                                <i class="ri-instagram-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <app-colections></app-colections>
     </main>
 </div>

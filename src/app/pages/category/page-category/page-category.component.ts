@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category } from 'src/app/models/Category';
 import { Product } from 'src/app/models/Product';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
+import { ProductsService } from 'src/app/services/products/products.service';
 import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service';
 
 @Component({
@@ -29,12 +29,13 @@ export class PageCategoryComponent implements OnInit {
     private rxjs: DataRxjsService,
     private actvRoute: ActivatedRoute,
     private catService: CategoriesService,
+    private productService: ProductsService
   ) { }
 
   ngOnInit(): void {
     this.actvRoute.queryParams.subscribe(params => {
       this.category_id = params['q'];
-      this.getProductsByCategory(+params['q']);
+      this.getProductsByCategoryId(+params['q']);
     });
 
     this.rxjs.openCloseFilterModal$.subscribe(value => {
@@ -46,12 +47,12 @@ export class PageCategoryComponent implements OnInit {
     console.log('value selected', value);
   }
 
-  getProductsByCategory(category_id: number) {
-    this.catService.categoryById(category_id).subscribe({
-      next: (data) => {
-        this.categoryName = data.name;
-        this.rxjs.sendProducts(data.products);
-        // console.log('CATEGORY_ID DATA', this.category);
+  getProductsByCategoryId(category_id: number) {
+    this.productService.productsByCategoryId(category_id).subscribe({
+      next: (data: Product[]) => {
+        this.categoryName = data[0]?.category.name;
+        this.rxjs.sendProducts(data);
+        console.log('CATEGORY_ID DATA', data);
       },
       error: (err) => {
         console.log('CATEGORY_ID DATA ERR', err);
