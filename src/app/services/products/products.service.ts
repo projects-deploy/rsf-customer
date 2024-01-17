@@ -48,7 +48,7 @@ export class ProductsService {
     return this.http.get<Product[]>(`${this.url}/${this.flag}/find/by-department?=${department_id}`);
   }
 
-  productIsNew(pageNumber: number = 2, pageSize: number = 5) {
-    return this.http.get<Pagination<Product[]>>(`${this.url}/${this.flag}/find/by-news?page=${pageNumber}&size=${pageSize}`);
+  productIsNew(pageNumber: number = 0, pageSize: number = 5) {
+    return this.http.get<Pagination<Product>>(`${this.url}/${this.flag}/find/by-news?page=${pageNumber}&size=${pageSize}`);
   }
 }

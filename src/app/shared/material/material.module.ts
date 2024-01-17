@@ -67,6 +67,7 @@ import { HighlightedComponent } from '../components/highlighted/highlighted.comp
 import { ArrivalsComponent } from '../components/arrivals/arrivals.component';
 import { ColectionsComponent } from '../components/colections/colections.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { DefaultCarouselComponent } from '../components/default-carousel/default-carousel.component';
 
 const modules = [
   A11yModule,
@@ -138,6 +139,7 @@ const componentes = [
   HighlightedComponent,
   ArrivalsComponent,
   ColectionsComponent,
+  DefaultCarouselComponent,
 ]
 
 @NgModule({

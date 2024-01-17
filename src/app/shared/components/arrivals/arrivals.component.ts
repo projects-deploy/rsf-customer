@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { carouselMock } from '../../utils/carousel';
+import { ProductsService } from 'src/app/services/products/products.service';
+import { Product } from 'src/app/models/Product';
 
 @Component({
   selector: 'app-arrivals',
@@ -9,7 +11,7 @@ import { carouselMock } from '../../utils/carousel';
 })
 export class ArrivalsComponent implements OnInit {
 
-  caroussel = carouselMock;
+  caroussel: Product[] = [];
 
   customOptions: OwlOptions = {
     loop: true,
@@ -41,10 +43,24 @@ export class ArrivalsComponent implements OnInit {
   };
 
 
-  constructor() { }
+  constructor(
+    private productService: ProductsService
+  ) { }
 
   ngOnInit(): void {
-    
+    this.allProductsIsNew();
+  }
+
+  allProductsIsNew() {
+    this.productService.productIsNew().subscribe({
+      next: (data) => {
+        this.caroussel = data.content;
+        console.log('IS NEW PRODUCTS DATA', data);
+      },
+      error: (err) => {
+        console.log('IS NEW PRODUCTS ERR', err);
+      }
+    })
   }
 
 }

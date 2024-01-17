@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { hoddie, shirt, sweater } from 'src/app/shared/utils/ProductsMock';
-import { carouselMock, imagesInstagram } from 'src/app/shared/utils/carousel';
+import { bannerInit, imagesInstagram } from 'src/app/shared/utils/carousel';
 
 @Component({
   selector: 'app-content',
@@ -9,6 +9,8 @@ import { carouselMock, imagesInstagram } from 'src/app/shared/utils/carousel';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent {
+
+  carouselRef: any;
 
   shirtTemplate: boolean = false;
   hoddieTemplate: boolean = false;
@@ -24,7 +26,7 @@ export class ContentComponent {
 
   shirtProducts = shirt;
   hoddieProducts = hoddie;
-  carousel = carouselMock;
+  carousel = bannerInit;
   sweaterProduct = sweater;
   insta_photos = imagesInstagram;
 
@@ -33,7 +35,10 @@ export class ContentComponent {
     mouseDrag: false,
     touchDrag: false,
     pullDrag: false,
-    dots: false,
+    dots: true,
+    autoHeight: false,
+    animateIn: 'fadeIn',
+    animateOut: 'fadeOut',
     navSpeed: 700,
     navText: ['<i class="ri-arrow-left-s-line"></i>', '<i class="ri-arrow-right-s-line"></i>'],
     responsive: {
@@ -51,7 +56,8 @@ export class ContentComponent {
       }
     },
     nav: true,
-    autoplay: true
+    autoplay: true,
+    autoplayTimeout: 5000,
   }
 
   changeTemplate(value: string) {

@@ -1,10 +1,12 @@
 import { Component, OnInit, computed, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Cupom } from 'src/app/models/Cupom';
 import { Customer } from 'src/app/models/Customer';
 import { Order } from 'src/app/models/Order';
 import { CupomService } from 'src/app/services/cupom/cupom.service';
 import { OrdersService } from 'src/app/services/ordres/orders.service';
+import { FreteService } from 'src/app/shared/services/calculaFrete/freteService.service';
 import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service';
 
 @Component({
@@ -20,6 +22,11 @@ export class PageCheckoutComponent implements OnInit {
   cupom = signal(0);
   s_delivery = signal(0);
   itemList = signal(this.checkout);
+  errorApplyCoupon: boolean = false;
+  errorApplyCouponMsg: String = '';
+  lastCoupon: string = '';
+  loading: boolean = false;
+  time_shipping: string = '';
 
   totalAmount = computed(() => {
     return this.itemList().reduce((acc: any, curr: any) => acc + curr.amount, 0);
@@ -38,24 +45,17 @@ export class PageCheckoutComponent implements OnInit {
   formCupom: FormGroup;
   commentsForm!: FormGroup;
 
+  checkForm: boolean = false;
   blockApplyBtn: boolean = true;
   checkPayment: boolean = false;
   checkDelivery: boolean = false;
 
-  delivery: any[] = [
-    {
-      id: 1,
-      name: 'Grátis',
-      value: 'free',
-      price: 0.00,
-    },
-    {
-      id: 2,
-      name: 'Correios',
-      value: 'flat',
-      price: 10.00
-    }
-  ];
+  localidade: string = '';
+  freteCalculado: number | null = 0;
+
+  delivery: any[] = [];
+
+  cepForm!: FormGroup
 
   radioPayment = [
     {
@@ -75,7 +75,7 @@ export class PageCheckoutComponent implements OnInit {
     }
   ];
 
-  arrCupons: selectCupons[] = [];
+  arrCupons: Cupom[] = [];
 
   constructor(
     private route: Router,
@@ -83,6 +83,7 @@ export class PageCheckoutComponent implements OnInit {
     private rxjs: DataRxjsService,
     private cupomService: CupomService,
     private orderService: OrdersService,
+    private freteService: FreteService,
   ) { }
 
   ngOnInit(): void {
@@ -92,6 +93,15 @@ export class PageCheckoutComponent implements OnInit {
 
     this.commentsForm = this.fb.group({
       comments: ['']
+    });
+
+    this.cepForm = this.fb.group({
+      cep: ['']
+    });
+
+    this.rxjs.checkoutValid$.subscribe(value => {
+      console.log('rxjs form', value);
+      this.checkForm = value;
     });
   }
 
@@ -107,20 +117,22 @@ export class PageCheckoutComponent implements OnInit {
       customer: this.customer,
       items: this.checkout
     }
-
-    console.log('CHECKOUT:', order);
+    this.loading = true;
     this.sendOrderApi(order);
   }
 
   sendOrderApi(order: Order) {
-    this.orderService.createOrder(order).subscribe({
+    this.orderService.createOrder(order, this.lastCoupon).subscribe({
       next: (data) => {
         console.log('CREATE ORDER SUCCESS:', data);
         localStorage.removeItem('rsf-cart');
         this.rxjs.crtlItemCardQuantity({
           qtde_items: 0
         });
-        this.route.navigate(['/']);
+        setTimeout(() => {
+          this.route.navigate(['/receipt'], { queryParams: { receipt: data.receipt_number } });
+          this.loading = false;
+        }, 5000);
         this.resetBeforeCheckoutSucess();
       },
       error: (err) => {
@@ -133,6 +145,7 @@ export class PageCheckoutComponent implements OnInit {
     this.checkDelivery = true;
     this.select_payment = value.value;
     this.s_delivery.set(value.price);
+    this.time_shipping = value.time;
   }
 
   resetBeforeCheckoutSucess() {
@@ -143,20 +156,27 @@ export class PageCheckoutComponent implements OnInit {
   paymentMode(value: string) {
     let vlr = (value === 'pix') ? 10 : 0;
     this.select_payment = value;
-    this.discountCalculate(vlr);
+    // this.discountCalculate(vlr);
     this.checkPayment = true;
   }
 
-  discountCalculate(value: number) {
+  discountCalculate(cupom: Cupom) {
+    let value: number = 0;
+
     this.cupom.update((currentArray) => {
-      return currentArray += (-value);
+      if (cupom.discountType == 'percent') {
+        value = -((this.finaly_valuet() * cupom.discount) / 100);
+      }
+      else if (cupom.discountType == 'money') {
+        value = (-cupom.discount);
+      }
+      return currentArray += (value);
     });
-    // this.calculateValue();
   }
 
   returnValue(value: number) {
     this.cupom.update((currentArray) => {
-      return currentArray -= value;
+      return currentArray += value;
     });
   }
 
@@ -179,37 +199,39 @@ export class PageCheckoutComponent implements OnInit {
     let idx = this.filterCupom(code);
     if (idx === -1) {
       this.applyCoupon(code);
-      return;
+    } else {
+      this.discountCalculate(this.arrCupons[idx]);
+      this.lastCoupon = this.arrCupons[idx].code;
+      this.blockForm();
     }
-    this.discountCalculate(this.arrCupons[idx].discount);
-    this.blockForm();
   }
 
   applyCoupon(code: string) {
-    this.cupomService.apllyCupom(code).subscribe({
+    let customer = String(this.customer.id);
+    this.errorApplyCoupon = false;
+    this.cupomService.apllyCupom(code, customer).subscribe({
       next: (data) => {
-        this.discountCalculate(data.discount);
+        this.discountCalculate(data);
         this.blockForm();
-        this.arrCupons.push({
-          code: code,
-          discount: data.discount
-        });
-        console.log('APPLY CUPOM SUCCESS:', this.arrCupons);
+        this.lastCoupon = data.code;
+        this.arrCupons.push({ ...data });
+        // console.log('APPLY CUPOM SUCCESS:', this.arrCupons);
       },
       error: (err) => {
-        console.log('APPLY CUPOM ERROR:', err);
+        console.log('APPLY CUPOM ERROR:', err.error.message);
+        this.errorApplyCoupon = true;
+        this.errorApplyCouponMsg = err.error.message;
       }
     });
   }
 
   removeCupom(code: string) {
-    console.log('VALUE REMOVE CUPOM', code);
-
     this.blockApplyBtn = true;
     this.formCupom.controls['discount'].enable();
     this.formCupom.patchValue({
       discount: ''
     });
+    this.lastCoupon = '';
 
     let idx = this.filterCupom(code);
 
@@ -217,8 +239,27 @@ export class PageCheckoutComponent implements OnInit {
       this.returnValue(this.arrCupons[idx].discount);
     }
   }
-}
-interface selectCupons {
-  code: string;
-  discount: number;
+
+  calcularFrete(cep: string) {
+    this.s_delivery.set(0);
+    this.freteService.getAddress(cep).subscribe({
+      next: (data) => {
+        this.delivery = this.freteService.calcularFrete(data.uf);
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
+  onOptionChange(idx: number) {
+    this.delivery.forEach(option => {
+      if (option.id === idx) {
+        option.selected = true;
+        this.s_delivery.set(option.price);
+      } else {
+        option.selected = false;
+      }
+    });
+  }
 }

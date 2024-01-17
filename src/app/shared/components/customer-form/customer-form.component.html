@@ -1,9 +1,14 @@
 <form [formGroup]="customerForm" class="w-75 m-auto">
     <div formGroupName="personaldata">
         <div class="row">
-            <div class="col-12 col-md-6 py-3">
+            <div class="col-12 col-md-6 py-3"
+                [class.ng-invalid.ng-touched]="customerForm.get('personaldata.name')?.invalid && customerForm.get('personaldata.name')?.touched">
                 <label for="first-name">First Name *</label>
                 <input formControlName="name" type="text" id="name" placeholder="Nome">
+                <div *ngIf="customerForm.get('personaldata.name')?.invalid && customerForm.get('personaldata.name')?.touched"
+                    class="error-message">
+                    Nome é um campo obrigatório.
+                </div>
             </div>
             <div class="col-12 col-md-6 py-3">
                 <label for="surname">Last Name *</label>

@@ -18,6 +18,9 @@ export class DataRxjsService {
   private openCloseFilterModal = new Subject<boolean>();
   openCloseFilterModal$ = this.openCloseFilterModal.asObservable();
 
+  private checkoutValid = new Subject<boolean>();
+  checkoutValid$ = this.checkoutValid.asObservable();
+
   private dataReviews = new Subject<Reviews[]>();
   dataReviews$ = this.dataReviews.asObservable();
 
@@ -37,6 +40,10 @@ export class DataRxjsService {
 
   closeFilterModal(value: boolean) {
     this.openCloseFilterModal.next(value);
+  }
+
+  crtlCheckoutForm(value: boolean) {
+    this.checkoutValid.next(value);
   }
 
   sendReviews(data: Reviews[]) {

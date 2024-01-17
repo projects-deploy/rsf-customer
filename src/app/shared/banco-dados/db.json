@@ -1,0 +1,30 @@
+{
+    "banners": [
+        {
+            "link_photo": "./assets/logos_banners/banner_01.jpg"
+        },
+        {
+            "link_photo": "./assets/logos_banners/banner_03.jpg"
+        },
+        {
+            "link_photo": "./assets/logos_banners/banner_02.jpg"
+        }
+    ],
+    "highlighted": [
+        {
+            "entity": "category",
+            "id": 1,
+            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet, nihil?"
+        },
+        {
+            "entity": "brand",
+            "id": 1,
+            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet, nihil?"
+        },
+        {
+            "entity": "department",
+            "id": 1,
+            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet, nihil?"
+        }
+    ]
+}
