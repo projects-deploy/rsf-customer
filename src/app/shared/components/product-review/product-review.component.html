@@ -11,13 +11,8 @@
             <div class="rating">
                 <strong class="px-3 col-3"> {{ data_reviews.average_rating | number: '1.1-1' }} </strong>
                 <div class="d-flex flex-column col-8">
-                    <div class="d-flex justify-content-around mb-1">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                    </div>
+                    <ngx-stars [readonly]="true" [maxStars]="5" [color]="'#2bcb96'" [initialStars]="4"
+                        [size]="2"></ngx-stars>
                     <span> {{ data_reviews.review_count }} reviews</span>
                 </div>
             </div>
@@ -46,7 +41,13 @@
                             <div class="grouping">
                                 <div class="name"> {{ r.customer.name + " " + r.customer.surname }} </div>
                                 <div class="rating">
-                                    <i class="ri-star-fill"></i>
+                                    <ngx-stars
+                                        [readonly]="true"
+                                        [maxStars]="5"
+                                        [color]="'#2bcb96'"
+                                        [initialStars]="r.rating"
+                                        [size]="1"
+                                    ></ngx-stars>
                                 </div>
                                 <div class="date grey-color">On {{ r.createdAt | date }} </div>
                             </div>
@@ -95,20 +96,7 @@
             <div class="rating">
                 <span>Your Ratting:</span>
                 <div class="stars">
-                    <input [(ngModel)]="value_rating" value="5" type="radio" name="rating" id="star5">
-                    <label for="star5"><i class="ri-star-fill"></i></label>
-
-                    <input [(ngModel)]="value_rating" value="4" type="radio" name="rating" id="star4">
-                    <label for="star4"><i class="ri-star-fill"></i></label>
-
-                    <input [(ngModel)]="value_rating" value="3" type="radio" name="rating" id="star3">
-                    <label for="star3"><i class="ri-star-fill"></i></label>
-
-                    <input [(ngModel)]="value_rating" value="2" type="radio" name="rating" id="star2">
-                    <label for="star2"><i class="ri-star-fill"></i></label>
-
-                    <input [(ngModel)]="value_rating" value="1" type="radio" name="rating" id="star1">
-                    <label for="star1"><i class="ri-star-fill"></i></label>
+                    <ngx-stars [wholeStars]="true" (ratingOutput)="onRatingSet($event)"></ngx-stars>
                 </div>
             </div>
             <form [formGroup]="reviewForm">
@@ -122,3 +110,5 @@
         </div>
     </div>
 </div>
+
+<!-- https://github.com/hughjdavey/ngx-stars?tab=readme-ov-file#usage -->
