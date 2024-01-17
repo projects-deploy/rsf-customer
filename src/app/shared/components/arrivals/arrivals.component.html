@@ -8,7 +8,18 @@
                 <owl-carousel-o [options]="customOptions">
                     <ng-container *ngFor="let slide of caroussel">
                         <ng-template class="slide" carouselSlide [id]="slide.link_photo">
-                            <app-thumbail [content]="slide"></app-thumbail>
+                            <div class="content-box border">
+                                <div class="my-card">
+                                    <div class="image">
+                                        <img [src]="slide.link_photo" alt="">
+                                    </div>
+                                    <figcaption>
+                                        <button mat-icon-button [routerLink]="['/product', 'detail', slide.id]">
+                                            <mat-icon>visibility</mat-icon>
+                                        </button>
+                                    </figcaption>
+                                </div>
+                            </div>
                         </ng-template>
                     </ng-container>
                 </owl-carousel-o>

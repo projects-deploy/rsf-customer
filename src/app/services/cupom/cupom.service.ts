@@ -15,7 +15,7 @@ export class CupomService {
     private http: HttpClient
   ) { }
 
-  apllyCupom(code: string) {
-    return this.http.get<Cupom>(`${this.url}/${this.flag}/apply?code=${code}`);
+  apllyCupom(code: string, customer_id: string) {
+    return this.http.get<Cupom>(`${this.url}/${this.flag}/apply?code=${code}&customer=${customer_id}`);
   }
 }

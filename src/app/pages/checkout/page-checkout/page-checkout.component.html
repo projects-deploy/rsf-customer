@@ -44,8 +44,8 @@
                         <span>Forma de pagamento *</span>
                         <ul>
                             <li *ngFor="let pg of radioPayment; let idx = index">
-                                <input type="radio" name="pay-option" [id]="pg.value" [value]="pg.value" [checked]="pg.check"
-                                    (change)="paymentMode(pg.value)">
+                                <input type="radio" name="pay-option" [id]="pg.value" [value]="pg.value"
+                                    [checked]="pg.check" (change)="paymentMode(pg.value)">
                                 <label [for]="pg.value"><i [class]="pg.icon"></i></label>
                             </li>
                         </ul>
@@ -58,6 +58,9 @@
                         </form>
                         <div *ngIf="!blockApplyBtn" class="text-end remove-cupom"><a
                                 (click)="removeCupom(cpm.value)">remover cupom</a></div>
+
+                        <div *ngIf="errorApplyCoupon" class="text-end remove-cupom"><a (click)="removeCupom(cpm.value)">
+                                {{errorApplyCouponMsg}} </a></div>
                     </div>
                     <div class="math-pricing">
                         <ul>
@@ -70,10 +73,24 @@
                                     <span>Envio *</span>
                                     <span class="value">{{ s_delivery() | currency }}</span>
                                 </p>
-                                <div *ngFor="let d of delivery" class="example-radio-group my-2">
-                                    <input type="radio" [id]="d.name" name="delivery" [value]="d.value"
-                                        [(ngModel)]="select_delivery" (change)="deliveryMode(d)">
-                                    <label class="ms-2" [for]="d.name"> {{ d.name }} </label>
+                                <form [formGroup]="cepForm" class="d-flex">
+                                    <div class="discount w-75" style="background-color: #FFF;">
+                                        <input formControlName="cep" class="input" type="text" id="surname" placeholder="Informe seu cep">
+                                    </div>
+                                    <div class="button">
+                                        <button class="primary-btn ms-3" (click)="calcularFrete(cepForm.value.cep)">Calcular</button>
+                                    </div>
+                                </form>
+                                <div class="delivery-options mt-3">
+                                    <div class="d-flex justify-content-between align-items-center my-1"
+                                        *ngFor="let option of delivery; let idx = index"
+                                        [class.selected]="option.selected" (click)="onOptionChange(option.id)">
+                                        <p class="m-0 d-flex flex-column">
+                                            <span>{{ option.name }}</span>
+                                            <span class="text-time">{{ option.time + ' dias úteis' }}</span>
+                                        </p>
+                                        <span>{{ option.price | currency }}</span>
+                                    </div>
                                 </div>
                             </li>
                             <li class="pricing-item">
@@ -88,15 +105,20 @@
                         <form [formGroup]="commentsForm">
                             <div class="check-comment">
                                 <div class="add-note">
-                                    <textarea formControlName="comments" class="w-100" rows="3" placeholder="Observações +"></textarea>
+                                    <textarea formControlName="comments" class="w-100" rows="3"
+                                        placeholder="Observações +"></textarea>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="button mt-2">
-                        <a [ngClass]="{'disabled': !checkPayment || !checkDelivery }" (click)="createOrder()" class="btn btn-secondary w-100 text-center">Finalizar compra</a>
+                        <a [ngClass]="{'disabled': !checkPayment || !checkDelivery || !checkForm }"
+                            (click)="createOrder()" class="btn btn-secondary w-100 text-center">Finalizar compra</a>
+                        <mat-progress-bar mode="indeterminate" color="warn" *ngIf="loading"></mat-progress-bar>
+
                     </div>
-                    <div class="text-end remove-cupom"><small>Campos com  <strong class="text-danger">*</strong> são obrigatórios!</small></div>
+                    <div class="text-end remove-cupom"><small>Campos com <strong class="text-danger">*</strong> são
+                            obrigatórios!</small></div>
                 </div>
             </div>
         </div>

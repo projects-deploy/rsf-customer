@@ -1,19 +1,7 @@
 @import '../../../../assets/styles/product-colections';
+@import '../../../../assets/styles/carrossel';
 
-.carousel-caption {
-    padding-bottom: 4rem;
-    margin: 0;
-}
-
-.carousel-caption p:first-child span {
-    width: 80px;
-    height: 80px;
-    padding: 1rem;
-    border-radius: 50%;
-    font-size: 18px;
-    background-color: var(--primary-color);
-    color: var(--white-color);
-}
+$carousel-height: 160px;
 
 p {
     margin: 24px;
@@ -79,24 +67,6 @@ p {
     line-height: 1;
 }
 
-.carousel-banners .owl-next, .carousel-teste .owl-prev {
-    background-color: transparent;
-    color: #000;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
-
-.carousel-banners .owl-next {
-    left: 0;
-    transform: translate(-50%, -50%);
-}
-
-.carousel-teste .owl-prev {
-    right: 0;
-    transform: translate(-50%, -50%);
-}
-
 .show {
     display: block;
 }
@@ -112,12 +82,52 @@ p {
     margin-top: 15px;
 }
 
-.caurousel-box-image {
-    height: calc(100vh - 180px);
+.carousel-box-image {
+    height: calc(100vh - 170px);
 }
 
-.caurousel-box-image .carousel-image {
+.carousel-box-image .carousel-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
+}
+
+.animated {
+    -webkit-animation-duration: 1000 ms;
+    animation-duration: 1000 ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.owl-animated-out {
+    z-index: 1
+}
+
+.owl-animated-in {
+    z-index: 0
+}
+
+.fadeOut {
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+}
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }

@@ -62,9 +62,9 @@
                                     <mat-icon>add_shopping_cart</mat-icon> Add to cart
                                 </button>
                             </div>
-                            <div class="buynow button">
+                            <!-- <div class="buynow button">
                                 <button type="submit" class="secondary-btn">Buy now</button>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="product-control list-inline" *ngIf="customer != null">
                             <ul>
@@ -104,18 +104,18 @@
 
     <div class="product detail">
         <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
-            <mat-tab label="Product detail">
+            <mat-tab label="Detalhes do produto">
                 <app-product-detail></app-product-detail>
             </mat-tab>
-            <mat-tab label="Custom">
+            <!-- <mat-tab label="Custom">
                 <app-product-custom></app-product-custom>
-            </mat-tab>
-            <mat-tab label="Review">
+            </mat-tab> -->
+            <mat-tab label="Opiniões do produto">
                 <app-product-review [product_review]="+product_id" ></app-product-review>
             </mat-tab>
-            <mat-tab label="Shipping">
+            <!-- <mat-tab label="Shipping">
                 <app-product-shipping></app-product-shipping>
-            </mat-tab>
+            </mat-tab> -->
         </mat-tab-group>
     </div>
 </div>

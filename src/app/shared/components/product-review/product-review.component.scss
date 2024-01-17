@@ -2,6 +2,10 @@ h3 {
     font-size: 30px;
 }
 
+.rating-stars i {
+    color: #c6c6c6;
+}
+
 .box-comment:not(:last-child) {
     border-bottom: 1px solid #c6c6c6;
 }
@@ -20,7 +24,7 @@ h3 {
     margin: 0 auto;
 }
 
-.product-review .head-review {
+.rating-review .rating {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,11 +33,11 @@ h3 {
     padding: 20px 0;
 }
 
-.product-review .head-review strong {
+.rating-review .rating strong {
     font-size: 50px;
 }
 
-.product-review .head-review span {
+.rating-review .rating span {
     position: relative;
     padding-left: 20px;
 }

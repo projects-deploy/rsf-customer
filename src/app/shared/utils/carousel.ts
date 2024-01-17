@@ -157,4 +157,16 @@ export const imagesInstagram = [
     {
         img: 'assets/images/ig_05.jpg'
     }
+];
+
+export const bannerInit = [
+    {
+        link_photo: 'https://www.shutterstock.com/image-vector/ecommerce-website-banner-template-presents-260nw-2252124451.jpg'
+    },
+    {
+        link_photo: 'https://ecomposer.io/cdn/shop/articles/shopify-banner-size_1.jpg?v=1699927741'
+    },
+    {
+        link_photo: 'https://buysellgraphic.com/images/graphic_preview/thumb/ecommerce_website_banner_template_shoppers_sketch_55245.jpg'
+    },
 ]

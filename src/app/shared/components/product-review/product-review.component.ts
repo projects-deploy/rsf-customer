@@ -21,11 +21,17 @@ export class ProductReviewComponent implements OnInit {
   customer: Customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`);
 
   reviewForm!: FormGroup;
-  data_reviews: prodReview;
+  data_reviews: prodReview = {
+    average_rating: 0,
+    review_count: 0
+  };
   rating_review = ratingStar;
   value_rating: number = 0;
   oppened_modal: boolean = false;
   reviews: Reviews[] = [];
+
+  rating_of_stars: number = 0;
+  number_of_stars: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -59,8 +65,9 @@ export class ProductReviewComponent implements OnInit {
         data.forEach((item: Reviews) => {
           sum += item.rating;
         });
-        // this.data_reviews.review_count = data.length;
-        console.log('REVIEWS BY PRODUCT ID DATA', sum);
+
+        this.rating_of_stars = this.data_reviews.average_rating;
+        console.log('REVIEWS BY PRODUCT ID DATA', this.rating_of_stars, data);
       },
       error: (err) => {
         console.log('REVIEWS BY PRODUCT ID ERR', err);
@@ -99,5 +106,10 @@ export class ProductReviewComponent implements OnInit {
   resetForm() {
     this.reviewForm.patchValue({title: '', comment: '' });
     this.value_rating = 0;
+  }
+
+  onRatingSet(rating: number): void {
+    console.warn(`User set rating to ${rating}`);
+    this.number_of_stars = rating;
   }
 }

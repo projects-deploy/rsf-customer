@@ -1,23 +1,55 @@
 <div id="page" class="page-home">
     <main>
-        <section class="carousel-banners">
-            <owl-carousel-o [options]="customOptions">
-                <ng-container *ngFor="let slide of carousel">
-                    <ng-template class="slide" carouselSlide [id]="slide.link_photo">
-                        <div class="caurousel-box-image">
-                            <img class="carousel-image" [src]="slide.link_photo" alt="">
+
+        <section class="home">
+            <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button
+                        *ngFor="let url of carousel; let i = index"
+                        type="button"
+                        [attr.data-bs-slide-to]="i"
+                        [ngClass]="{'active': i === 0}"
+                        data-bs-target="#carouselExampleCaptions"
+                        aria-current="true">
+                    </button>
+                </div>
+                <div class="carousel-inner">
+                    <div
+                        class="carousel-item"
+                        [ngClass]="{'active': i === 0}"
+                        data-bs-interval="6000"
+                        *ngFor="let url of carousel; let i = index">
+                        <img [src]="url.link_photo" class="d-block">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>First slide label</h5>
+                            <p>Some representative placeholder content for the first slide.</p>
                         </div>
-                    </ng-template>
-                </ng-container>
-            </owl-carousel-o>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </section>
 
-        <!-- guide -->
+        <!-- carousel marcas -->
+        <div class="container box my-4">
+            <app-default-carousel></app-default-carousel>
+        </div>
+
+        <!-- em destaque -->
         <div class="guide pt-3">
             <app-highlighted></app-highlighted>
         </div>
 
-        <!-- carousel -->
+        <!-- carousel Novidades -->
         <div class="carousel">
             <app-arrivals></app-arrivals>
         </div>

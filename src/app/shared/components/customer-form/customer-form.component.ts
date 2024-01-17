@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { distinctUntilChanged } from 'rxjs';
 import { Customer } from 'src/app/models/Customer';
+import { DataRxjsService } from '../../services/rxjs/data-rxjs.service';
 
 @Component({
   selector: 'app-customer-form',
@@ -12,10 +14,12 @@ export class CustomerFormComponent implements OnInit {
 
   @Input() customer!: Customer;
   customerForm!: FormGroup;
+  teste: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private rxjs: DataRxjsService,
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +51,11 @@ export class CustomerFormComponent implements OnInit {
         uf: ['', [Validators.required]],
       })
     });
+
+    this.customerForm.statusChanges.pipe(distinctUntilChanged()).subscribe(newStatus => {
+      let value = newStatus === "VALID";
+      this.rxjs.crtlCheckoutForm(value);
+    });
   }
 
   updateForm(values: Customer) {
@@ -76,6 +85,10 @@ export class CustomerFormComponent implements OnInit {
     this.http.get(`https://viacep.com.br/ws/${cep}/json/`).subscribe(address => {
       this.customerForm.patchValue({ address });
     });
+  }
+
+  get f(): any {
+    return this.customerForm.controls;
   }
 }
 

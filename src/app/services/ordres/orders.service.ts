@@ -19,11 +19,16 @@ export class OrdersService {
     return this.http.get<Order[]>((`${this.url}/${this.flag}`));
   }
 
-  orderById(order_id: number) {    return this.http.get<Order>(`${this.url}/${this.flag}/${order_id}`);
+  orderById(order_id: number) {
+    return this.http.get<Order>(`${this.url}/${this.flag}/${order_id}`);
   }
 
-  createOrder(order: Order) {
-    return this.http.post<Order>(`${this.url}/${this.flag}`, order);
+  orderByReceipt(receiptNumber: string) {
+    return this.http.get<Order>(`${this.url}/${this.flag}/by-receipt/${receiptNumber}`);
+  }
+
+  createOrder(order: Order, code: string) {
+    return this.http.post<Order>(`${this.url}/${this.flag}?code=${code}`, order);
   }
 
   updateOrder(id_order: number, order: Order) {

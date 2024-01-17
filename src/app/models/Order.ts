@@ -7,8 +7,9 @@ export interface Order {
     payment: string;
     shipping: string;
     comments: string;
+    receipt_number?: string;
     date_order: Date;
     value_total: number;
-    customer?: Customer;
+    customer: Customer;
     items: CartItem[];
 }

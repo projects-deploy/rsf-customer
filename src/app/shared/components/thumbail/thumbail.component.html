@@ -4,19 +4,17 @@
             <img [src]="content.link_photo" alt="">
         </div>
         <figcaption>
-            <figcaption>
-                <button mat-icon-button>
-                    <mat-icon>star_border</mat-icon>
-                </button>
+            <button mat-icon-button>
+                <mat-icon>star_border</mat-icon>
+            </button>
 
-                <button mat-icon-button [routerLink]="['/product', 'detail', content.id]">
-                    <mat-icon>visibility</mat-icon>
-                </button>
+            <button mat-icon-button [routerLink]="['/product', 'detail', content.id]">
+                <mat-icon>visibility</mat-icon>
+            </button>
 
-                <button mat-icon-button (click)="addToCartStorage(content)">
-                    <mat-icon>add_shopping_cart</mat-icon>
-                </button>
-            </figcaption>
+            <button mat-icon-button (click)="addToCartStorage(content)">
+                <mat-icon>add_shopping_cart</mat-icon>
+            </button>
         </figcaption>
     </div>
     <div class="infos">

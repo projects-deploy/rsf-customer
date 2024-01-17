@@ -1,4 +1,5 @@
 @import '../../../../assets/styles/general.scss';
+@import '../../../../assets/styles/product-colections';
 
 .tag-title {
     font-family: 'Prata', serif;
@@ -6,101 +7,95 @@
     --fw600: 400;
 }
 
-@import '../../../../assets/styles/product-colections';
-
-.carousel-caption {
-    padding-bottom: 4rem;
-    margin: 0;
+.content-box {
+    display: flex;
+    gap: 35px;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 380px;
 }
 
-.carousel-caption p:first-child span {
-    padding: 15px 8px;
-    border-radius: 50%;
-    font-size: 25px;
-    background-color: var(--primary-color);
-    color: var(--white-color);
-}
-
-p {
-    margin: 24px;
-}
-
-.box-image {
+.my-card {
     position: relative;
+    color: #000;
+    min-width: 250px;
+    max-width: 310px;
+    margin: 10px;
     overflow: hidden;
 }
 
-.box-image .thumbnail img {
-    width: 100%;
-    height: auto;
-    display: block;
+.my-card .image {
+    height: 100%;
 }
 
-.box-image .actions {
-    font-size: 20px;
+.my-card img {
+    position: relative;
+    vertical-align: top;
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.7s ease;
+}
+
+.my-card:hover img {
+    transform: scale(1.2);
+}
+
+.my-card:hover figcaption i,
+.my-card:hover figcaption button {
+    opacity: 1;
+    z-index: 1;
+    transform: translateY(-20%);
+}
+
+.my-card figcaption {
+    position: absolute;
+    padding: 15px 20px;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-card figcaption i,
+.my-card figcaption button {
+    background-color: #FFF;
+    margin-left: 15px;
     width: 50px;
     height: 50px;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%);
-    background-color: var(--white-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    pointer-events: none;
-    opacity: 0;
-    position: absolute;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.box-image:hover .actions {
-    opacity: 1;
-    transform: translateY(-30%) translateX(-50%);
-    z-index: 1;
-}
-
-.banner {
-    background-color: var(--ligth-color);
-    background-image: url(../../../../assets/images/banner.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position-x: 75%;
-    background-origin: border-box;
-    height: 350px;
-    padding: 50px 0;
-}
-
-.banner .wrap {
-    height: 100%;
-    left: 75%;
-}
-
-.banner h3 {
-    font-size: 40px;
-}
-
-.banner h2 {
-    font-size: 50px;
-    line-height: 1;
-}
-
-.carousel-teste .owl-next, .carousel-teste .owl-prev {
-    background-color: transparent;
+    font-size: 20px;
     color: #000;
-    width: 60px;
-    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
     border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    cursor: pointer;
+    border: 1px solid $ligth-color;
 }
 
-.owl-theme .owl-nav [class*=owl-] {
-    background: greenyellow;
+.my-card figcaption i:hover,
+.my-card figcaption button:hover {
+    background-color: #ebeaea;
 }
 
-.show {
-    display: block;
+.my-card figcaption i:first-child,
+.my-card figcaption button:first-child {
+    margin-left: 0;
 }
 
-.select-style li {
-    font-size: 16px;
+.my-card figcaption::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* background: linear-gradient(90deg, #b2c4c9, #FFF); */
+    opacity: 0.8;
+    z-index: -1;
 }

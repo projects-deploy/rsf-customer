@@ -1,42 +1,72 @@
-<div class="product-review">
-    <h3>Rating & Review</h3>
-    <ng-container *ngIf="reviews.length > 0; else noComments">
-        <div class="head-review">
-            <div class="sum-rating">
-                <strong> {{ data_reviews.average_rating | number: '1.1-1' }} </strong>
-                <span> {{ data_reviews.review_count }} reviews</span>
-            </div>
-            <div class="button">
-                <a (click)="oppened_modal = true;" class="primary-btn">Whrite a review</a>
+<div class="row mt-4 px-2">
+    <div class="d-flex justify-content-between">
+        <h3>Rating & Review</h3>
+
+        <div class="button">
+            <a (click)="oppened_modal = true;" class="primary-btn">Whrite a review</a>
+        </div>
+    </div>
+    <div class="col-12 col-md-3">
+        <div class="rating-review">
+            <div class="rating">
+                <strong class="px-3 col-3"> {{ data_reviews.average_rating | number: '1.1-1' }} </strong>
+                <div class="d-flex flex-column col-8">
+                    <ngx-stars [readonly]="true" [maxStars]="5" [color]="'#2bcb96'" [initialStars]="4"
+                        [size]="2"></ngx-stars>
+                    <span> {{ data_reviews.review_count }} reviews</span>
+                </div>
             </div>
         </div>
-        <div class="body-review box-comment" *ngFor="let r of reviews; let idx = index">
-            <div class="profile">
-                <div class="thumb-name">
-                    <div class="image">
-                        <img [src]="r.customer.link_photo" alt="">
-                    </div>
-                    <div class="grouping">
-                        <div class="name"> {{ r.customer.name + " " + r.customer.surname }} </div>
-                        <div class="rating">
-                            <i class="ri-star-fill"></i>
+        <div class="rating-stars w-75 m-auto">
+            <p class="d-flex align-items-center m-0" *ngFor="let s of [1,2,3,4,5]; let idx = index; let lst = last">
+                <mat-progress-bar mode="determinate" value="60"></mat-progress-bar>
+                <span class="ps-3 d-flex">
+                    {{(idx + 1)}}
+                    <i class="ri-star-fill ps-1"></i>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="col-12 col-md-9">
+        <div class="product-review">
+
+            <ng-container *ngIf="reviews.length > 0; else noComments">
+
+                <div class="body-review box-comment" *ngFor="let r of reviews; let idx = index">
+                    <div class="profile">
+                        <div class="thumb-name">
+                            <div class="image">
+                                <img [src]="r.customer.link_photo" alt="">
+                            </div>
+                            <div class="grouping">
+                                <div class="name"> {{ r.customer.name + " " + r.customer.surname }} </div>
+                                <div class="rating">
+                                    <ngx-stars
+                                        [readonly]="true"
+                                        [maxStars]="5"
+                                        [color]="'#2bcb96'"
+                                        [initialStars]="r.rating"
+                                        [size]="1"
+                                    ></ngx-stars>
+                                </div>
+                                <div class="date grey-color">On {{ r.createdAt | date }} </div>
+                            </div>
                         </div>
-                        <div class="date grey-color">On {{ r.createdAt | date }} </div>
+                        <div class="comment">
+                            <strong> {{ r.title }} </strong>
+                            <p class="grey-color"> {{ r.comment }} </p>
+                        </div>
                     </div>
                 </div>
-                <div class="comment">
-                    <strong> {{ r.title }} </strong>
-                    <p class="grey-color"> {{ r.comment }} </p>
+            </ng-container>
+            <ng-template #noComments>
+                <div class="alert alert-light mt-3" role="alert">
+                    O produto ainda não possui avaliação!
+                    <a mat-button (click)="oppened_modal = true;">Clique aqui</a>e seja o primeiro a fazer!
                 </div>
-            </div>
+            </ng-template>
         </div>
-    </ng-container>
-    <ng-template #noComments>
-        <div class="alert alert-light mt-3" role="alert">
-            O produto ainda não possui avaliação!
-            <a mat-button (click)="oppened_modal = true;">Clique aqui</a>e seja o primeiro a fazer!
-        </div>
-    </ng-template>
+    </div>
 </div>
 
 <div id="data-question" class="data-popup d-question">
@@ -66,20 +96,7 @@
             <div class="rating">
                 <span>Your Ratting:</span>
                 <div class="stars">
-                    <input [(ngModel)]="value_rating" value="5" type="radio" name="rating" id="star5">
-                    <label for="star5"><i class="ri-star-fill"></i></label>
-
-                    <input [(ngModel)]="value_rating" value="4" type="radio" name="rating" id="star4">
-                    <label for="star4"><i class="ri-star-fill"></i></label>
-
-                    <input [(ngModel)]="value_rating" value="3" type="radio" name="rating" id="star3">
-                    <label for="star3"><i class="ri-star-fill"></i></label>
-
-                    <input [(ngModel)]="value_rating" value="2" type="radio" name="rating" id="star2">
-                    <label for="star2"><i class="ri-star-fill"></i></label>
-
-                    <input [(ngModel)]="value_rating" value="1" type="radio" name="rating" id="star1">
-                    <label for="star1"><i class="ri-star-fill"></i></label>
+                    <ngx-stars [wholeStars]="true" (ratingOutput)="onRatingSet($event)"></ngx-stars>
                 </div>
             </div>
             <form [formGroup]="reviewForm">
@@ -93,3 +110,5 @@
         </div>
     </div>
 </div>
+
+<!-- https://github.com/hughjdavey/ngx-stars?tab=readme-ov-file#usage -->
