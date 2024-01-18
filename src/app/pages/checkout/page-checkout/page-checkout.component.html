@@ -84,7 +84,7 @@
                                 <div class="delivery-options mt-3">
                                     <div class="d-flex justify-content-between align-items-center my-1"
                                         *ngFor="let option of delivery; let idx = index"
-                                        [class.selected]="option.selected" (click)="onOptionChange(option.id)">
+                                        [class.selected]="option.selected" (click)="deliveryMode(option)">
                                         <p class="m-0 d-flex flex-column">
                                             <span>{{ option.name }}</span>
                                             <span class="text-time">{{ option.time + ' dias úteis' }}</span>
@@ -115,7 +115,6 @@
                         <a [ngClass]="{'disabled': !checkPayment || !checkDelivery || !checkForm }"
                             (click)="createOrder()" class="btn btn-secondary w-100 text-center">Finalizar compra</a>
                         <mat-progress-bar mode="indeterminate" color="warn" *ngIf="loading"></mat-progress-bar>
-
                     </div>
                     <div class="text-end remove-cupom"><small>Campos com <strong class="text-danger">*</strong> são
                             obrigatórios!</small></div>
