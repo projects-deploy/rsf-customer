@@ -26,7 +26,7 @@ export class PageCheckoutComponent implements OnInit {
   errorApplyCouponMsg: String = '';
   lastCoupon: string = '';
   loading: boolean = false;
-  time_shipping: string = '';
+  shipping: string = '';
 
   totalAmount = computed(() => {
     return this.itemList().reduce((acc: any, curr: any) => acc + curr.amount, 0);
@@ -40,7 +40,6 @@ export class PageCheckoutComponent implements OnInit {
 
   payment: string = '';
   select_payment: string = '';
-  select_delivery: string = '';
 
   formCupom: FormGroup;
   commentsForm!: FormGroup;
@@ -110,8 +109,8 @@ export class PageCheckoutComponent implements OnInit {
     let order: Order = {
       date_order: new Date(Date.now()),
       value_total: +this.finaly_valuet().toFixed(2),
-      shipping: this.select_delivery,
-      payment: this.select_delivery,
+      shipping: this.shipping,
+      payment: this.select_payment,
       comments: this.commentsForm.value.comments,
       status: 1,
       customer: this.customer,
@@ -145,7 +144,16 @@ export class PageCheckoutComponent implements OnInit {
     this.checkDelivery = true;
     this.select_payment = value.value;
     this.s_delivery.set(value.price);
-    this.time_shipping = value.time;
+    this.shipping = value.value;
+
+    this.delivery.forEach(option => {
+      if (option.id === value.id) {
+        option.selected = true;
+        this.s_delivery.set(option.price);
+      } else {
+        option.selected = false;
+      }
+    });
   }
 
   resetBeforeCheckoutSucess() {
@@ -248,17 +256,6 @@ export class PageCheckoutComponent implements OnInit {
       },
       error: (err) => {
         console.log('err', err);
-      }
-    });
-  }
-
-  onOptionChange(idx: number) {
-    this.delivery.forEach(option => {
-      if (option.id === idx) {
-        option.selected = true;
-        this.s_delivery.set(option.price);
-      } else {
-        option.selected = false;
       }
     });
   }
