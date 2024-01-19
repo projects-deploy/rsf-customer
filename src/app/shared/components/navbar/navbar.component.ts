@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   opened_cart: boolean = false;
   active_mobile: boolean = false;
+  oppened_favorites: boolean = false;
   openModalPromotions: boolean = false;
 
   itens_cart: number = 0;
@@ -145,6 +146,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
         console.log('GET ALL DEPARTMENTS ERR:', err);
       }
     });
+  }
+
+  closeFavorites(e: any) {
+    console.log('EMIT NAV FOOTER', e);
+    this.oppened_favorites = e;
   }
 
   openMobileMenu() {

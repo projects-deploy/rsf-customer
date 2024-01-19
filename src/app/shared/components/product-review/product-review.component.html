@@ -92,11 +92,11 @@
         <div class="data-content modal-top">
             <a mat-button class="close-trigger" color="accent" (click)="oppened_modal = false;"><i
                     class="ri-close-line"></i></a>
-            <h3 class="reccos-title">Write a Review</h3>
+            <h3 class="reccos-title">Dê sua opinião sobre o produto</h3>
             <div class="rating">
                 <span>Your Ratting:</span>
                 <div class="stars">
-                    <ngx-stars [wholeStars]="true" (ratingOutput)="onRatingSet($event)"></ngx-stars>
+                    <ngx-stars [wholeStars]="true" (ratingOutput)="onRatingSet($event)" [color]="'#2bcb96'"></ngx-stars>
                 </div>
             </div>
             <form [formGroup]="reviewForm">

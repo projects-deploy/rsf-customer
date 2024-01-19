@@ -1,10 +1,10 @@
 <div id="mobile-nav" class="">
-    <app-navbar-footer (cartMenuClose)="crtlCartMenu($event)"></app-navbar-footer>
+    <app-navbar-footer (closeFavoritesModal)="closeFavorites($event)"></app-navbar-footer>
 </div>
 
 <nav class="navbar bg-light sticky-top shadow py-3 h-navbar" style="height: auto;">
     <div class="container-fluid  p-3">
-        <a class="menu-trigger reccos-cursor" (click)="openMobileMenu()">
+        <a class="menu-trigger reccos-cursor" (click)="active_mobile = !active_mobile">
             <i class="ri-menu-line"></i>
         </a>
 
@@ -31,7 +31,8 @@
 
         <div class="list-inline d-lg-block d-sm-none d-none">
             <ul>
-                <li><a href=""><span class="reccos-badge"> {{ttl_favorites}} </span>
+                <li><a (click)="oppened_favorites = !oppened_favorites"><span class="reccos-badge"> {{ttl_favorites}}
+                        </span>
                         <i class="ri-heart-line"></i>
                     </a>
                 </li>
@@ -101,124 +102,17 @@
 
 <div id="mobile-menu" class="mobile-menu" [ngClass]="{'mobile-menu-active': active_mobile}">
     <div class="wrap">
-        <app-mobile-menu
-            [mobile_menu_cat]="menu_cat"
-            [mobile_menu_dpt]="menu_depto"
-            [mobile_menu_bnd]="menu_brand"
-        ></app-mobile-menu>
+        <app-mobile-menu [mobile_menu_cat]="menu_cat" [mobile_menu_dpt]="menu_depto"
+            [mobile_menu_bnd]="menu_brand"></app-mobile-menu>
     </div>
 </div>
 
-<!-- <div id="data-cart" class="cart-menu" [ngClass]="{'active': opened_cart}">
+<div id="data-review" class="data-popup d-favorites" [ngClass]="{'open-favorites': oppened_favorites}">
     <div class="wrap">
-        <a class="close-trigger" (click)="opened_cart = false;">
-            <i class="ri-close-circle-line"></i>
-        </a>
-        <div class="scrollto cart-outer">
-            <div class="wrapper">
-                <div class="cart-list">
-                    <div class="wrapper">
-                        <div class="cart-header">
-                            <h2>
-                                <span class="red">Shopping </span>
-                                <span class="orange">Cart</span>
-                            </h2>
-                        </div>
-                        <div class="cart-body scrollto" *ngIf="products_cart.length > 0; else emptyCart">
-                            <div class="product-list">
-                                <div class="wrapper">
-                                    <ul class="p-0">
-                                        <li *ngFor="let cart of products_cart; let idx = index">
-                                            <div class="grouping">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <button (click)="updateQuantity(true, idx)">+</button>
-                                                        <input type="text" [value]="cart.quantity">
-                                                        <button (click)="updateQuantity(false, idx)">-</button>
-                                                    </div>
-                                                </div>
-                                                <div class="thumbnail">
-                                                    <a href="">
-                                                        <img [src]="cart.products.link_photo" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="variants">
-                                                <h4 class="dot-title m-0">
-                                                    <a href="">{{ cart.products.name }}</a>
-                                                </h4>
-                                                <div class="color grey-color">
-                                                    <span>Color:</span>
-                                                    <span>Tosca</span>
-                                                </div>
-                                                <div class="size grey-color">
-                                                    <span>Size:</span>
-                                                    <span>L</span>
-                                                </div>
-                                                <div class="price">$ {{ (cart.products.price_promo *
-                                                    cart.quantity).toFixed(2) }}
-                                                </div>
-                                                <a href="" class="item-remove"><i class="ri-close-line"></i></a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <ng-template #emptyCart>
-                            <div class="empty-img d-flex flex-column align-items-center justify-content-center">
-                                <img src="./assets/messages/empty.png" alt="" width="50%">
-                                <p class="mb-5" style="font-size: 25px;">Seu carrinho está vazio!</p>
-                            </div>
-                        </ng-template>
-                        <div class="cart-footer">
-                            <div class="discount">
-                                <form action="">
-                                    <input type="text" class="input" placeholder="Cupon">
-                                    <input type="submit" class="submit" value="Apply">
-                                </form>
-                            </div>
-                            <div class="math-pricing">
-                                <ul class="p-0">
-                                    <li>
-                                        <span>Subtotal</span>
-                                        <span class="value">{{ totalAmount }}</span>
-                                    </li>
-                                    <ul class="p-0">
-                                        <li><span>Shipping</span></li>
-                                        <li>
-                                            <div>
-                                                <input type="radio" class="checker" name="shipping">
-                                                <label for="">Free</label>
-                                            </div>
-                                            <span class="value">$0.00</span>
-                                        </li>
-                                        <li>
-                                            <div>
-                                                <input type="radio" class="checker" name="shipping">
-                                                <label for="">Flat</label>
-                                            </div>
-                                            <span class="value">$7.00</span>
-                                        </li>
-                                    </ul>
-                                    <li>
-                                        <span>Promo discount</span>
-                                        <span class="value">- $0.00</span>
-                                    </li>
-                                    <li class="total">
-                                        <span>Total</span>
-                                        <span class="value">$ {{ totalAmount.toFixed(2) }} </span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="button" *ngIf="products_cart.length > 0;">
-                                <a (click)="goToCheckout('checkout')" class="cursor-pointer secondary-btn">Checkout</a>
-                                <a (click)="goToCheckout('cart')" class="cursor-pointer grey-link">View cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="data-content modal-top">
+            <a mat-button class="close-trigger" color="accent" (click)="oppened_favorites = false;"><i
+                    class="ri-close-line"></i></a>
+            <app-favorites></app-favorites>
         </div>
     </div>
-</div> -->
+</div>

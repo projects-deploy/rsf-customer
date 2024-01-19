@@ -1,3 +1,5 @@
+@import '../../../../assets/styles/variables';
+
 .ng-invalid.ng-touched {
     border-color: #ff0000;
 }
@@ -8,4 +10,54 @@
 
 .error-message {
     color: #ff0000;
+}
+
+.dropzone-box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dropzone-box h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.dropzone-area {
+    padding: 1rem;
+    position: relative;
+    margin-top: 1rem;
+    min-height: 16rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px dashed $primary-color;
+    border-radius: .5rem;
+    color: $primary-color;
+    cursor: pointer;
+}
+
+.dropzone-area [type="file"] {
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.dropzone-area .file-upload-icon svg {
+    height: 5rem;
+    width: 5rem;
+    margin-bottom: 0.5rem;
+    stroke: $primary-color;
+}
+
+.dropzone--over {
+    border-style: solid;
+    background-color: $fashwhite-color;
 }

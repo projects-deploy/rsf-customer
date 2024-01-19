@@ -24,7 +24,6 @@ export class CustomerFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    console.log('customer', this.customer);
 
     if (this.customer != null || this.customer != undefined) {
       this.updateForm(this.customer);
