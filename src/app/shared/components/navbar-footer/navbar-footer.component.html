@@ -1,12 +1,12 @@
 <div id="mobile-nav" class="mobile-nav">
     <div class="wrap">
         <a routerLink="/"><i class="ri-home-4-line"></i> </a>
-        <a routerLink="/"><i class="ri-user-line"></i> </a>
-        <a routerLink="/">
+        <a routerLink="/customer"><i class="ri-user-line"></i> </a>
+        <a (click)="crtlFavoriteModal()">
             <i class="ri-star-line"></i>
             <span class="item-floating">{{ttl_favorites}}</span>
         </a>
-        <a routerLink="/" (click)="closeCartMenu()">
+        <a routerLink="/cart">
             <i class="ri-shopping-bag-line"></i>
             <span class="item-floating">{{itens_cart}}</span>
         </a>

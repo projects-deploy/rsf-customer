@@ -3,7 +3,7 @@ h3, a:hover {
 }
 
 .social-media i{
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .title {
@@ -11,4 +11,14 @@ h3, a:hover {
     font-size: 35px;
     --fw600: 400;
     margin-top: 15px;
+}
+
+.inner-footer{
+    padding: 2rem 0;
+}
+
+@media screen and (max-width: 767px) {
+    .inner-footer{
+        padding: 2rem 0 2.8rem 0;
+    }
 }

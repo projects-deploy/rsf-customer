@@ -99,7 +99,6 @@ export class PageCheckoutComponent implements OnInit {
     });
 
     this.rxjs.checkoutValid$.subscribe(value => {
-      console.log('rxjs form', value);
       this.checkForm = value;
     });
   }
@@ -123,7 +122,7 @@ export class PageCheckoutComponent implements OnInit {
   sendOrderApi(order: Order) {
     this.orderService.createOrder(order, this.lastCoupon).subscribe({
       next: (data) => {
-        console.log('CREATE ORDER SUCCESS:', data);
+        // console.log('CREATE ORDER SUCCESS:', data);
         localStorage.removeItem('rsf-cart');
         this.rxjs.crtlItemCardQuantity({
           qtde_items: 0

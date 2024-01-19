@@ -6,9 +6,7 @@
 }
 
 .category .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px 20px;
+    display: flex;
 }
 
 .category .grid .content-box .my-card {
@@ -23,7 +21,6 @@
 .category .grid .content-box .my-card img {
     position: relative;
     vertical-align: top;
-    max-width: 100%;
     transition: 0.7s ease;
     width: 100%;
     height: 100%;
@@ -32,12 +29,6 @@
 
 .category .grid .content-box .my-card:hover img {
     transform: scale(1.2);
-}
-
-.category .grid .content-box .my-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .category .grid .content-box .my-card figcaption {
