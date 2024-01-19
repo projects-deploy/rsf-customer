@@ -4,16 +4,15 @@
 .carousel-inner {
     height: 0;
     padding-bottom: 25%;
-    /* this sets carousel aspect ratio (4:1 here) */
 }
 
 .carousel-item {
     position: absolute !important;
-    /* Bootstrap is insistent */
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    width: 100%;
 }
 
 .home .carousel-item::before {
@@ -32,7 +31,6 @@
 }
 
 .home .carousel-item .container {
-    /* background-color: blue; */
     position: absolute;
     left: 50%;
     top: 50%;
@@ -84,63 +82,11 @@
     }
 }
 
-// .home .carousel-controls {
-//     position: absolute;
-//     left: 50%;
-//     bottom: 40px;
-//     z-index: 2;
-//     transform: translate(-50%);
-// }
-
-// .home .carousel-indicators {
-//     position: relative;
-//     margin: 0;
-// }
-
-// .home .carousel-indicators button {
-//     width: 30px;
-//     height: 30px;
-//     margin: 0 5px;
-//     border-radius: 50%;
-//     background-position: center;
-//     background-size: cover;
-//     border: 3px solid transparent;
-//     transition: all .3s ease;
-// }
-
-// .home .carousel-indicators button.active {
-//     border-color: #FFF;
-//     transform: scale(1.2);
-// }
-
-// .home .carousel-control-next,
-// .home .carousel-control-prev {
-//     width: 60px;
-//     height: 60px;
-//     z-index: 3;
-//     top: 50%;
-//     transform: translateY(-50%);
-//     border-radius: 50%;
-//     transition: all .3s ease;
-// }
-
-// .home .carousel-control-next:hover,
-// .home .carousel-control-prev:hover {
-//     box-shadow: 0 0 10px #FFF;
-// }
-
-// .home .carousel-control-next img,
-// .home .carousel-control-prev img {
-//     width: 30px;
-// }
-
-// .home .carousel-control-next {
-//     right: -90px;
-// }
-
-// .home .carousel-control-prev {
-//     left: -90px;
-// }
+@media screen and (max-width: 575px) {
+    .carousel-inner {
+        padding-bottom: 75%;
+    }
+}
 
 @media (max-width: 767px) {
 
@@ -149,10 +95,14 @@
         display: none;
     }
 
-    // .home .carousel-indicators button {
-    //     width: 50px;
-    //     height: 50px;
-    // }
+    .carousel-inner {
+        padding-bottom: 50%;
+    }
+
+    .home .carousel-item {
+        // width: 50%;
+        object-fit: contain;
+    }
 
     .home .carousel-item h2 {
         font-size: 45px;
