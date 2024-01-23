@@ -362,9 +362,7 @@ form :where(input, textarea, select)::placeholder {
 .cart-menu,
 .sidebar {
     z-index: 2;
-    /* 1001 */
     pointer-events: none;
-
     visibility: hidden;
     opacity: 0;
 }
@@ -2053,6 +2051,10 @@ input[type="range"]::-webkit-slider-thumb {
 
 @media screen and (min-width: 992px) {
 
+    .mobile-nav {
+        display: none;
+    }
+
     .menu-trigger,
     .sidebar .close-trigger,
     .category-content .sorter>a {
@@ -2181,8 +2183,6 @@ input[type="range"]::-webkit-slider-thumb {
 
 @media screen and (min-width: 768px) {
 
-
-
     .banner {
         background-size: contain;
         background-position-x: right;
@@ -2237,10 +2237,6 @@ input[type="range"]::-webkit-slider-thumb {
     .checkout-address>div .wrapper,
     .checkout-products .total-summary {
         margin: 0;
-    }
-
-    .mobile-nav {
-        display: none;
     }
 
     .inner-footer .bottom {
