@@ -15,12 +15,17 @@
                     <span class="nav__logo-name">Home</span>
                 </a>
 
-                <a href="#" class="nav__link nav__logo">
+                <a [routerLink]="['/product']" class="nav__link nav__logo">
                     <i class='ri-box-3-line nav__icon'></i>
                     <span class="nav__logo-name">Produtos</span>
                 </a>
 
-                <div class="nav__dropdown nav__logo">
+                <a href="#" class="nav__link nav__logo">
+                    <i class='ri-box-3-line nav__icon'></i>
+                    <span class="nav__logo-name">Promoções</span>
+                </a>
+
+                <!-- <div class="nav__dropdown nav__logo">
                     <a class="nav__link">
                         <i class='ri-shapes-line nav__icon'></i>
                         <span class="nav__name">Departamentos</span>
@@ -33,7 +38,7 @@
                                 class="nav__dropdown-item"> {{ depto.name }} </a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="nav__dropdown  nav__logo">
                     <a class="nav__link">

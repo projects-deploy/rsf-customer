@@ -12,13 +12,3 @@
 .breadcrumb-item.active {
     color: $primary-color;
 }
-
-.sidebar-active {
-    position: absolute;
-    top: 90px;
-    width: 360px;
-    visibility: visible;
-    opacity: 1;
-    background-color: #FFF;
-    transform: translateX(0);
-}

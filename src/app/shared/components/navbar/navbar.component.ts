@@ -178,6 +178,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.active_mobile = e;
   }
 
+  closeModalFilter() {
+    this.rxjs.closeFilterModal(false);
+  }
+
   goToCheckout(route: string) {
     this.opened_cart = false;
     this.route.navigate([`/${route}`]);
