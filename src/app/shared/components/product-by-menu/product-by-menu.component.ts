@@ -30,6 +30,10 @@ export class ProductByMenuComponent implements OnInit {
         this.products = data;
       }
     });
+
+    this.rxjs.openCloseFilterModal$.subscribe(value => {
+      this.openned_sidebar = value;
+    });
   }
 
   selectedFilter(value: any) {
