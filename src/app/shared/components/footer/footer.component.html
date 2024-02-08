@@ -6,11 +6,14 @@
                     <h2 class="title">Newsletter</h2>
                     <p class="grey-color">Digite seu e-mail abaixo para ser o primeiro a saber sobre novas coleções e
                         produtos</p>
-                    <form action="" class="search">
-                        <i class="ri-mail-line"></i>
-                        <input type="text" class="input" placeholder="Informe seu e-mail" id="email">
-                        <input type="submit" class="submit" />
-                        <i class="ri-arrow-right-line"></i>
+                    <form [formGroup]="newsletterForm">
+                        <mat-form-field class="example-full-width newsletter me-3" appearance="outline">
+                            <mat-label>Informe seu e-mail</mat-label>
+                            <input [disabled]="l['email'].status == 'INVALID'" formControlName="email" matInput
+                                placeholder="Informe seu e-mail">
+                        </mat-form-field>
+                        <button type="submit" class="news__btn" [disabled]="!disabledBtn"
+                            (click)="subscribeNewsletter(newsletterForm.value)">Subscribe</button>
                     </form>
                 </div>
 

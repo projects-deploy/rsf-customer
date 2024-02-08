@@ -1,8 +1,9 @@
-h3, a:hover {
+h3,
+a:hover {
     font-weight: 600;
 }
 
-.social-media i{
+.social-media i {
     font-size: 18px;
 }
 
@@ -13,12 +14,27 @@ h3, a:hover {
     margin-top: 15px;
 }
 
-.inner-footer{
+.inner-footer {
     padding: 2rem 0;
 }
 
+.newsletter {
+    width: 75%;
+}
+
+.news__btn {
+    border: none;
+    outline: none;
+    background: transparent;
+    background-color: hsl(248, 66%, 66%);
+    padding: 18px 15px;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
-    .inner-footer{
+    .inner-footer {
         padding: 2rem 0 2.8rem 0;
     }
 }
