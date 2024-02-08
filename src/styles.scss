@@ -66,6 +66,20 @@ textarea::placeholder {
     margin: 30px;
 }
 
+.tag-promotions {
+    font-family: 'Prata', sans-serif;
+    letter-spacing: 1.5px;
+    font-size: 17px;
+    padding: 20px 0;
+}
+
+.link-shop {
+    color: $primary-color;
+    font-weight: 600;
+    margin-left: 5px;
+    border-bottom: 2px solid $primary-color;
+}
+
 .reccos-title {
     font-family: 'Prata', sans-serif;
     font-size: 18px;
@@ -160,7 +174,8 @@ body::-webkit-scrollbar-thumb,
     overflow-y: auto;
 }
 
-.gradient-title, .icon-title {
+.gradient-title,
+.icon-title {
     font-family: 'Prata', sans-serif;
     font-size: 25px;
     background: #FF7900;

@@ -1,28 +1,23 @@
 <div id="page" class="page-home">
     <main>
+        <div class="tag-promotions bg-dark w-100 text-white">
+            <p class="m-0 text-center ">Descontos em todos os nossos departamentos! Ofertas por tempo limitado!!!
+                <a class="link-shop" [routerLink]="['/product']">Confira!</a>
+            </p>
+        </div>
+
         <section class="home">
             <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <button
-                        *ngFor="let url of carousel; let i = index"
-                        type="button"
-                        [attr.data-bs-slide-to]="i"
-                        [ngClass]="{'active': i === 0}"
-                        data-bs-target="#carouselExampleCaptions"
-                        aria-current="true">
+                    <button *ngFor="let url of carousel; let i = index" type="button" [attr.data-bs-slide-to]="i"
+                        [ngClass]="{'active': i === 0}" data-bs-target="#carouselExampleCaptions" aria-current="true">
                     </button>
                 </div>
                 <div class="carousel-inner">
-                    <div
-                        class="carousel-item"
-                        [ngClass]="{'active': i === 0}"
-                        data-bs-interval="6000"
+                    <div class="carousel-item banner-carousel" [ngClass]="{'active': i === 0}"
+                        [style.background-image]="'url(' + url.link_photo +')'" data-bs-interval="6000"
                         *ngFor="let url of carousel; let i = index">
-                        <img [src]="url.link_photo" class="d-block">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the first slide.</p>
-                        </div>
+                        <!-- <img [src]="url.link_photo" class="d-block"> -->
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
@@ -86,6 +81,41 @@
                 </div>
             </div>
         </div>
-        <app-colections></app-colections>
+        <!-- <app-colections></app-colections> -->
+
+
+
+        <div class="container">
+            <div class="grid center">
+                <div class="box">
+                    <i class="ri-car-fill"></i>
+                    <div class="d-flex flex-column">
+                        <strong>Entregas Rápidas e frete grátis</strong>
+                        <small>Num raio de 300km</small>
+                    </div>
+                </div>
+                <div class="box">
+                    <i class="ri-money-dollar-box-line"></i>
+                    <div class="d-flex flex-column">
+                        <strong>Garantia devolução de dinheiro</strong>
+                        <small>Em até 7 dias</small>
+                    </div>
+                </div> 
+                <div class="box">
+                    <i class="ri-customer-service-2-line"></i>
+                    <div class="d-flex flex-column">
+                        <strong>Suporte on-line 24 horas</strong>
+                        <small>7 dias por semana</small>
+                    </div>
+                </div>
+                <div class="box">
+                    <i class="ri-secure-payment-fill"></i>
+                    <div class="d-flex flex-column">
+                        <strong>Pagamento Seguro</strong>
+                        <small>Pagamento 100% seguro</small>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </div>
