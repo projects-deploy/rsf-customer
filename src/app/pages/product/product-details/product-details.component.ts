@@ -88,7 +88,7 @@ export class ProductDetailsComponent implements OnInit {
 
         this.rxjs.sendRating(data_reviews);
 
-        console.log('LIST PRODUCTS ID DATA', data);
+        // console.log('LIST PRODUCTS ID DATA', data);
       },
       error: (err) => {
         console.log('LIST PRODUCTS ID ERR', err);

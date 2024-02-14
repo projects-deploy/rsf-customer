@@ -6,11 +6,13 @@
                     <h2 class="title">Newsletter</h2>
                     <p class="grey-color">Digite seu e-mail abaixo para ser o primeiro a saber sobre novas coleções e
                         produtos</p>
-                    <form action="" class="search">
-                        <i class="ri-mail-line"></i>
-                        <input type="text" class="input" placeholder="Informe seu e-mail" id="email">
-                        <input type="submit" class="submit" />
-                        <i class="ri-arrow-right-line"></i>
+                    <form [formGroup]="newsletterForm">
+                        <div class="d-flex py-3">
+                            <input formControlName="email" type="text"
+                                id="surname" placeholder="Informe seu e-mail">
+                            <button type="submit" class="news__btn ms-3" [disabled]="l['email'].status == 'INVALID' || !disabledBtn"
+                                (click)="subscribeNewsletter(newsletterForm.value)">Subscribe</button>
+                        </div>
                     </form>
                 </div>
 
@@ -44,13 +46,6 @@
                             <a class="p-0" href=""><i class="ri-whatsapp-line"></i> +55 (16) 99100-8358</a><br>
                             <a class="p-0" href="mailto:contato-rsf@admin.com?subject=Contato"><i
                                     class="ri-mail-send-line"></i> contato-rsf@admin.com</a>
-                        </p>
-                        <p class="d-flex justify-content-around social-media">
-                            <a href=""><i class="ri-instagram-line"></i></a>
-                            <a href=""><i class="ri-facebook-line"></i></a>
-                            <a href=""><i class="ri-messenger-line"></i></a>
-                            <a href=""><i class="ri-tiktok-line"></i></a>
-                            <a href=""><i class="ri-twitter-x-line"></i></a>
                         </p>
                     </div>
                 </div>
