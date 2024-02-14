@@ -3,7 +3,64 @@
 </div>
 
 <nav class="navbar bg-light sticky-top shadow py-3 h-navbar" style="height: auto;">
-    <div class="container-fluid  p-3">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center w-100 pb-3">
+            <div class="d-flex justify-content-between align-items-center header-media">
+                <img src="./assets/logos_banners/logo.png" class="img-banner">
+                <a class="menu-trigger reccos-cursor" (click)="active_mobile = !active_mobile; closeModalFilter()">
+                    <i class="ri-menu-line"></i>
+                </a>
+            </div>
+            <div>
+                <div class="col-12 col-lg-12 d-lg-block d-sm-none d-none">
+                    <ul class="d-flex justify-content-center align-items-center space-menu p-0 m-0">
+                        <li class="item-menu"> <a class="nav-link active" aria-current="page" href="#">Home</a> </li>
+                        <li class="item-menu"> <a class="nav-link" routerLink="/product">Produtos</a> </li>
+                        <li class="nav-item dropdown item-menu">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false"> Categorias </a>
+                            <ul class="dropdown-menu dropdown-cat">
+                                <li *ngFor="let cat of menu_cat">
+                                    <a class="dropdown-item" [routerLink]="['/category']"
+                                        [queryParams]="{s: cat.name_link, q: cat.id}"> {{ cat.name }} </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="item-menu">
+                            <a class="nav-link" href="#">Blog</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between w-100 pt-3">
+            <p class="social-media">
+                <a href=""><i class="ri-instagram-line"></i></a>
+                <a href=""><i class="ri-facebook-line"></i></a>
+                <a href=""><i class="ri-tiktok-line"></i></a>
+                <a href=""><i class="ri-youtube-line"></i></a>
+            </p>
+            <div class="list-inline d-lg-block d-sm-none d-none">
+                <ul>
+                    <li>
+                        <a (click)="oppened_favorites = !oppened_favorites">
+                            <span class="reccos-badge"> {{ttl_favorites}} </span>
+                            <i class="ri-heart-line"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="reccos-cursor" [routerLink]="['/cart']">
+                            <span class="reccos-badge"> {{ itens_cart }} </span>
+                            <i class="ri-shopping-cart-2-line"></i>
+                        </a>
+                    </li>
+                    <li><a href=""><i class="ri-user-line"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container-fluid  p-3">
         <a class="menu-trigger reccos-cursor" (click)="active_mobile = !active_mobile; closeModalFilter()">
             <i class="ri-menu-line"></i>
         </a>
@@ -97,7 +154,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
 </nav>
 
 <div id="mobile-menu" class="mobile-menu" [ngClass]="{'mobile-menu-active': active_mobile}">

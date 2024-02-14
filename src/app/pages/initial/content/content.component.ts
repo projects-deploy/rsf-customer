@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Carousel } from 'src/app/models/Carousel';
+import { CarouselService } from 'src/app/services/carousel/carousel.service';
+import { CollectionService } from 'src/app/services/collection/collection.service';
+import { TabsService } from 'src/app/services/tabs/tabs.service';
 import { hoddie, shirt, sweater } from 'src/app/shared/utils/ProductsMock';
 import { bannerInit, imagesInstagram } from 'src/app/shared/utils/carousel';
 
@@ -8,7 +12,7 @@ import { bannerInit, imagesInstagram } from 'src/app/shared/utils/carousel';
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent {
+export class ContentComponent implements OnInit {
 
   carouselRef: any;
 
@@ -24,11 +28,14 @@ export class ContentComponent {
     { name: 'Shirt', value: 'shirt' }
   ];
 
+  productsByTag: any = [];
+
   shirtProducts = shirt;
   hoddieProducts = hoddie;
-  carousel = bannerInit;
   sweaterProduct = sweater;
   insta_photos = imagesInstagram;
+
+  carousel: Carousel[] = [];
 
   customOptions: OwlOptions = {
     loop: true,
@@ -60,6 +67,17 @@ export class ContentComponent {
     autoplayTimeout: 5000,
   }
 
+  constructor(
+    private tabsService: TabsService,
+    private carouselService: CarouselService,
+    private collectionService: CollectionService,
+  ) { }
+
+  ngOnInit(): void {
+    this.getCarousel();
+    this.getProductByTag();
+  }
+
   changeTemplate(value: string) {
 
     this.shirtTemplate = false;
@@ -83,5 +101,40 @@ export class ContentComponent {
 
   selectShow() {
     this.showSelect = !this.showSelect;
+  }
+
+  /* CAROUSEL */
+  getCarousel() {
+    this.carouselService.carouselById(1).subscribe({
+      next: (data) => {
+        let carouselSplitLink = data.links.split(',');
+        carouselSplitLink.forEach((item: any, i: number) => {
+          this.carousel.push({
+            id: (i + 1),
+            links: item,
+            createdAt: data.createdAt,
+            updatedAt: data.updatedAt
+          });
+        });
+          
+        // console.log('GET CAROUSEL DATA', this.carousel);
+      },
+      error: (err) => {
+        console.log('GET CAROUSEL ERRR', err);
+      }
+    });
+  }
+
+  getProductByTag() {
+    this.tabsService.getProductsBytag(1).subscribe({
+      next: (data) => {
+
+        this.productsByTag = data;
+        console.log('IS NEW getProductsBytag DATA', data);
+      },
+      error: (err) => {
+        console.log('IS NEW getProductsBytag ERR', err);
+      }
+    });
   }
 }

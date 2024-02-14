@@ -90,6 +90,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.rxjs.openCloseMenu$.subscribe(value => {
       this.active_mobile = value;
     });
+
+    this.rxjs.openCloseFavorites$.subscribe(data => {
+      this.oppened_favorites = false;
+    });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -149,7 +153,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   closeFavorites(e: any) {
-    console.log('EMIT NAV FOOTER', e);
     this.oppened_favorites = e;
   }
 

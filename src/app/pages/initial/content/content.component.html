@@ -1,10 +1,10 @@
 <div id="page" class="page-home">
     <main>
-        <div class="tag-promotions bg-dark w-100 text-white">
+        <!-- <div class="tag-promotions bg-dark w-100 text-white">
             <p class="m-0 text-center ">Descontos em todos os nossos departamentos! Ofertas por tempo limitado!!!
                 <a class="link-shop" [routerLink]="['/product']">Confira!</a>
             </p>
-        </div>
+        </div> -->
 
         <section class="home">
             <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -15,9 +15,8 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item banner-carousel" [ngClass]="{'active': i === 0}"
-                        [style.background-image]="'url(' + url.link_photo +')'" data-bs-interval="6000"
+                        [style.background-image]="'url(' + url.links +')'" data-bs-interval="6000"
                         *ngFor="let url of carousel; let i = index">
-                        <!-- <img [src]="url.link_photo" class="d-block"> -->
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
@@ -52,19 +51,9 @@
             <div class="container">
                 <div class="dotgrid">
                     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
-                        <mat-tab label="Sweater">
+                        <mat-tab *ngFor="let p of productsByTag" [label]="p.nameTag.toUpperCase()">
                             <div class="d-flex justify-content-around">
-                                <app-category-thumbnail [content]="sweaterProduct"></app-category-thumbnail>
-                            </div>
-                        </mat-tab>
-                        <mat-tab label="Hoddie">
-                            <div class="d-flex justify-content-around">
-                                <app-category-thumbnail [content]="hoddieProducts"></app-category-thumbnail>
-                            </div>
-                        </mat-tab>
-                        <mat-tab label="Shirt">
-                            <div class="d-flex justify-content-around">
-                                <app-category-thumbnail [content]="shirtProducts"></app-category-thumbnail>
+                                <app-category-thumbnail [content]="p.products"></app-category-thumbnail>
                             </div>
                         </mat-tab>
                     </mat-tab-group>
@@ -75,15 +64,14 @@
         <div class="banner">
             <div class="container" style="height: 100%;">
                 <div class="wrap d-flex flex-column justify-content-center ms-lg-4">
-                    <div class="content span">Promo</div>
+                    <div class="content span">Promoção</div>
                     <h2>Getready! <br> Winter is <span class="text-white">comming...</span></h2>
                     <div class="button"><a href="" class="primary-btn">Go get it</a></div>
                 </div>
             </div>
         </div>
+
         <!-- <app-colections></app-colections> -->
-
-
 
         <div class="container">
             <div class="grid center">
@@ -100,7 +88,7 @@
                         <strong>Garantia devolução de dinheiro</strong>
                         <small>Em até 7 dias</small>
                     </div>
-                </div> 
+                </div>
                 <div class="box">
                     <i class="ri-customer-service-2-line"></i>
                     <div class="d-flex flex-column">

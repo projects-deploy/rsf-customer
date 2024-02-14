@@ -68,7 +68,7 @@
                         </div>
                         <div class="product-control list-inline" *ngIf="customer != null">
                             <ul>
-                                <li><a href=""><i class="ri-heart-line"></i><span>Adicionar aos favoritos</span></a>
+                                <li><a (click)="addToFavorites(product)"><i class="ri-heart-line"></i><span>Adicionar aos favoritos</span></a>
                                 </li>
                                 <li><a href=""><i class="ri-arrow-left-right-line"></i><span>Avise-me quando chegar</span></a></li>
                                 <li><a href="#0" trigger-button data-target="data-share">

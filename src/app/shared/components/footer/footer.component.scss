@@ -1,10 +1,8 @@
+@import '../../../../assets/styles/variables';
+
 h3,
 a:hover {
     font-weight: 600;
-}
-
-.social-media i {
-    font-size: 18px;
 }
 
 .title {
@@ -26,7 +24,8 @@ a:hover {
     border: none;
     outline: none;
     background: transparent;
-    background-color: hsl(248, 66%, 66%);
+    // background-color: hsl(248, 66%, 66%);
+    background-color: $primary-color;
     padding: 18px 15px;
     color: white;
     border-radius: 3px;
