@@ -33,6 +33,7 @@ export class ReceiptComponent implements OnInit {
       logradouro: '',
       complemento: '',
       birth_date: new Date(Date.now()),
+      favorites: []
     }
   };
 

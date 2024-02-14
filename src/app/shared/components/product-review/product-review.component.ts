@@ -67,7 +67,7 @@ export class ProductReviewComponent implements OnInit {
         });
 
         this.rating_of_stars = this.data_reviews.average_rating;
-        console.log('REVIEWS BY PRODUCT ID DATA', this.rating_of_stars, data);
+        // console.log('REVIEWS BY PRODUCT ID DATA', this.rating_of_stars, data);
       },
       error: (err) => {
         console.log('REVIEWS BY PRODUCT ID ERR', err);

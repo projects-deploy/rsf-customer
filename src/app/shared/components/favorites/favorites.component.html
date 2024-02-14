@@ -1,1 +1,14 @@
-<p>favorites works!</p>
+<h3>Meus favoritos</h3>
+
+<div class="row">
+    <div class="col-md-6 products d-flex mb-3" *ngFor="let p of products">
+        <div class="d-flex">
+            <div class="profile-photo" [style.background-image]="'url(' + p.link_photo  + ')'">
+            </div>
+            <div class="ms-2 d-flex flex-column align-items-center justify-content-center">
+                <p>{{ p.name }}</p>
+                <a class="text-danger"(click)="removeFavorite(p)">remover</a>
+            </div>
+        </div>
+    </div>
+</div>

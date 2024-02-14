@@ -30,6 +30,9 @@ export class DataRxjsService {
   private dataReview = new Subject<prodReview>();
   dataReview$ = this.dataReview.asObservable();
 
+  private openCloseFavorites = new Subject<boolean>();
+  openCloseFavorites$ = this.openCloseFavorites.asObservable();
+
   crtlItemCardQuantity(value: itemsCardRxjs) {
     this.cartItemsQuantity.next(value);
   }
@@ -56,6 +59,10 @@ export class DataRxjsService {
 
   sendRating(data: prodReview) {
     this.dataReview.next(data);
+  }
+
+  crtlFavorites(data: boolean) {
+    this.openCloseFavorites.next(data);
   }
 
 }

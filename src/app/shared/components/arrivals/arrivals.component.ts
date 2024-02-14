@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { carouselMock } from '../../utils/carousel';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { Product } from 'src/app/models/Product';
 
@@ -44,7 +43,7 @@ export class ArrivalsComponent implements OnInit {
 
 
   constructor(
-    private productService: ProductsService
+    private productService: ProductsService,
   ) { }
 
   ngOnInit(): void {
