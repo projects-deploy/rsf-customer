@@ -15,7 +15,7 @@ export class TabsService {
     private http: HttpClient
   ) { }
 
-  getAllTabss() {
+  getAllTabs() {
     return this.http.get<Tabs[]>((`${this.url}/${this.flag}`));
   }
 

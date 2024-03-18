@@ -1,0 +1,16 @@
+@import '../../../../assets/styles/variables';
+
+.title-questions {
+    font-size: 30px;
+    font-family: 'Prata', sans-serif;
+}
+
+.sub-title {
+    color: $primary-color;
+    font-weight: 700;
+}
+
+.customer-details {
+    display: flex;
+    align-items: center;
+}

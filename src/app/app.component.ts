@@ -13,14 +13,5 @@ export class AppComponent {
   constructor(
     private size: SizeWindowService,
     private custService: CustomersService
-  ) {
-    custService.customerById(1).subscribe({
-      next: (data) => {
-        localStorage.setItem('rsf-customer', JSON.stringify(data));
-      },
-      error: (err) => {
-        console.log('ERRO AO BUSCAR USÁRIO');
-      }
-    });
-  }
+  ) { }
 }

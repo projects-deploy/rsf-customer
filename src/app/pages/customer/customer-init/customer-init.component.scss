@@ -6,3 +6,37 @@
     --fw600: 400;
     color: #2bcb96;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.customer-link {
+    // border: 1px solid #c6c6c6;
+    width: 100%;
+    padding: 15px 10px;
+    font-size: 14px;
+}
+
+.customer-link i {
+    font-size: 35px;
+    color: #636161;
+}
+
+.start-border {
+    border-left: 2px solid #c6c6c6;
+}
+
+.border-bottom {
+    border-bottom: 2px solid #c6c6c6;
+}
+
+.customer-link:hover {
+    color: #2bcb96;
+}
+
+.title-customer {
+    font-size: 40px;
+    line-height: 1;
+}

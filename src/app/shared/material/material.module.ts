@@ -70,6 +70,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { DefaultCarouselComponent } from '../components/default-carousel/default-carousel.component';
 import { NgxStarsModule } from 'ngx-stars';
 import { FavoritesComponent } from '../components/favorites/favorites.component';
+import { ProductQuestionsComponent } from '../components/product-questions/product-questions.component';
+import { RedirectLoginComponent } from '../components/redirect-login/redirect-login.component';
 
 const modules = [
   A11yModule,
@@ -144,6 +146,8 @@ const componentes = [
   ColectionsComponent,
   DefaultCarouselComponent,
   FavoritesComponent,
+  ProductQuestionsComponent,
+  RedirectLoginComponent,
 ]
 
 @NgModule({

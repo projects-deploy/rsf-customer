@@ -2,47 +2,33 @@
     <app-navbar-footer (closeFavoritesModal)="closeFavorites($event)"></app-navbar-footer>
 </div>
 
-<nav class="navbar bg-light sticky-top shadow py-3 h-navbar" style="height: auto;">
+<nav class="navbar bg-light sticky-top shadow h-navbar" style="height: auto;">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center w-100 pb-3">
-            <div class="d-flex justify-content-between align-items-center header-media">
-                <img src="./assets/logos_banners/logo.png" class="img-banner">
+        <div class="d-flex justify-content-between align-items-center w-100 reccos-padding">
+            <div class="visible">
+                <img src="./assets/logos_banners/logo.png">
                 <a class="menu-trigger reccos-cursor" (click)="active_mobile = !active_mobile; closeModalFilter()">
                     <i class="ri-menu-line"></i>
                 </a>
             </div>
-            <div>
-                <div class="col-12 col-lg-12 d-lg-block d-sm-none d-none">
-                    <ul class="d-flex justify-content-center align-items-center space-menu p-0 m-0">
-                        <li class="item-menu"> <a class="nav-link active" aria-current="page" href="#">Home</a> </li>
-                        <li class="item-menu"> <a class="nav-link" routerLink="/product">Produtos</a> </li>
-                        <li class="nav-item dropdown item-menu">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false"> Categorias </a>
-                            <ul class="dropdown-menu dropdown-cat">
-                                <li *ngFor="let cat of menu_cat">
-                                    <a class="dropdown-item" [routerLink]="['/category']"
-                                        [queryParams]="{s: cat.name_link, q: cat.id}"> {{ cat.name }} </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="item-menu">
-                            <a class="nav-link" href="#">Blog</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="d-flex justify-content-between w-100 pt-3">
-            <p class="social-media">
-                <a href=""><i class="ri-instagram-line"></i></a>
-                <a href=""><i class="ri-facebook-line"></i></a>
-                <a href=""><i class="ri-tiktok-line"></i></a>
-                <a href=""><i class="ri-youtube-line"></i></a>
-            </p>
             <div class="list-inline d-lg-block d-sm-none d-none">
                 <ul>
+                    <li class="item-menu"> <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="item-menu"> <a class="nav-link" routerLink="/product">Produtos</a> </li>
+                    <li class="nav-item dropdown item-menu">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"> Categorias </a>
+                        <ul class="dropdown-menu dropdown-cat">
+                            <li *ngFor="let cat of menu_cat">
+                                <a class="dropdown-item" [routerLink]="['/category']"
+                                    [queryParams]="{s: cat.name_link, q: cat.id}"> {{ cat.name }} </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="item-menu">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
                     <li>
                         <a (click)="oppened_favorites = !oppened_favorites">
                             <span class="reccos-badge"> {{ttl_favorites}} </span>
@@ -55,106 +41,11 @@
                             <i class="ri-shopping-cart-2-line"></i>
                         </a>
                     </li>
-                    <li><a href=""><i class="ri-user-line"></i></a></li>
+                    <li><a [routerLink]="['/customer']"><i class="ri-user-line"></i></a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <!-- <div class="container-fluid  p-3">
-        <a class="menu-trigger reccos-cursor" (click)="active_mobile = !active_mobile; closeModalFilter()">
-            <i class="ri-menu-line"></i>
-        </a>
-
-        <a class="navbar-brand" href="#">
-            <h4 class="font-weight-bold m-0">
-                <i class="icon-title me-2 ri-shopping-cart-line"></i>
-                <span class="gradient-title">reccos.shop.com</span>
-            </h4>
-        </a>
-
-        <div class="search_box  d-lg-block d-sm-none d-none">
-            <div class="search">
-                <div class="select_area">
-                    <i class="ri-box-3-line map_icon"></i>
-                    <div class="text">Produtos</div>
-                </div>
-                <div class="line"></div>
-                <div class="text_and-icon">
-                    <input type="text" class="search_text" id="search_text" placeholder="Buscar por produtos">
-                    <i class="ri-search-line search_icon"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="list-inline d-lg-block d-sm-none d-none">
-            <ul>
-                <li><a (click)="oppened_favorites = !oppened_favorites"><span class="reccos-badge"> {{ttl_favorites}}
-                        </span>
-                        <i class="ri-heart-line"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="reccos-cursor" [routerLink]="['/cart']">
-                        <span class="reccos-badge"> {{ itens_cart }} </span>
-                        <i class="ri-shopping-cart-2-line"></i>
-                    </a>
-                </li>
-                <li><a href=""><i class="ri-user-line"></i></a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="container-fluid p-2">
-        <div class="col-12 col-lg-12 d-lg-block d-sm-none d-none">
-            <ul class="d-flex justify-content-center align-items-center space-menu p-0 m-0">
-                <li class="item-menu"> <a class="nav-link active" aria-current="page" href="#">Home</a> </li>
-                <li class="item-menu"> <a class="nav-link" routerLink="/product">Produtos</a> </li>
-                <li class="nav-item dropdown item-menu">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false"> Departamentos </a>
-                    <ul class="dropdown-menu">
-                        <li *ngFor="let depto of menu_depto">
-                            <a class="dropdown-item"> {{ depto.name }} </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown item-menu">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false"> Categorias </a>
-                    <ul class="dropdown-menu dropdown-cat">
-                        <li *ngFor="let cat of menu_cat">
-                            <a class="dropdown-item" [routerLink]="['/category']"
-                                [queryParams]="{s: cat.name_link, q: cat.id}"> {{ cat.name }} </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item dropdown item-menu">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false"> Marcas </a>
-                    <ul class="dropdown-menu brand-drop">
-                        <li *ngFor="let brand of menu_brand">
-                            <a class="dropdown-item px-0" [routerLink]="['/brand']"
-                                [queryParams]="{s: brand.name_link, q: brand.id}">
-                                <img src="https://www.shutterstock.com/image-vector/image-icon-trendy-flat-style-600nw-643080895.jpg"
-                                    alt="" width="15%" height="auto"> {{ brand.name }} </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item dropdown position-static item-menu">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false"> Promoções </a>
-                    <ul class="dropdown-menu dropdown-promo-menu w-100">
-                        <li><app-category-thumbnail [content]="destak_images"></app-category-thumbnail></li>
-                    </ul>
-                </li>
-
-                <li class="item-menu">
-                    <a class="nav-link" href="#">Blog</a>
-                </li>
-            </ul>
-        </div>
-    </div> -->
 </nav>
 
 <div id="mobile-menu" class="mobile-menu" [ngClass]="{'mobile-menu-active': active_mobile}">
@@ -169,7 +60,8 @@
         <div class="data-content modal-top">
             <a mat-button class="close-trigger" color="accent" (click)="oppened_favorites = false;"><i
                     class="ri-close-line"></i></a>
-            <app-favorites></app-favorites>
+            <app-favorites *ngIf="customerLogged"></app-favorites>
+            <app-redirect-login *ngIf="!customerLogged"></app-redirect-login>
         </div>
     </div>
 </div>

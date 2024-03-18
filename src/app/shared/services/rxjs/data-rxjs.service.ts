@@ -33,6 +33,9 @@ export class DataRxjsService {
   private openCloseFavorites = new Subject<boolean>();
   openCloseFavorites$ = this.openCloseFavorites.asObservable();
 
+  private reloadQuestions = new Subject<boolean>();
+  reloadQuestions$ = this.reloadQuestions.asObservable();
+
   crtlItemCardQuantity(value: itemsCardRxjs) {
     this.cartItemsQuantity.next(value);
   }
@@ -63,6 +66,10 @@ export class DataRxjsService {
 
   crtlFavorites(data: boolean) {
     this.openCloseFavorites.next(data);
+  }
+
+  questionsReload(evt: boolean) {
+    this.reloadQuestions.next(evt);
   }
 
 }

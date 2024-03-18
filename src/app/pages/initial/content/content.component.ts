@@ -37,6 +37,33 @@ export class ContentComponent implements OnInit {
 
   carousel: Carousel[] = [];
 
+  carouselMock = [
+    {
+      id: 1,
+      links: 'https://hips.hearstapps.com/hmg-prod/images/lead-image-spring-hannah-01-64077144f3607.jpg?crop=1xw:0.999632892804699xh;center,top&resize=1200:*',
+      createdAt: '2024-02-29T00:00:000',
+      updatedAt: '2024-02-29T00:00:000'
+    },
+    {
+      id: 2,
+      links: 'https://hips.hearstapps.com/hmg-prod/images/lead-image-hannah3-01-1672764993.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*',
+      createdAt: '2024-02-29T00:00:000',
+      updatedAt: '2024-02-29T00:00:000'
+    },
+    {
+      id: 3,
+      links: 'https://hips.hearstapps.com/hmg-prod/images/lead-image-plus-01-1660255255.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*',
+      createdAt: '2024-02-29T00:00:000',
+      updatedAt: '2024-02-29T00:00:000'
+    },
+    {
+      id: 4,
+      links: 'https://hips.hearstapps.com/hmg-prod/images/lead-image-school-look-01-1661894139.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*',
+      createdAt: '2024-02-29T00:00:000',
+      updatedAt: '2024-02-29T00:00:000'
+    },
+  ]
+
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: false,
@@ -74,7 +101,7 @@ export class ContentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getCarousel();
+    // this.getCarousel();
     this.getProductByTag();
   }
 
@@ -116,7 +143,7 @@ export class ContentComponent implements OnInit {
             updatedAt: data.updatedAt
           });
         });
-          
+
         // console.log('GET CAROUSEL DATA', this.carousel);
       },
       error: (err) => {
@@ -126,7 +153,7 @@ export class ContentComponent implements OnInit {
   }
 
   getProductByTag() {
-    this.tabsService.getProductsBytag(1).subscribe({
+    this.tabsService.tabsById(1).subscribe({
       next: (data) => {
 
         this.productsByTag = data;

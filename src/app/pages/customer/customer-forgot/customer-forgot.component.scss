@@ -1,0 +1,47 @@
+@import '../../../../assets/styles/variables';
+
+input {
+    font: inherit;
+    width: 100%;
+    margin: 0;
+    outline: none;
+    border: none;
+}
+
+label {
+    display: inline-block;
+}
+
+.tag-title {
+    font-family: 'Prata', serif;
+    font-size: 35px;
+    --fw600: 400;
+    color: #2bcb96;
+}
+
+.customer-inputs {
+    font-size: var(--fs-14);
+    border: 1px solid var(--ligth-color);
+    outline: 0;
+    background-color: transparent;
+    padding: 15px;
+    transition: border .3s;
+}
+
+.customer-inputs:focus {
+    border-color: var(--dark-color);
+}
+
+.customer-inputs::placeholder {
+    color: var(--grey-color);
+}
+
+.customer-link {
+    width: 100%;
+    padding: 15px 10px;
+    font-size: 14px;
+}
+
+.customer-link:hover {
+    color: #2bcb96;
+}

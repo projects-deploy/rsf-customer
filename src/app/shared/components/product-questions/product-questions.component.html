@@ -1,0 +1,41 @@
+<div class="row mt-4 px-2">
+    <h3 class="title-questions mb-3">Perguntas sobre o produto</h3>
+    <div class="product-question w-75 m-auto">
+
+        <ng-container *ngIf="questions.length > 0; else noComments">
+
+            <div class="body-review box-comment" *ngFor="let q of questions; let idx = index">
+                <div class="profile">
+                    <div class="customer-details">
+                        <div class="image">
+                            <img [src]="q.customer?.link_photo">
+                        </div>
+                        <div class="grouping">
+                            <div class="sub-title"> {{ q.customer?.name }} </div>
+                            <div class="date grey-color"> {{ q.createdAt | date }} </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+
+                        <ul class="grey-color">
+                            <li>
+                                {{ q.content }}
+                                <ul class="ms-5 mt-2" *ngFor="let res of q.answers">
+                                    <strong> RESPOSTA </strong>
+                                    <div class="date mt-0 mb-2 grey-color">{{ res.createdAt | date }}</div>
+                                    <li>{{ res.content }}</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #noComments>
+            <div class="alert alert-light mt-3" role="alert">
+                Não existem perguntas sobre este produto!
+            </div>
+        </ng-template>
+    </div>
+</div>
+<!-- https://github.com/hughjdavey/ngx-stars?tab=readme-ov-file#usage -->

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Brand } from 'src/app/models/Brand';
 import { Category } from 'src/app/models/Category';
+import { Customer } from 'src/app/models/Customer';
 import { Department } from 'src/app/models/Department';
 import { BrandsService } from 'src/app/services/brands/brands.service';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -18,6 +19,8 @@ import { DataRxjsService } from 'src/app/shared/services/rxjs/data-rxjs.service'
 export class NavbarComponent implements OnInit, OnDestroy {
 
   local_str = JSON.parse(`${localStorage.getItem(('rsf-cart'))}`) || 0;
+  local_fvt = JSON.parse(`${localStorage.getItem(('rsf-favorites'))}`) || 0;
+  customer: Customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`) || null;
 
   subscription: Subscription = new Subscription;
 
@@ -28,6 +31,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   opened_cart: boolean = false;
   active_mobile: boolean = false;
+  customerLogged: boolean = false;
   oppened_favorites: boolean = false;
   openModalPromotions: boolean = false;
 
@@ -71,11 +75,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private deptoService: DepartmentsService,
     private categoryService: CategoriesService,
   ) {
+
+    if (this.local_fvt.length > 0) {
+      this.ttl_favorites = this.local_fvt.length;
+      console.log('LOCALSTORAGE:', this.local_fvt.length);
+    } else {
+      localStorage.setItem('rsf-favorites', JSON.stringify([]));
+    }
+
     if (this.local_str.length > 0) {
       this.itens_cart = this.local_str.length;
     } else {
       localStorage.setItem('rsf-cart', JSON.stringify([]));
     }
+
+    this.customerLogged = this.customer !== null;
   }
 
   ngOnInit(): void {

@@ -21,11 +21,12 @@ export class CartService {
   ) { }
 
   addItem(item: CartItem) {
+    console.log('ITEMMMMM', item);
 
     const idx = this.cartStrg.items.findIndex((i: CartItem) => i.product.id === item.product.id);
 
     if (idx !== -1) {
-      this.cartStrg.items[idx].qtde_item += item.qtde_item;
+      this.cartStrg.items[idx].qtde_item = item.qtde_item;
       this.cartStrg.items[idx].amount += parseFloat((item.qtde_item * item.product.price_promo).toFixed(2));
     } else {
       item.amount = parseFloat((item.qtde_item * item.product.price_promo).toFixed(2));

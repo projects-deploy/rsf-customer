@@ -53,9 +53,9 @@
                                                 <div class="price">{{ c.product.price_promo | currency }}</div>
                                                 <div class="quantity">
                                                     <div class="control">
-                                                        <button (click)="addProduct(idx, true)">+</button>
-                                                        <input type="text" [value]="c.qtde_item">
                                                         <button (click)="addProduct(idx)">-</button>
+                                                        <input type="text" [value]="c.qtde_item">
+                                                        <button (click)="addProduct(idx, true)">+</button>
                                                     </div>
                                                 </div>
                                                 <div class="price-sub">{{ (c.product.price_promo *

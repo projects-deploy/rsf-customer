@@ -53,13 +53,14 @@
                         </div>
                         <div class="product-action py-4">
                             <div class="qty">
-                                <button class="decrease">-</button>
-                                <input type="text" value="1">
-                                <button class="increase">+</button>
+                                <button [disabled]="qtItems === 0" class="decrease" (click)="rmvItems()">-</button>
+                                <input min="0" [(ngModel)]="qtItems" type="text" [value]="qtItems">
+                                <button class="increase" (click)="addItems()">+</button>
                             </div>
                             <div class="addcart button">
-                                <button mat-button class="secondary-btn w-100" (click)="addToCart(product)">
-                                    <mat-icon>add_shopping_cart</mat-icon> Add to cart
+                                <button [disabled]="product.in_stok === 0" mat-button class="secondary-btn w-100"
+                                    (click)="addToCart(product)">
+                                    <mat-icon>add_shopping_cart</mat-icon> Adicionar ao carrinho
                                 </button>
                             </div>
                             <!-- <div class="buynow button">
@@ -68,19 +69,29 @@
                         </div>
                         <div class="product-control list-inline" *ngIf="customer != null">
                             <ul>
-                                <li><a (click)="addToFavorites(product)"><i class="ri-heart-line"></i><span>Adicionar aos favoritos</span></a>
+                                <li><a (click)="addToFavorites(product)"><i class="ri-heart-line"></i><span>Adicionar
+                                            aos favoritos</span></a>
                                 </li>
-                                <li><a href=""><i class="ri-arrow-left-right-line"></i><span>Avise-me quando chegar</span></a></li>
-                                <li><a href="#0" trigger-button data-target="data-share">
-                                        <i class="ri-share-forward-line"></i><span>Compartilhar</span>
+                                <li>
+                                    <a (click)="oppened_modal_arrive = true;">
+                                        <i class="ri-arrow-left-right-line"></i>
+                                        <span>Avise-me quando chegar</span>
                                     </a>
                                 </li>
-                                <li><a (click)="oppened_modal = true;"><i class="ri-question-line"></i><span>Ask
-                                            Question</span></a>
+                                <!-- <li>
+                                    <a href="">
+                                        <i class="ri-share-forward-line"></i><span>Compartilhar</span>
+                                    </a>
+                                </li> -->
+                                <li>
+                                    <a (click)="oppened_modal = true;">
+                                        <i class="ri-question-line"></i>
+                                        <span>Faça uma pergunta</span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="shipping">
+                        <!-- <div class="shipping">
                             <ul>
                                 <li class="mb-2">
                                     <i class="ri-gift-line me-2"></i>
@@ -91,7 +102,7 @@
                                     <span class="grey-color">Estimated delivery: 01 - 07 Jan, 2024</span>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                         <div class="product-stok">
                             <div class="wrap">
                             </div>
@@ -111,7 +122,10 @@
                 <app-product-custom></app-product-custom>
             </mat-tab> -->
             <mat-tab label="Opiniões do produto">
-                <app-product-review [product_review]="+product_id" ></app-product-review>
+                <app-product-review [product_review]="+product_id"></app-product-review>
+            </mat-tab>
+            <mat-tab label="Perguntas">
+                <app-product-questions [product]="+product_id"></app-product-questions>
             </mat-tab>
             <!-- <mat-tab label="Shipping">
                 <app-product-shipping></app-product-shipping>
@@ -120,18 +134,60 @@
     </div>
 </div>
 
+<div id="data-question" class="data-popup d-question" [ngClass]="{'open-modal': oppened_modal_arrive}">
+    <div class="wrap">
+        <div class="data-title">
+            <a mat-button class="close-trigger" color="accent" (click)="oppened_modal_arrive = false;">
+                <i class="ri-close-line"></i>
+            </a>
+            <h3 class="product-title text-start">{{ product.name }}</h3>
+
+            <div class="grid">
+                <div class="box border">
+                    <p class="image-arrive" [style.background-image]="'url(' + product.link_photo  + ')'"></p>
+                </div>
+                <form [formGroup]="arrivalForm" class="p-3">
+                    <h5 style="font-size: 14px; font-family: 'Prata', sans-serif;">
+                        <strong>Você será notificado quando o produto estiver disponível!</strong>
+                    </h5>
+                    <div class="div-height">
+                        <label for="name" class="m-0">Nome *</label>
+                        <input formControlName="name" type="text" placeholder="Name">
+                        <p *ngIf="(l['name']?.touched || l['name']?.dirty) && l['name']?.errors?.['required']" class="text-end error-input">Campo obrigatório</p>
+                    </div>
+                    <div class="div-height">
+                        <label for="email" class="m-0">E-mail *</label>
+                        <input formControlName="email" type="email" placeholder="Email">
+                        <p *ngIf="(l['email']?.touched || l['email']?.dirty) && l['email']?.errors?.['required']" class="text-end error-input">Campo obrigatório</p>
+                        <p *ngIf="(l['email']?.touched || l['email']?.dirty) && l['email']?.errors?.['email']" class="text-end error-input">Formato e-mail inválido</p>
+                    </div>
+                    <div class="button">
+                        <button class="secondary-btn" [ngClass]="{'arrival-desabled-btn': arrivalForm.invalid }" [disabled]="arrivalForm.invalid"
+                            (click)="sendArrival(arrivalForm.value)">Enviar
+                            <i class="ri-send-plane-2-line ms-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="data-question" class="data-popup d-question" [ngClass]="{'open-modal': oppened_modal}">
     <div class="wrap">
         <div class="data-content">
             <a mat-button class="close-trigger" color="accent" (click)="oppened_modal = false;"><i
                     class="ri-close-line"></i></a>
-            <h3 class="reccos-title">The question</h3>
-            <form action="">
-                <div><input type="text" placeholder="Name"></div>
-                <div><input type="text" placeholder="Email"></div>
-                <div><textarea placeholder="Your question is..." name="" id="" cols="30" rows="5"></textarea></div>
+            <h3 class="reccos-title">Faça sua pergunta</h3>
+            <form [formGroup]="questionForm">
+                <div><input type="text" placeholder="Nome"></div>
+                <div><input type="text" placeholder="E-mail"></div>
+                <div><textarea formControlName="content" placeholder="Faça sua pergunta..." name="" id="" cols="30"
+                        rows="5"></textarea></div>
                 <div class="button">
-                    <button class="secondary-btn">Submit</button>
+                    <button class="secondary-btn" (click)="sendQuestion(questionForm.value)">Enviar
+                        <i class="ri-send-plane-2-line ms-2"></i>
+                    </button>
                 </div>
             </form>
         </div>

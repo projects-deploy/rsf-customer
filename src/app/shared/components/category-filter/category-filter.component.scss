@@ -48,3 +48,18 @@
 .summary .product-color button:hover:not(.selected) {
     box-shadow: inset 0 0 0 4px var(--white-color);
 }
+
+body::-webkit-scrollbar {
+    width: 5px;
+}
+
+body::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #e01e1e;
+    border: 1px solid #e01e1e;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #e01e1e;
+}

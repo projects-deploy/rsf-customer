@@ -12,6 +12,20 @@ ul {
   opacity: 1;
 }
 
+.list-inline a{
+    position: relative;
+    font-size: 18px;
+    font-family: 'Prata', sans-serif;
+    padding: 0 10px;
+    line-height: 1;
+    display: flex;
+    transition: var(--transiction-color);
+}
+
+.list-inline a i {
+  font-size: 22px;
+}
+
 .navbar {
   font-size: 16px !important;
 }
@@ -54,6 +68,14 @@ ul {
   font-weight: 600;
 }
 
+.reccos-padding {
+  padding: 1rem 0;
+}
+
+.item-menu {
+  padding: 0 10px;
+}
+
 .reccos-badge {
   position: absolute;
   font-size: 13px;
@@ -68,6 +90,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .dropdown-promo-menu {
@@ -191,6 +214,21 @@ ul {
     width: 100%;
     padding-top: 20px;
   }
+
+  .visible {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .visible img{
+    width: 40%;
+  }
+}
+
+.bg-transp {
+  background-color: transparent;
 }
 
 

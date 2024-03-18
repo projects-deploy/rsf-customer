@@ -2,16 +2,16 @@
     <div class="d-flex justify-content-between">
         <h3>Rating & Review</h3>
 
-        <div class="button">
+        <!-- <div class="button">
             <a (click)="oppened_modal = true;" class="primary-btn">Whrite a review</a>
-        </div>
+        </div> -->
     </div>
     <div class="col-12 col-md-3">
         <div class="rating-review">
             <div class="rating">
                 <strong class="px-3 col-3"> {{ data_reviews.average_rating | number: '1.1-1' }} </strong>
                 <div class="d-flex flex-column col-8">
-                    <ngx-stars [readonly]="true" [maxStars]="5" [color]="'#2bcb96'" [initialStars]="4"
+                    <ngx-stars [readonly]="true" [maxStars]="5" [color]="'#2bcb96'" [initialStars]="0"
                         [size]="2"></ngx-stars>
                     <span> {{ data_reviews.review_count }} reviews</span>
                 </div>
@@ -62,7 +62,6 @@
             <ng-template #noComments>
                 <div class="alert alert-light mt-3" role="alert">
                     O produto ainda não possui avaliação!
-                    <a mat-button (click)="oppened_modal = true;">Clique aqui</a>e seja o primeiro a fazer!
                 </div>
             </ng-template>
         </div>

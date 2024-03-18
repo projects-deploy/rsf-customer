@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row px-5 py-3 w-100">
+        <h2 class="tag-title">Login</h2>
+        <form [formGroup]="formLogin">
+            <div class="col-12 col-md-12 py-3">
+                <label for="email">Email *</label>
+                <input formControlName="email" class="customer-inputs " type="email" id="email" placeholder="seunome@provedor.com">
+            </div>
+
+            <div class="col-12 col-md-12 py-3">
+                <label for="email">Senha *</label>
+                <input formControlName="password" class="customer-inputs " type="email" id="email" placeholder="seunome@provedor.com">
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <a [routerLink]="['/customer']" class="customer-link text-center" href="#">Voltar</a>
+    </div>
+</div>

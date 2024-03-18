@@ -4,6 +4,7 @@ import { Favorites } from 'src/app/models/Favorites';
 import { Product } from 'src/app/models/Product';
 import { FavoritesService } from 'src/app/services/favorites/favorites.service';
 import { DataRxjsService } from '../../services/rxjs/data-rxjs.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favorites',
@@ -12,18 +13,24 @@ import { DataRxjsService } from '../../services/rxjs/data-rxjs.service';
 })
 export class FavoritesComponent implements OnInit {
 
-  customer: Customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`) || 0;
+  customer: Customer = JSON.parse(`${localStorage.getItem(('rsf-customer'))}`) || null;
 
   favorites: Favorites[] = [];
   products: Product[] = [];
 
+  enableFavorites: boolean = false;
+
   constructor(
     private rxjs: DataRxjsService,
     private favoritesService: FavoritesService,
+    private route: Router
   ) { }
 
   ngOnInit(): void {
-    this.getCustomerFavorites();
+    if (this.customer !== null) {
+      this.getCustomerFavorites();
+      this.enableFavorites = true;
+    }
   }
 
   getCustomerFavorites() {
@@ -35,9 +42,11 @@ export class FavoritesComponent implements OnInit {
 
         localStorage.setItem('rsf-favorites', JSON.stringify(data));
         console.log('GET ALL getAllFavoritesCustomers:', this.products);
+        this.enableFavorites = false;
       },
       error: (err) => {
         console.log('GET ALL getAllFavoritesCustomers ERR:', err);
+        this.enableFavorites = false;
       }
     });
   }
@@ -55,5 +64,4 @@ export class FavoritesComponent implements OnInit {
       }
     });
   }
-
 }
